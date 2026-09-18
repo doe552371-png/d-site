@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import CategoriesSection from "@/components/CategoriesSection";
+import RequestForm from "@/components/RequestForm";
 
 export default function Home() {
   return (
@@ -79,40 +80,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DECOR PRO */}
-      <section id="professionals" className="border-b border-neutral-200">
+      {/* REQUEST */}
+      <section id="request" className="border-b border-neutral-200">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
-                DECOR PRO
+                Заявка
               </p>
 
               <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
-                Рабочее пространство для профессионалов
+                Расскажите о задаче
               </h2>
+
+              <p className="mt-5 max-w-xl text-base leading-7 text-neutral-500">
+                Подойдёт фото, размеры, план помещения или просто описание.
+                Не обязательно знать название материала.
+              </p>
             </div>
 
             <div className="max-w-2xl">
-              <p className="text-lg leading-8 text-neutral-600">
-                Для дизайнеров, архитекторов, строителей и комплектаторов.
-                Передавайте проекты и ТЗ, подбирайте материалы, работайте
-                с расчётами, спецификациями, коммерческими предложениями
-                и заказами — в одном пространстве DECOR.
-              </p>
-
-              <Link
-                href="/pro"
-                className="mt-8 inline-flex rounded-md bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-              >
-                Перейти в ПРО
-              </Link>
+              <RequestForm />
             </div>
           </div>
         </div>
       </section>
 
       <CategoriesSection />
+
+      {/* ABOUT */}
+      <section id="about" className="border-t border-neutral-200">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+                DECOR
+              </p>
+
+              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+                Материалы как часть решения
+              </h2>
+            </div>
+
+            <p className="max-w-2xl text-lg leading-8 text-neutral-600">
+              Мы собираем каталог интерьерных материалов и помогаем
+              подобрать конкретное решение под задачу, пространство и
+              бюджет — от первого выбора до поставки.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACTS */}
+      <section id="contacts" className="border-t border-neutral-200">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+                Контакты
+              </p>
+
+              <p className="mt-3 text-base text-neutral-500">
+                Подбор, расчёт и вопросы по материалам — через заявку.
+              </p>
+            </div>
+
+            <Link
+              href="#request"
+              className="inline-flex w-fit rounded-md bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+            >
+              Оставить заявку
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
