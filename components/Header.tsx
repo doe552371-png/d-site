@@ -57,13 +57,13 @@ export default function Header() {
           </Link>
         </div>
 
-        <button
-          type="button"
+        <Link
+          href="/#request"
           className="text-sm md:hidden"
-          aria-label="Открыть меню"
+          aria-label="Перейти к заявке"
         >
-          Меню
-        </button>
+          Заявка
+        </Link>
       </div>
     </header>
   );
