@@ -1,12 +1,30 @@
+import Image from "next/image";
 import Link from "next/link";
 import { categories } from "@/data/categories";
 import { manufacturers } from "@/data/manufacturers";
+import { productImages } from "@/data/productImages";
 import { products } from "@/data/products";
 
 export default function CatalogPage() {
   const publishedProducts = products.filter(
     (product) => product.published,
   );
+
+  function getPreviewImage(slug: string) {
+    return (
+      productImages.find(
+        (image) =>
+          image.productSlug === slug &&
+          image.status === "approved" &&
+          image.isPrimary,
+      ) ??
+      productImages.find(
+        (image) =>
+          image.productSlug === slug &&
+          image.status === "approved",
+      )
+    );
+  }
 
   return (
     <main>
@@ -152,13 +170,25 @@ export default function CatalogPage() {
                 (item) => item.slug === product.manufacturer,
               );
 
+              const image = getPreviewImage(product.slug);
+
               return (
                 <Link
                   key={product.slug}
                   href={`/product/${product.slug}`}
                   className="group"
                 >
-                  <div className="aspect-[4/5] bg-neutral-100 transition-colors group-hover:bg-neutral-200" />
+                  <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100">
+                    {image && (
+                      <Image
+                        src={image.url}
+                        alt={image.alt}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 320px"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    )}
+                  </div>
 
                   <div className="pt-5">
                     <p className="text-xs font-medium uppercase tracking-[0.1em] text-neutral-400">
