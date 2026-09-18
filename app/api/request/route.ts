@@ -62,6 +62,7 @@ export async function POST(request: Request) {
     const name = String(body.name ?? "").trim();
     const phone = String(body.phone ?? "").trim();
     const product = String(body.product ?? "").trim();
+    const message = String(body.message ?? "").trim();
     const website = String(body.website ?? "").trim();
 
     if (website) {
@@ -84,7 +85,12 @@ export async function POST(request: Request) {
       );
     }
 
-    if (name.length > 100 || phone.length > 50 || product.length > 200) {
+    if (
+      name.length > 100 ||
+      phone.length > 50 ||
+      product.length > 200 ||
+      message.length > 2000
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -118,6 +124,7 @@ export async function POST(request: Request) {
       name,
       phone,
       product: product || undefined,
+      message: message || undefined,
     });
 
     return NextResponse.json({
