@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { categories } from "@/data/categories";
 import { manufacturers } from "@/data/manufacturers";
+import { productImages } from "@/data/productImages";
 import { products } from "@/data/products";
 
 type CategoryPageProps = {
@@ -27,6 +29,22 @@ export default async function CategoryPage({
     (product) =>
       product.category === category.slug && product.published,
   );
+
+  function getPreviewImage(productSlug: string) {
+    return (
+      productImages.find(
+        (image) =>
+          image.productSlug === productSlug &&
+          image.status === "approved" &&
+          image.isPrimary,
+      ) ??
+      productImages.find(
+        (image) =>
+          image.productSlug === productSlug &&
+          image.status === "approved",
+      )
+    );
+  }
 
   return (
     <main>
@@ -80,13 +98,25 @@ export default async function CategoryPage({
                   (item) => item.slug === product.manufacturer,
                 );
 
+                const image = getPreviewImage(product.slug);
+
                 return (
                   <Link
                     key={product.slug}
                     href={`/product/${product.slug}`}
                     className="group"
                   >
-                    <div className="aspect-[4/5] bg-neutral-100 transition-colors group-hover:bg-neutral-200" />
+                    <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100">
+                      {image && (
+                        <Image
+                          src={image.url}
+                          alt={image.alt}
+                          fill
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 360px"
+                          className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                        />
+                      )}
+                    </div>
 
                     <div className="pt-5">
                       <p className="text-xs font-medium uppercase tracking-[0.1em] text-neutral-400">
