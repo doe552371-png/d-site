@@ -5,12 +5,14 @@ type TelegramMessage = {
   name: string;
   phone: string;
   product?: string;
+  message?: string;
 };
 
 export async function sendTelegramMessage({
   name,
   phone,
   product,
+  message,
 }: TelegramMessage) {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
     throw new Error("Telegram environment variables are not configured");
@@ -22,6 +24,7 @@ export async function sendTelegramMessage({
     `Имя: ${name}`,
     `Телефон: ${phone}`,
     product ? `Товар: ${product}` : "",
+    message ? `Задача: ${message}` : "",
   ]
     .filter(Boolean)
     .join("\n");
