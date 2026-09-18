@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "import:images": "node scripts/import-product-images.mjs",
     "generate:products": "node scripts/generate-products.mjs",
     "generate:variants": "node scripts/generate-product-variants.mjs",
