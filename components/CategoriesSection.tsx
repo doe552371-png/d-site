@@ -1,47 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 
-const categories = [
-  {
-    slug: "wall-panels",
-    name: "Декоративные панели",
-    description: "Панели для стен и потолков",
-  },
-  {
-    slug: "decorative-plaster",
-    name: "Декоративная штукатурка",
-    description: "Фактурные покрытия для интерьера",
-  },
-  {
-    slug: "wallpaper",
-    name: "Обои",
-    description: "Современные интерьерные покрытия",
-  },
-  {
-    slug: "moldings",
-    name: "Молдинги",
-    description: "Детали для стен и потолков",
-  },
-  {
-    slug: "porcelain-stoneware",
-    name: "Керамогранит",
-    description: "Износостойкие покрытия для интерьера",
-  },
-  {
-    slug: "engineered-board",
-    name: "Инженерная доска",
-    description: "Натуральные деревянные покрытия для пола",
-  },
-  {
-    slug: "stone-veneer",
-    name: "Каменный шпон",
-    description: "Тонкий натуральный камень для стен и мебели",
-  },
-];
+import { categories } from "@/data/categories";
+import { productImages } from "@/data/productImages";
+import { products } from "@/data/products";
 
 export default function CategoriesSection() {
+  const publishedProducts = products.filter(
+    (product) => product.published,
+  );
+
   return (
     <section className="border-t border-neutral-200">
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
         <div className="mb-12 flex items-end justify-between gap-8">
           <div>
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
@@ -62,29 +33,70 @@ export default function CategoriesSection() {
         </div>
 
         <div className="grid gap-px bg-neutral-200 md:grid-cols-2">
-          {categories.map((category, index) => (
-            <Link
-              key={category.slug}
-              href={`/category/${category.slug}`}
-              className="group bg-white p-8 transition-colors hover:bg-neutral-50 md:p-10"
-            >
-              <div className="flex min-h-40 flex-col justify-between">
-                <span className="text-xs font-medium text-neutral-400">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+          {categories.map((category, index) => {
+            const categoryProducts = publishedProducts.filter(
+              (product) => product.category === category.slug,
+            );
 
-                <div>
-                  <h3 className="text-2xl font-semibold uppercase tracking-tight">
-                    {category.name}
-                  </h3>
+            const previewImage = categoryProducts
+              .map(
+                (product) =>
+                  productImages.find(
+                    (image) =>
+                      image.productSlug === product.slug &&
+                      image.status === "approved" &&
+                      image.isPrimary,
+                  ) ??
+                  productImages.find(
+                    (image) =>
+                      image.productSlug === product.slug &&
+                      image.status === "approved",
+                  ),
+              )
+              .find(Boolean);
 
-                  <p className="mt-3 text-base font-medium text-neutral-500">
-                    {category.description}
-                  </p>
+            return (
+              <Link
+                key={category.slug}
+                href={`/category/${category.slug}`}
+                className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-8"
+              >
+                <div className="grid min-h-44 gap-6 sm:grid-cols-[9rem_1fr] sm:items-end">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+                    {previewImage && (
+                      <Image
+                        src={previewImage.url}
+                        alt={previewImage.alt}
+                        fill
+                        sizes="144px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    )}
+                  </div>
+
+                  <div className="flex min-h-36 flex-col justify-between">
+                    <span className="text-xs font-medium text-neutral-400">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <div>
+                      <h3 className="text-2xl font-semibold uppercase tracking-tight">
+                        {category.name}
+                      </h3>
+
+                      <p className="mt-3 text-base font-medium text-neutral-500">
+                        {category.description}
+                      </p>
+
+                      <p className="mt-4 text-sm text-neutral-400">
+                        {categoryProducts.length} товаров
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
 
         <Link
