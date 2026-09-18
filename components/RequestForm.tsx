@@ -3,14 +3,15 @@
 import { useState } from "react";
 
 type RequestFormProps = {
-  productName: string;
+  productName?: string;
 };
 
 export default function RequestForm({
-  productName,
+  productName = "",
 }: RequestFormProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -31,6 +32,7 @@ export default function RequestForm({
         body: JSON.stringify({
           name,
           phone,
+          message,
           product: productName,
           website,
         }),
@@ -45,6 +47,7 @@ export default function RequestForm({
       setStatus("success");
       setName("");
       setPhone("");
+      setMessage("");
       setWebsite("");
     } catch {
       setStatus("error");
@@ -70,6 +73,16 @@ export default function RequestForm({
       onSubmit={handleSubmit}
       className="mt-10"
     >
+      <textarea
+        name="message"
+        placeholder="Расскажите о задаче"
+        value={message}
+        onChange={(event) => setMessage(event.target.value)}
+        maxLength={2000}
+        rows={5}
+        className="mt-4 w-full resize-y border border-neutral-300 px-5 py-4 outline-none transition-colors focus:border-black"
+      />
+
       <div
         aria-hidden="true"
         className="absolute -left-[9999px] h-px w-px overflow-hidden"
