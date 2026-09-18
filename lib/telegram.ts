@@ -18,7 +18,7 @@ export async function sendTelegramMessage({
     throw new Error("Telegram environment variables are not configured");
   }
 
-  const message = [
+  const telegramText = [
     "Новая заявка с сайта",
     "",
     `Имя: ${name}`,
@@ -38,7 +38,7 @@ export async function sendTelegramMessage({
       },
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
-        text: message,
+        text: telegramText,
       }),
     },
   );
