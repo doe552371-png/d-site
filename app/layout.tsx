@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const manrope = localFont({
-  src: "../public/fonts/ManropeVariable.woff2",
-  variable: "--font-manrope",
-  weight: "200 800",
+const inter = Inter({
+  subsets: ["cyrillic", "latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["cyrillic", "latin"],
+  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -24,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${manrope.variable} h-full`}
+      className={inter.variable + " " + interTight.variable + " h-full"}
       data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col">
