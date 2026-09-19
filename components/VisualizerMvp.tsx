@@ -25,7 +25,56 @@ const tasks = [
 ];
 
 const styles = ["Современный", "Минимализм", "Japandi", "Soft Classic"];
-const materials = ["Молдинги", "Плинтусы", "Стеновые панели", "Каменный шпон"];
+const materials = ["Все", "Молдинги", "Плинтусы", "Стеновые панели", "Каменный шпон"];
+
+function StylePreview({ style }: { style: string }) {
+  const base =
+    "relative h-[74px] w-full overflow-hidden rounded-md border border-black/5";
+
+  if (style === "Современный") {
+    return (
+      <div className={`${base} bg-[#dddcd8]`}>
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-[#b2a391]" />
+        <div className="absolute left-[16%] top-[24%] h-1 w-[68%] bg-[#f7f6f2]" />
+        <div className="absolute bottom-[19%] left-[21%] h-4 w-12 rounded-sm bg-[#343536]" />
+        <div className="absolute bottom-[19%] right-[20%] h-6 w-1 bg-[#242526]" />
+      </div>
+    );
+  }
+
+  if (style === "Минимализм") {
+    return (
+      <div className={`${base} bg-[#f0eee8]`}>
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[#d4c7b2]" />
+        <div className="absolute left-[18%] bottom-[24%] h-5 w-16 rounded-[4px] bg-[#6c6a64]" />
+        <div className="absolute right-[17%] bottom-[23%] h-7 w-px bg-[#2c2c2a]" />
+        <div className="absolute right-[14%] bottom-[23%] h-7 w-px bg-[#2c2c2a]" />
+      </div>
+    );
+  }
+
+  if (style === "Japandi") {
+    return (
+      <div className={`${base} bg-[#ddd2c2]`}>
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[#b89d77]" />
+        <div className="absolute left-[17%] top-[10%] h-[66%] w-px bg-[#8c6f50]" />
+        <div className="absolute left-[25%] top-[10%] h-[66%] w-px bg-[#8c6f50]" />
+        <div className="absolute left-[33%] top-[10%] h-[66%] w-px bg-[#8c6f50]" />
+        <div className="absolute bottom-[22%] left-[40%] h-5 w-14 rounded-[8px] bg-[#c8c0b4]" />
+        <div className="absolute bottom-[21%] right-[18%] h-8 w-4 rounded-t-full bg-[#71816b]" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`${base} bg-[#e7dfd2]`}>
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[#c4a98a]" />
+      <div className="absolute left-[16%] top-[15%] h-[52%] w-[68%] border border-[#b19a80]" />
+      <div className="absolute left-[21%] top-[20%] h-[42%] w-[58%] border border-[#c8b7a3]" />
+      <div className="absolute bottom-[20%] left-[27%] h-5 w-16 rounded-full bg-[#d7cec2]" />
+    </div>
+  );
+}
 
 export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
   const [file, setFile] = useState<File | null>(null);
@@ -49,6 +98,10 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
   }, [file]);
 
   const visibleMatches = useMemo(() => {
+    if (material === "Все") {
+      return matches.slice(0, 4);
+    }
+
     const normalized = material.toLowerCase();
 
     if (normalized.includes("молдинг")) {
@@ -155,12 +208,9 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                 Задача
               </h2>
             </div>
-            <span className="rounded-full border border-neutral-200 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
-              MVP
-            </span>
           </div>
 
-          <div className="mt-8 space-y-6">
+          <div className="mt-8 space-y-7">
             <fieldset>
               <legend className="text-sm font-semibold">Что хотим изменить?</legend>
               <div className="mt-3 grid gap-2">
@@ -184,20 +234,23 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
 
             <fieldset>
               <legend className="text-sm font-semibold">Стиль</legend>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="mt-3 grid grid-cols-2 gap-2">
                 {styles.map((item) => (
                   <button
                     key={item}
                     type="button"
                     onClick={() => setStyle(item)}
                     className={
-                      "rounded-full border px-4 py-2 text-xs font-semibold transition-colors " +
+                      "overflow-hidden border text-left transition-colors " +
                       (style === item
-                        ? "border-black bg-black text-white"
+                        ? "border-black ring-1 ring-black"
                         : "border-neutral-200 hover:border-neutral-400")
                     }
                   >
-                    {item}
+                    <StylePreview style={item} />
+                    <span className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-tight">
+                      {item}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -231,11 +284,8 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
               onClick={startVisualization}
               className="w-full bg-black px-6 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
             >
-              {file ? "Подготовить визуализацию" : "Сначала загрузить фото"}
+              {file ? "Показать решение" : "Сначала загрузить фото"}
             </button>
-            <p className="mt-4 text-xs leading-5 text-neutral-400">
-              Сейчас это интерфейс MVP. Следующим этапом подключим AI-генерацию и автоматический подбор позиций из каталога.
-            </p>
           </div>
         </div>
       </div>
@@ -265,9 +315,6 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                 </div>
               </div>
             </div>
-            <p className="mt-8 max-w-xl text-sm leading-6 text-white/60">
-              На следующем шаге этот сценарий будет отправляться в AI вместе с фотографией помещения и данными каталога DECOR.
-            </p>
           </div>
 
           <div className="bg-white p-7 md:p-9">
@@ -305,7 +352,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
 
             <div className="mt-6 border-t border-neutral-200 pt-5">
               <p className="text-sm leading-6 text-neutral-500">
-                В реальной версии здесь появится AI-визуализация с этими материалами уже внутри помещения.
+                Подходящие позиции из текущего каталога DECOR.
               </p>
             </div>
           </div>
