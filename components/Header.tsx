@@ -1,69 +1,113 @@
 import Link from "next/link";
 
+const productLinks = [
+  { href: "/category/moldings", label: "Молдинги" },
+  { href: "/category/baseboards", label: "Плинтусы" },
+  { href: "/category/wall-panels", label: "Панели" },
+  { href: "/category/stone-veneer", label: "Каменный шпон" },
+];
+
 export default function Header() {
   return (
-    <header className="border-b border-neutral-200">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+    <header className="border-b border-neutral-200 bg-white">
+      <div className="hidden border-b border-neutral-200 md:block">
+        <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-between px-6 text-sm text-neutral-500">
+          <span>Архитекторам, дизайнерам и комплектаторам</span>
+          <div className="flex items-center gap-6">
+            <Link href="/pro" className="transition-colors hover:text-black">
+              DECOR PRO
+            </Link>
+            <Link href="/#contacts" className="transition-colors hover:text-black">
+              Контакты
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto flex min-h-[76px] max-w-[1440px] items-center gap-8 px-6">
         <Link
           href="/"
-          className="text-lg font-medium tracking-[0.08em]"
+          className="shrink-0 text-xl font-semibold uppercase tracking-[0.12em]"
         >
           DECOR
         </Link>
 
-        <nav className="hidden items-center gap-8 text-base md:flex">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-7 lg:flex">
+          {productLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-base transition-colors hover:text-neutral-500"
+            >
+              {item.label}
+            </Link>
+          ))}
           <Link
             href="/catalog"
-            className="transition-colors hover:text-neutral-500"
+            className="text-base transition-colors hover:text-neutral-500"
           >
             Каталог
           </Link>
-
           <Link
             href="/visualizer"
-            className="transition-colors hover:text-neutral-500"
+            className="text-base transition-colors hover:text-neutral-500"
           >
             Подбор
           </Link>
-
           <Link
             href="/#about"
-            className="transition-colors hover:text-neutral-500"
+            className="text-base transition-colors hover:text-neutral-500"
           >
             О нас
           </Link>
-
-          <Link
-            href="/#contacts"
-            className="transition-colors hover:text-neutral-500"
-          >
-            Контакты
-          </Link>
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="ml-auto flex items-center gap-3">
+          <Link
+            href="/catalog"
+            className="hidden px-2 py-3 text-base transition-colors hover:text-neutral-500 sm:inline-flex"
+          >
+            Поиск
+          </Link>
           <Link
             href="/pro"
-            className="rounded-md border border-black px-5 py-3 text-base font-medium transition-colors hover:bg-black hover:text-white"
+            className="hidden border border-black px-5 py-3 text-base font-medium transition-colors hover:bg-black hover:text-white sm:inline-flex"
           >
-            ПРО
+            PRO
           </Link>
-
           <Link
             href="/#request"
-            className="rounded-md bg-black px-5 py-3 text-base font-semibold text-white transition-opacity hover:opacity-80"
+            className="bg-black px-5 py-3 text-base font-semibold text-white transition-opacity hover:opacity-80"
           >
-            Оставить заявку
+            Заявка
           </Link>
         </div>
+      </div>
 
-        <Link
-          href="/#request"
-          className="text-base md:hidden"
-          aria-label="Перейти к заявке"
-        >
-          Заявка
-        </Link>
+      <div className="border-t border-neutral-200 lg:hidden">
+        <nav className="mx-auto flex max-w-[1440px] gap-6 overflow-x-auto px-6 py-3 text-base">
+          {productLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="shrink-0 text-neutral-700 transition-colors hover:text-black"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="/catalog"
+            className="shrink-0 text-neutral-700 transition-colors hover:text-black"
+          >
+            Каталог
+          </Link>
+          <Link
+            href="/visualizer"
+            className="shrink-0 text-neutral-700 transition-colors hover:text-black"
+          >
+            Подбор
+          </Link>
+        </nav>
       </div>
     </header>
   );
