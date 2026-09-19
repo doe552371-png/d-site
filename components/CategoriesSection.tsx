@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { categories } from "@/data/categories";
-import { productImages } from "@/data/productImages";
-import { products } from "@/data/products";
+import {
+  getProductPreviewImage,
+  getPublishedProducts,
+} from "@/lib/catalog";
 
 export default function CategoriesSection() {
-  const publishedProducts = products.filter(
-    (product) => product.published,
-  );
+  const publishedProducts = getPublishedProducts();
 
   return (
     <section className="border-t border-neutral-200">
@@ -39,19 +39,8 @@ export default function CategoriesSection() {
             );
 
             const previewImage = categoryProducts
-              .map(
-                (product) =>
-                  productImages.find(
-                    (image) =>
-                      image.productSlug === product.slug &&
-                      image.status === "approved" &&
-                      image.isPrimary,
-                  ) ??
-                  productImages.find(
-                    (image) =>
-                      image.productSlug === product.slug &&
-                      image.status === "approved",
-                  ),
+              .map((product) =>
+                getProductPreviewImage(product.slug),
               )
               .find(Boolean);
 
