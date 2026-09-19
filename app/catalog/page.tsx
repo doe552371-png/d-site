@@ -1,30 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+
+import {
+  getCategoryBySlug,
+  getManufacturerBySlug,
+  getProductPreviewImage,
+  getPublishedProducts,
+} from "@/lib/catalog";
 import { categories } from "@/data/categories";
 import { manufacturers } from "@/data/manufacturers";
-import { productImages } from "@/data/productImages";
-import { products } from "@/data/products";
 
 export default function CatalogPage() {
-  const publishedProducts = products.filter(
-    (product) => product.published,
-  );
-
-  function getPreviewImage(slug: string) {
-    return (
-      productImages.find(
-        (image) =>
-          image.productSlug === slug &&
-          image.status === "approved" &&
-          image.isPrimary,
-      ) ??
-      productImages.find(
-        (image) =>
-          image.productSlug === slug &&
-          image.status === "approved",
-      )
-    );
-  }
+  const publishedProducts = getPublishedProducts();
 
   return (
     <main>
@@ -114,8 +101,7 @@ export default function CatalogPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {manufacturers.map((manufacturer) => {
               const manufacturerProducts = publishedProducts.filter(
-                (product) =>
-                  product.manufacturer === manufacturer.slug,
+                (product) => product.manufacturer === manufacturer.slug,
               );
 
               if (manufacturerProducts.length === 0) {
@@ -162,15 +148,9 @@ export default function CatalogPage() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {publishedProducts.slice(0, 8).map((product) => {
-              const category = categories.find(
-                (item) => item.slug === product.category,
-              );
-
-              const manufacturer = manufacturers.find(
-                (item) => item.slug === product.manufacturer,
-              );
-
-              const image = getPreviewImage(product.slug);
+              const category = getCategoryBySlug(product.category);
+              const manufacturer = getManufacturerBySlug(product.manufacturer);
+              const image = getProductPreviewImage(product.slug);
 
               return (
                 <Link
