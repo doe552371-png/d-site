@@ -20,7 +20,7 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/#selection"
+            href="/visualizer"
             className="transition-colors hover:text-neutral-500"
           >
             Подбор
