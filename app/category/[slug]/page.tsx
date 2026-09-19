@@ -79,7 +79,7 @@ export default async function CategoryPage({
             </div>
           ) : (
             <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {categoryProducts.map((product) => {
+              {categoryProducts.map((product, index) => {
                 const manufacturer = getManufacturerBySlug(
                   product.manufacturer,
                 );
@@ -97,6 +97,7 @@ export default async function CategoryPage({
                           src={image.url}
                           alt={image.alt}
                           fill
+                          loading={index === 0 ? "eager" : "lazy"}
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 360px"
                           className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                         />
