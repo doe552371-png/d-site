@@ -2,81 +2,87 @@ import Link from "next/link";
 
 import { categories } from "@/data/categories";
 import CategoryVisual from "@/components/CategoryVisual";
-import {
-  getPublishedProducts,
-} from "@/lib/catalog";
+import { getPublishedProducts } from "@/lib/catalog";
+
+const featured = [
+  "moldings",
+  "baseboards",
+  "cornices",
+  "wall-panels",
+  "3d-panels",
+  "stone-veneer",
+];
 
 export default function CategoriesSection() {
   const publishedProducts = getPublishedProducts();
+  const visibleCategories = featured
+    .map((slug) => categories.find((category) => category.slug === slug))
+    .filter(Boolean);
 
   return (
-    <section className="border-t border-neutral-200">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-        <div className="mb-12 flex items-end justify-between gap-8">
-          <div>
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
+    <section className="border-b border-neutral-200">
+      <div className="mx-auto max-w-[1440px] px-6 py-20 md:py-24">
+        <div className="mb-10 flex flex-col gap-5 md:mb-12 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-neutral-500">
               Каталог
             </p>
-
-            <h2 className="text-3xl font-semibold uppercase leading-tight tracking-tight md:text-5xl">
-              Материалы для интерьера
+            <h2 className="mt-4 text-4xl font-semibold uppercase leading-[0.96] tracking-tight md:text-6xl">
+              Материалы,
+              <br />
+              которые формируют пространство
             </h2>
           </div>
 
           <Link
             href="/catalog"
-            className="hidden text-sm font-medium underline underline-offset-4 md:block"
+            className="inline-flex text-base font-medium underline underline-offset-4 transition-colors hover:text-neutral-500"
           >
             Смотреть весь каталог
           </Link>
         </div>
 
-        <div className="grid gap-px bg-neutral-200 md:grid-cols-2">
-          {categories.map((category, index) => {
+        <div className="grid gap-px overflow-hidden border border-neutral-200 bg-neutral-200 sm:grid-cols-2 xl:grid-cols-3">
+          {visibleCategories.map((category, index) => {
             const categoryProducts = publishedProducts.filter(
-              (product) => product.category === category.slug,
+              (product) => product.category === category!.slug,
             );
 
             return (
               <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
-                className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-8"
+                key={category!.slug}
+                href={`/category/${category!.slug}`}
+                className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-7"
               >
-                <div className="grid min-h-44 gap-6 sm:grid-cols-[9rem_1fr] sm:items-end">
-                  <CategoryVisual slug={category.slug} />
-
-                  <div className="flex min-h-36 flex-col justify-between">
-                    <span className="text-xs font-medium text-neutral-400">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <div>
-                      <h3 className="text-2xl font-semibold uppercase tracking-tight">
-                        {category.name}
-                      </h3>
-
-                      <p className="mt-3 text-base font-medium text-neutral-500">
-                        {category.description}
-                      </p>
-
-                      <p className="mt-4 text-sm text-neutral-400">
-                        {categoryProducts.length} товаров
-                      </p>
-                    </div>
-                  </div>
+                <div className="overflow-hidden bg-neutral-100">
+                  <CategoryVisual slug={category!.slug} />
                 </div>
+
+                <div className="flex items-start justify-between gap-5 pt-6">
+                  <div>
+                    <p className="text-sm text-neutral-400">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="mt-3 text-2xl font-semibold uppercase leading-tight tracking-tight md:text-3xl">
+                      {category!.name}
+                    </h3>
+                    <p className="mt-3 max-w-sm text-base leading-7 text-neutral-500">
+                      {category!.description}
+                    </p>
+                  </div>
+
+                  <span className="pt-1 text-2xl transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </div>
+
+                <p className="mt-5 text-sm text-neutral-400">
+                  {categoryProducts.length} товаров
+                </p>
               </Link>
             );
           })}
         </div>
-
-        <Link
-          href="/catalog"
-          className="mt-8 inline-block text-sm font-medium underline underline-offset-4 md:hidden"
-        >
-          Смотреть весь каталог
-        </Link>
       </div>
     </section>
   );
