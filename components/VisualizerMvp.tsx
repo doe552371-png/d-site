@@ -28,6 +28,60 @@ const styles = ["Современный", "Минимализм", "Japandi", "So
 const materials = ["Все", "Молдинги", "Плинтусы", "Стеновые панели", "Каменный шпон"];
 
 function StylePreview({ style }: { style: string }) {
+  const previews: Record<string, string> = {
+    "Современный":
+      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4700b6c5-aab2-4a43-a93e-83a10ed40381",
+    "Минимализм":
+      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:d1e3fc06-8375-458a-b49d-2aff343f76ac",
+    "Japandi":
+      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:b7199a6e-37fd-4e1c-afea-ac2d7354f454",
+    "Soft Classic":
+      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:141d16d2-227c-4c28-909b-c2303feffb6f",
+  };
+
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+      <Image
+        src={previews[style]}
+        alt=""
+        fill
+        unoptimized
+        sizes="(max-width: 1024px) 45vw, 260px"
+        className="object-cover transition-transform duration-500"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+    </div>
+  );
+}se client";
+
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+type Match = {
+  slug: string;
+  name: string;
+  manufacturer: string;
+  category: string;
+  categoryName: string;
+  image?: string;
+  price?: string;
+};
+
+type VisualizerMvpProps = {
+  matches: Match[];
+};
+
+const tasks = [
+  "Молдинги и стеновой декор",
+  "Плинтусы и примыкания",
+  "Панели и фактурные стены",
+  "Несколько решений сразу",
+];
+
+const styles = ["Современный", "Минимализм", "Japandi", "Soft Classic"];
+const materials = ["Все", "Молдинги", "Плинтусы", "Стеновые панели", "Каменный шпон"];
+
+function StylePreview({ style }: { style: string }) {
   const base =
     "relative h-[74px] w-full overflow-hidden rounded-md border border-black/5";
 
