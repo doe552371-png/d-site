@@ -150,7 +150,7 @@ export const productImagesGenerated: ProductImage[] = [
       version: "1.0",
     },
     version: 1,
-    isPrimary: true,
+    isPrimary: false,
     sortOrder: 22,
   }
   {
@@ -302,7 +302,7 @@ export const productImagesGenerated: ProductImage[] = [
       version: "1.0",
     },
     version: 1,
-    isPrimary: true,
+    isPrimary: false,
     sortOrder: 20,
   }
   {
