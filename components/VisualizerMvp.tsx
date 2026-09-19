@@ -27,29 +27,39 @@ const tasks = [
 const styles = ["Современный", "Минимализм", "Japandi", "Soft Classic"];
 const materials = ["Все", "Молдинги", "Плинтусы", "Стеновые панели", "Каменный шпон"];
 
-function StylePreview({ style }: { style: string }) {
-  const previews: Record<string, string> = {
-    "Современный":
-      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4700b6c5-aab2-4a43-a93e-83a10ed40381",
-    "Минимализм":
-      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:d1e3fc06-8375-458a-b49d-2aff343f76ac",
-    "Japandi":
-      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:b7199a6e-37fd-4e1c-afea-ac2d7354f454",
-    "Soft Classic":
-      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:141d16d2-227c-4c28-909b-c2303feffb6f",
-  };
+const stylePreviews: Record<string, string> = {
+  "Современный":
+    "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4700b6c5-aab2-4a43-a93e-83a10ed40381",
+  "Минимализм":
+    "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:d1e3fc06-8375-458a-b49d-2aff343f76ac",
+  "Japandi":
+    "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:b7199a6e-37fd-4e1c-afea-ac2d7354f454",
+  "Soft Classic":
+    "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:141d16d2-227c-4c28-909b-c2303feffb6f",
+};
 
+function StyleHeroPreview({ style }: { style: string }) {
   return (
-    <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+    <div className="relative aspect-[16/7] overflow-hidden rounded-sm bg-neutral-100">
       <Image
-        src={previews[style]}
+        src={stylePreviews[style]}
         alt=""
         fill
         unoptimized
-        sizes="(max-width: 1024px) 45vw, 260px"
-        className="object-cover transition-transform duration-500"
+        sizes="(max-width: 1024px) 100vw, 760px"
+        className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-white md:p-6">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+            Стиль
+          </p>
+          <p className="mt-1 text-lg font-semibold uppercase tracking-tight md:text-xl">
+            {style}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -212,25 +222,25 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
 
             <fieldset>
               <legend className="text-sm font-semibold">Стиль</legend>
-              <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-                {styles.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setStyle(item)}
-                    className={
-                      "group overflow-hidden rounded-sm border bg-white text-left transition-all " +
-                      (style === item
-                        ? "border-black shadow-[inset_0_-2px_0_#000]"
-                        : "border-neutral-200 hover:border-neutral-400")
-                    }
-                  >
-                    <StylePreview style={item} />
-                    <span className="block px-2.5 py-2 text-[11px] font-semibold leading-tight tracking-[-0.01em]">
+              <div className="mt-3">
+                <StyleHeroPreview style={style} />
+                <div className="mt-4 flex items-center gap-5 overflow-x-auto border-b border-neutral-200 pb-2">
+                  {styles.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setStyle(item)}
+                      className={
+                        "shrink-0 pb-2 text-xs font-semibold uppercase tracking-tight transition-colors " +
+                        (style === item
+                          ? "border-b-2 border-black text-black"
+                          : "border-b-2 border-transparent text-neutral-400 hover:text-black")
+                      }
+                    >
                       {item}
-                    </span>
-                  </button>
-                ))}
+                    </button>
+                  ))}
+                </div>
               </div>
             </fieldset>
 
