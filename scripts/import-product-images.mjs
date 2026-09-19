@@ -429,6 +429,12 @@ async function main() {
   // ------------------------------------------------------------
 
   const records = manifest.map((item) => {
+    const isPrimary =
+      CURATED_PRIMARY_FILES[item.productSlug] ===
+        item.originalFilename ||
+      (!CURATED_FILE_WHITELISTS[item.productSlug] &&
+        item.sortOrder === 1);
+
     return `  {
     id: "${escapeTsString(item.id)}",
     productSlug: "${escapeTsString(item.productSlug)}",
@@ -445,11 +451,7 @@ async function main() {
       version: "1.0",
     },
     version: 1,
-    isPrimary:
-      CURATED_PRIMARY_FILES[item.productSlug] ===
-        item.originalFilename ||
-      (!CURATED_FILE_WHITELISTS[item.productSlug] &&
-        item.sortOrder === 1),
+    isPrimary: ${isPrimary},
     sortOrder: ${item.sortOrder},
   },`;
   });
