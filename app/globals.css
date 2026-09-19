@@ -6,8 +6,6 @@
   --muted: #6b6b6b;
   --border: #e5e5e5;
   --surface: #f7f7f7;
-  --font-body: "GT America LC", var(--font-manrope), Arial, Helvetica, sans-serif;
-  --font-display: "Family", var(--font-manrope), Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -23,7 +21,7 @@ html {
     margin: 0;
     background: var(--background);
     color: var(--foreground);
-    font-family: var(--font-body);
+    font-family: var(--font-inter), Arial, Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
@@ -37,21 +35,19 @@ html {
   h5,
   h6 {
     margin: 0;
-    font-family: var(--font-display);
+    font-family: var(--font-inter-tight), var(--font-inter), Arial, Helvetica, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
 
-  nav,
-  button {
-    font-family: var(--font-body);
-    font-size: 16px;
+  nav {
     font-weight: 500;
   }
 
-  .text-sm {
-    font-size: 14px;
+  button {
+    font-size: 16px;
+    font-weight: 500;
   }
 
   p {
@@ -67,4 +63,10 @@ html {
   textarea {
     font: inherit;
   }
+}
+
+header a.text-sm,
+nav.text-sm a,
+main a.rounded-md.text-sm {
+  font-size: 16px;
 }
