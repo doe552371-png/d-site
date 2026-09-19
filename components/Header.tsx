@@ -27,7 +27,7 @@ export default function Header() {
       <div className="mx-auto flex min-h-[76px] max-w-[1440px] items-center gap-8 px-6">
         <Link
           href="/"
-          className="shrink-0 text-xl font-semibold uppercase tracking-[0.12em]"
+          className="shrink-0 text-xl font-medium uppercase tracking-[0.12em]"
         >
           DECOR
         </Link>
@@ -37,26 +37,26 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-base transition-colors hover:text-neutral-500"
+              className="text-lg transition-colors hover:text-neutral-500"
             >
               {item.label}
             </Link>
           ))}
           <Link
             href="/catalog"
-            className="text-base transition-colors hover:text-neutral-500"
+            className="text-lg transition-colors hover:text-neutral-500"
           >
             Каталог
           </Link>
           <Link
             href="/visualizer"
-            className="text-base transition-colors hover:text-neutral-500"
+            className="text-lg transition-colors hover:text-neutral-500"
           >
             Подбор
           </Link>
           <Link
             href="/#about"
-            className="text-base transition-colors hover:text-neutral-500"
+            className="text-lg transition-colors hover:text-neutral-500"
           >
             О нас
           </Link>
@@ -65,19 +65,19 @@ export default function Header() {
         <div className="ml-auto flex items-center gap-3">
           <Link
             href="/catalog"
-            className="hidden px-2 py-3 text-base transition-colors hover:text-neutral-500 sm:inline-flex"
+            className="hidden px-2 py-3 text-lg transition-colors hover:text-neutral-500 sm:inline-flex"
           >
             Поиск
           </Link>
           <Link
             href="/pro"
-            className="hidden border border-black px-5 py-3 text-base font-medium transition-colors hover:bg-black hover:text-white sm:inline-flex"
+            className="hidden border border-black px-5 py-3 text-lg font-medium transition-colors hover:bg-black hover:text-white sm:inline-flex"
           >
             PRO
           </Link>
           <Link
             href="/#request"
-            className="bg-black px-5 py-3 text-base font-semibold text-white transition-opacity hover:opacity-80"
+            className="bg-black px-5 py-3 text-lg font-medium text-white transition-opacity hover:opacity-80"
           >
             Заявка
           </Link>
@@ -85,7 +85,7 @@ export default function Header() {
       </div>
 
       <div className="border-t border-neutral-200 lg:hidden">
-        <nav className="mx-auto flex max-w-[1440px] gap-6 overflow-x-auto px-6 py-3 text-base">
+        <nav className="mx-auto flex max-w-[1440px] gap-6 overflow-x-auto px-6 py-3 text-lg">
           {productLinks.map((item) => (
             <Link
               key={item.href}
