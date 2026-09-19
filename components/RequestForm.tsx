@@ -143,7 +143,7 @@ export default function RequestForm({
       <button
         type="submit"
         disabled={status === "loading"}
-        className="mt-4 rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-4 bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {status === "loading"
           ? "Отправка..."
