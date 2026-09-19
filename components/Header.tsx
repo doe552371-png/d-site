@@ -19,27 +19,43 @@ export default function Header() {
             Каталог
           </Link>
 
-          <a
-            href="#about"
+          <Link
+            href="/#selection"
+            className="transition-colors hover:text-neutral-500"
+          >
+            Подбор
+          </Link>
+
+          <Link
+            href="/#about"
             className="transition-colors hover:text-neutral-500"
           >
             О нас
-          </a>
+          </Link>
 
-          <a
-            href="#contacts"
+          <Link
+            href="/#contacts"
             className="transition-colors hover:text-neutral-500"
           >
             Контакты
-          </a>
+          </Link>
         </nav>
 
-        <a
-          href="#request"
-          className="hidden border border-black px-5 py-3 text-sm transition-colors hover:bg-black hover:text-white md:block"
-        >
-          Оставить заявку
-        </a>
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="/pro"
+            className="rounded-md border border-black px-5 py-3 text-sm font-medium transition-colors hover:bg-black hover:text-white"
+          >
+            ПРО
+          </Link>
+
+          <Link
+            href="/#request"
+            className="rounded-md bg-black px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+          >
+            Оставить заявку
+          </Link>
+        </div>
 
         <button
           type="button"

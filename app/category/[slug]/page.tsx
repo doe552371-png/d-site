@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { categories } from "@/data/categories";
+import { manufacturers } from "@/data/manufacturers";
 import { products } from "@/data/products";
 
 type CategoryPageProps = {
@@ -14,14 +15,17 @@ export default async function CategoryPage({
 }: CategoryPageProps) {
   const { slug } = await params;
 
-  const category = categories.find((item) => item.slug === slug);
+  const category = categories.find(
+    (item) => item.slug === slug,
+  );
 
   if (!category) {
     notFound();
   }
 
   const categoryProducts = products.filter(
-    (product) => product.category === category.slug,
+    (product) =>
+      product.category === category.slug && product.published,
   );
 
   return (
@@ -51,7 +55,7 @@ export default async function CategoryPage({
 
       <section>
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="mb-12 flex items-end justify-between">
+          <div className="mb-12 flex items-end justify-between gap-8">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
                 Коллекция
@@ -63,31 +67,67 @@ export default async function CategoryPage({
             </div>
           </div>
 
-          <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryProducts.map((product) => (
-              <Link
-                key={product.slug}
-                href={`/product/${product.slug}`}
-                className="group"
-              >
-                <div className="aspect-[4/5] bg-neutral-100 transition-colors group-hover:bg-neutral-200" />
+          {categoryProducts.length === 0 ? (
+            <div className="border border-neutral-200 p-8">
+              <p className="text-base font-medium text-neutral-500">
+                В этой категории пока нет опубликованных товаров.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {categoryProducts.map((product) => {
+                const manufacturer = manufacturers.find(
+                  (item) => item.slug === product.manufacturer,
+                );
 
-                <div className="pt-5">
-                  <h3 className="text-xl font-semibold uppercase tracking-tight">
-                    {product.name}
-                  </h3>
+                return (
+                  <Link
+                    key={product.slug}
+                    href={`/product/${product.slug}`}
+                    className="group"
+                  >
+                    <div className="aspect-[4/5] bg-neutral-100 transition-colors group-hover:bg-neutral-200" />
 
-                  <p className="mt-3 text-base font-medium leading-7 text-neutral-500">
-                    {product.description}
-                  </p>
+                    <div className="pt-5">
+                      <p className="text-xs font-medium uppercase tracking-[0.1em] text-neutral-400">
+                        {manufacturer?.name}
+                      </p>
 
-                  <p className="mt-4 text-sm font-medium">
-                    {product.price}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+                      {product.collection && (
+                        <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-neutral-400">
+                          {product.collection}
+                        </p>
+                      )}
+
+                      <h3 className="mt-2 text-xl font-semibold uppercase tracking-tight">
+                        {product.name}
+                      </h3>
+
+                      <p className="mt-3 text-base font-medium leading-7 text-neutral-500">
+                        {product.description}
+                      </p>
+
+                      {product.dimensions && (
+                        <p className="mt-3 text-sm font-medium text-neutral-500">
+                          {product.dimensions}
+                        </p>
+                      )}
+
+                      {product.color && (
+                        <p className="mt-1 text-sm font-medium text-neutral-500">
+                          Цвет: {product.color}
+                        </p>
+                      )}
+
+                      <p className="mt-4 text-sm font-medium">
+                        {product.price}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
     </main>

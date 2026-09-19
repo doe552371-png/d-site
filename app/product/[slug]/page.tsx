@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories } from "@/data/categories";
+
+import ProductOptions from "@/components/ProductOptions";
+import RequestForm from "@/components/RequestForm";
+
+import { productImages } from "@/data/productImages";
 import { products } from "@/data/products";
+import { productVariants } from "@/data/productVariants";
 
 type ProductPageProps = {
   params: Promise<{
@@ -14,110 +19,85 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const { slug } = await params;
 
-  const product = products.find((item) => item.slug === slug);
+  const product = products.find(
+    (item) =>
+      item.slug === slug &&
+      item.published,
+  );
 
   if (!product) {
     notFound();
   }
 
-  const category = categories.find(
-    (item) => item.slug === product.category,
+  const variants = productVariants.filter(
+    (variant) =>
+      variant.productSlug === product.slug &&
+      variant.published,
+  );
+
+  const images = productImages.filter(
+    (image) =>
+      image.productSlug === product.slug &&
+      image.status === "approved",
   );
 
   return (
-    <main>
-      <section className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-8">
-          <Link
-            href={`/category/${product.category}`}
-            className="text-sm font-medium text-neutral-500 underline underline-offset-4"
-          >
-            ← {category?.name ?? "Категория"}
-          </Link>
-        </div>
-      </section>
+    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Breadcrumbs */}
+      <div className="mb-8 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+        <Link
+          href="/"
+          className="transition hover:text-neutral-900"
+        >
+          Главная
+        </Link>
 
-      <section>
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div className="aspect-[4/5] bg-neutral-100" />
+        <span>/</span>
 
-            <div className="flex flex-col justify-center">
-              <p className="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
-                {category?.name}
-              </p>
+        <span className="text-neutral-900">
+          {product.name}
+        </span>
+      </div>
 
-              <h1 className="mt-5 text-5xl font-semibold uppercase leading-[0.98] tracking-tight md:text-7xl">
-                {product.name}
-              </h1>
+      {/* Product */}
+      <div className="grid gap-10 lg:grid-cols-2">
+        {/* Gallery + variants */}
+        <ProductOptions
+          productImages={images}
+          productName={product.name}
+          variants={variants}
+        />
 
-              <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-neutral-500">
-                {product.description}
-              </p>
-
-              <div className="mt-10 border-t border-neutral-200 pt-6">
-                <p className="text-sm font-medium uppercase tracking-[0.1em] text-neutral-400">
-                  Стоимость
-                </p>
-
-                <p className="mt-2 text-xl font-semibold">
-                  {product.price}
-                </p>
-              </div>
-
-              <a
-                href="#request"
-                className="mt-10 inline-flex w-fit bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-              >
-                Запросить информацию
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="request"
-        className="border-t border-neutral-200"
-      >
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="max-w-2xl">
-            <p className="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
-              Запрос
-            </p>
-
-            <h2 className="mt-4 text-3xl font-semibold uppercase leading-tight tracking-tight md:text-5xl">
-              Узнать подробнее
-            </h2>
-
-            <p className="mt-6 text-lg font-medium leading-8 text-neutral-500">
-              Оставьте заявку, чтобы узнать наличие, стоимость и
-              получить дополнительную информацию о материале.
-            </p>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              <input
-                type="text"
-                placeholder="Ваше имя"
-                className="border border-neutral-300 px-5 py-4 outline-none transition-colors focus:border-black"
-              />
-
-              <input
-                type="tel"
-                placeholder="Телефон"
-                className="border border-neutral-300 px-5 py-4 outline-none transition-colors focus:border-black"
-              />
+        {/* Product information */}
+        <div className="space-y-8">
+          <div>
+            <div className="mb-3 text-sm text-neutral-500">
+              {product.manufacturer}
             </div>
 
-            <button
-              type="button"
-              className="mt-4 bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-            >
-              Отправить запрос
-            </button>
+            <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              {product.name}
+            </h1>
+
+            <div className="mt-3 text-sm text-neutral-500">
+              Артикул: {product.sku}
+            </div>
+          </div>
+
+          {product.description && (
+            <div className="leading-7 text-neutral-700">
+              {product.description}
+            </div>
+          )}
+
+          {/* Request form */}
+          <div className="border-t border-neutral-200 pt-8">
+            <RequestForm
+              productName={product.name}
+            />
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

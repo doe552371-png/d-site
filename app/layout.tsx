@@ -22,7 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${manrope.variable} h-full`}>
+    <html
+      lang="ru"
+      className={`${manrope.variable} h-full`}
+      data-scroll-behavior="smooth"
+    >
       <body className="min-h-full flex flex-col">
         <Header />
         {children}

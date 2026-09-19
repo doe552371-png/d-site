@@ -1,37 +1,52 @@
 export const categories = [
   {
-    slug: "wall-panels",
-    name: "Декоративные панели",
-    description: "Панели для стен и потолков",
-  },
-  {
-    slug: "decorative-plaster",
-    name: "Декоративная штукатурка",
-    description: "Фактурные покрытия для интерьера",
-  },
-  {
-    slug: "wallpaper",
-    name: "Обои",
-    description: "Современные интерьерные покрытия",
-  },
-  {
     slug: "moldings",
     name: "Молдинги",
-    description: "Детали для стен и потолков",
+    description: "Декоративные профили для стен и интерьера",
   },
   {
-    slug: "porcelain-stoneware",
-    name: "Керамогранит",
-    description: "Износостойкие покрытия для интерьера",
+    slug: "baseboards",
+    name: "Плинтусы",
+    description: "Напольные и скрытые решения для интерьера",
   },
   {
-    slug: "engineered-board",
-    name: "Инженерная доска",
-    description: "Натуральные деревянные покрытия для пола",
+    slug: "cornices",
+    name: "Карнизы",
+    description: "Потолочные и декоративные профили",
+  },
+  {
+    slug: "baguettes",
+    name: "Багеты",
+    description: "Профили и решения для декоративного оформления",
+  },
+  {
+    slug: "rails-beams",
+    name: "Рейки и бруски",
+    description: "Декоративные рейки и профильные элементы",
+  },
+  {
+    slug: "3d-panels",
+    name: "3D-панели",
+    description: "Рельефные декоративные панели",
+  },
+  {
+    slug: "wall-panels",
+    name: "Стеновые панели",
+    description: "Декоративные панели для стен",
   },
   {
     slug: "stone-veneer",
     name: "Каменный шпон",
-    description: "Тонкий натуральный камень для стен и мебели",
+    description: "Натуральный камень для стен и интерьера",
+  },
+  {
+    slug: "porcelain-stoneware",
+    name: "Керамогранит",
+    description: "Керамогранит для интерьера и архитектурных решений",
+  },
+  {
+    slug: "adhesives-accessories",
+    name: "Клей и комплектующие",
+    description: "Клеи, соединители, углы и монтажные элементы",
   },
 ];

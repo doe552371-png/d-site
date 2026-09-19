@@ -1,0 +1,111 @@
+export interface ProductVariant {
+  id: string;
+  productSlug: string;
+  name: string;
+  article: string;
+  dimensions: string;
+  color: string;
+  published: boolean;
+}
+
+export const productVariantsGenerated: ProductVariant[] = [
+  {
+    id: "decomaster-d235-115",
+    productSlug: "decomaster-d235-115",
+    name: "Белый",
+    article: "D235-115/20",
+    dimensions: "80×17×2400 мм",
+    color: "Белый",
+    published: true,
+  },
+  {
+    id: "decomaster-d235-116",
+    productSlug: "decomaster-d235-115",
+    name: "Чёрный",
+    article: "D235-116/20",
+    dimensions: "80×17×2400 мм",
+    color: "Чёрный",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u",
+    productSlug: "paolo-arte-kr025u",
+    name: "Под покраску",
+    article: "Kr025U",
+    dimensions: "80×16×2000 мм",
+    color: "Под покраску",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-10",
+    productSlug: "paolo-arte-kr025u",
+    name: "Клён",
+    article: "Kr025U-10",
+    dimensions: "80×16×2000 мм",
+    color: "Клён",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-13",
+    productSlug: "paolo-arte-kr025u",
+    name: "Графит",
+    article: "Kr025U-13",
+    dimensions: "80×16×2000 мм",
+    color: "Графит",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-14",
+    productSlug: "paolo-arte-kr025u",
+    name: "Дуб",
+    article: "Kr025U-14",
+    dimensions: "80×16×2000 мм",
+    color: "Дуб",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-18",
+    productSlug: "paolo-arte-kr025u",
+    name: "Дуб коричневый",
+    article: "Kr025U-18",
+    dimensions: "80×16×2000 мм",
+    color: "Дуб коричневый",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-6",
+    productSlug: "paolo-arte-kr025u",
+    name: "Дуб медовый",
+    article: "Kr025U-6",
+    dimensions: "80×16×2000 мм",
+    color: "Дуб медовый",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-7",
+    productSlug: "paolo-arte-kr025u",
+    name: "Орех",
+    article: "Kr025U-7",
+    dimensions: "80×16×2000 мм",
+    color: "Орех",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-8",
+    productSlug: "paolo-arte-kr025u",
+    name: "Тёмный орех",
+    article: "Kr025U-8",
+    dimensions: "80×16×2000 мм",
+    color: "Тёмный орех",
+    published: true,
+  },
+  {
+    id: "paolo-arte-kr025u-9",
+    productSlug: "paolo-arte-kr025u",
+    name: "Выбеленная сосна",
+    article: "Kr025U-9",
+    dimensions: "80×16×2000 мм",
+    color: "Выбеленная сосна",
+    published: true,
+  },
+];
