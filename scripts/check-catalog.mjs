@@ -45,7 +45,7 @@ async function exists(file) {
 
 function extractStringValues(text, field) {
   const regex = new RegExp(
-    `${field}:\\\\s*"([^"]+)"`,
+    String.raw`${field}:\s*"([^"]+)"`,
     "g",
   );
 
