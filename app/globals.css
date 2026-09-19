@@ -41,9 +41,7 @@ html {
   }
 
   nav,
-  button,
-  .text-sm {
-    font-size: 14px;
+  button {
     font-weight: 500;
   }
 
