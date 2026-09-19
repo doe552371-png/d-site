@@ -84,7 +84,7 @@ function cleanName(name) {
     .replace(/^-|-$/g, "");
 }
 
-function detectType(filename) {
+function detectType(filename, width, height) {
   const value = filename.toLowerCase();
 
   if (
@@ -114,6 +114,22 @@ function detectType(filename) {
     value.includes("application")
   ) {
     return "installation";
+  }
+
+  if (width && height) {
+    const ratio = width / height;
+
+    if (ratio >= 1.45) {
+      return "interior";
+    }
+
+    if (
+      ratio >= 1.05 &&
+      ratio <= 1.3 &&
+      Math.max(width, height) < 1200
+    ) {
+      return "detail";
+    }
   }
 
   return "catalog";
@@ -202,6 +218,7 @@ async function main() {
   const files = await getFiles(SOURCE_ROOT);
 
   const manifest = [];
+  const seenChecksumsByProduct = new Map();
 
   for (const sourceFile of files) {
     const relativePath = path.relative(
@@ -217,7 +234,37 @@ async function main() {
 
     const filename = path.basename(sourceFile);
 
-    const imageType = detectType(filename);
+    const pipeline = sharp(sourceFile).rotate();
+    const metadata = await pipeline.metadata();
+
+    const imageType = detectType(
+      filename,
+      metadata.width ?? null,
+      metadata.height ?? null,
+    );
+
+    const fileBuffer = await fs.readFile(sourceFile);
+    const checksum = (await import("node:crypto"))
+      .createHash("sha256")
+      .update(fileBuffer)
+      .digest("hex");
+
+    const seenChecksums =
+      seenChecksumsByProduct.get(productSlug) ??
+      new Set();
+
+    if (seenChecksums.has(checksum)) {
+      console.log(
+        `↪ duplicate skipped: ${relativePath}`,
+      );
+      continue;
+    }
+
+    seenChecksums.add(checksum);
+    seenChecksumsByProduct.set(
+      productSlug,
+      seenChecksums,
+    );
 
     const cleanFilename =
       cleanName(filename) + ".webp";
@@ -236,10 +283,6 @@ async function main() {
       outputDirectory,
       cleanFilename,
     );
-
-    const pipeline = sharp(sourceFile).rotate();
-
-    const metadata = await pipeline.metadata();
 
     await pipeline
       .webp({
