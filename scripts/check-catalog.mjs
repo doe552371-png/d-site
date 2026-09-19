@@ -9,12 +9,6 @@ const PRODUCTS_FILE = path.join(
   "products.ts",
 );
 
-const PRODUCTS_GENERATED_FILE = path.join(
-  ROOT,
-  "data",
-  "products.generated.ts",
-);
-
 const VARIANTS_FILE = path.join(
   ROOT,
   "data",
@@ -51,7 +45,7 @@ async function exists(file) {
 
 function extractStringValues(text, field) {
   const regex = new RegExp(
-    `${field}:\\s*"([^"]+)"`,
+    `${field}:\\\\s*"([^"]+)"`,
     "g",
   );
 
@@ -66,10 +60,6 @@ async function main() {
 
   console.log("=== decor-site catalog check ===");
   console.log("");
-
-  // ----------------------------------------------------------
-  // Files
-  // ----------------------------------------------------------
 
   for (const file of [
     PRODUCTS_FILE,
@@ -89,12 +79,6 @@ async function main() {
     "utf8",
   );
 
-  const productsGeneratedText =
-    await fs.readFile(
-      PRODUCTS_GENERATED_FILE,
-      "utf8",
-    );
-
   const variantsText = await fs.readFile(
     VARIANTS_FILE,
     "utf8",
@@ -105,21 +89,13 @@ async function main() {
     "utf8",
   );
 
-  // ----------------------------------------------------------
-  // Products — проверяем итоговый products.ts,
-  // где объединены generated и ручные товары.
-  // ----------------------------------------------------------
-
-  const productSlugs = [
-    ...extractStringValues(
-      productsText,
-      "slug",
-    ),
-    ...extractStringValues(
-      productsGeneratedText,
-      "slug",
-    ),
-  ];
+  // Товары уже собраны в data/products.ts через productsGenerated.
+  // Повторно подключать products.generated.ts здесь нельзя:
+  // это создавало ложные дубли slug во время проверки.
+  const productSlugs = extractStringValues(
+    productsText,
+    "slug",
+  );
 
   const duplicateProducts = productSlugs.filter(
     (slug, index) =>
@@ -136,10 +112,6 @@ async function main() {
   } else {
     ok(`Товаров без duplicate slug: ${productSlugs.length}`);
   }
-
-  // ----------------------------------------------------------
-  // Variants
-  // ----------------------------------------------------------
 
   const variantIds = extractStringValues(
     variantsText,
@@ -161,10 +133,6 @@ async function main() {
   } else {
     ok(`Вариантов без duplicate id: ${variantIds.length}`);
   }
-
-  // ----------------------------------------------------------
-  // Images
-  // ----------------------------------------------------------
 
   const imageUrls = extractStringValues(
     imagesText,
@@ -191,10 +159,6 @@ async function main() {
     ok("Все runtime-изображения локальные");
   }
 
-  // ----------------------------------------------------------
-  // Image files
-  // ----------------------------------------------------------
-
   const localUrls = imageUrls.filter((url) =>
     url.startsWith("/images/"),
   );
@@ -206,7 +170,7 @@ async function main() {
 
     const absolute = path.join(
       PUBLIC_ROOT,
-      relative.replace(/^images\//, "images/"),
+      relative,
     );
 
     if (!(await exists(absolute))) {
@@ -221,20 +185,14 @@ async function main() {
     errors += missingImages;
   }
 
-  // ----------------------------------------------------------
-  // Product/image relation
-  // ----------------------------------------------------------
+  const imageProductSlugs = extractStringValues(
+    imagesText,
+    "productSlug",
+  );
 
-  const imageProductSlugs =
-    extractStringValues(
-      imagesText,
-      "productSlug",
-    );
-
-  const missingProductImages =
-    imageProductSlugs.filter(
-      (slug) => !productSlugs.includes(slug),
-    );
+  const missingProductImages = imageProductSlugs.filter(
+    (slug) => !productSlugs.includes(slug),
+  );
 
   if (missingProductImages.length > 0) {
     fail(
@@ -247,20 +205,14 @@ async function main() {
     ok("Все изображения привязаны к существующим товарам");
   }
 
-  // ----------------------------------------------------------
-  // Variant relation
-  // ----------------------------------------------------------
+  const imageVariantIds = extractStringValues(
+    imagesText,
+    "variantId",
+  );
 
-  const imageVariantIds =
-    extractStringValues(
-      imagesText,
-      "variantId",
-    );
-
-  const unknownVariants =
-    imageVariantIds.filter(
-      (id) => !variantIds.includes(id),
-    );
+  const unknownVariants = imageVariantIds.filter(
+    (id) => !variantIds.includes(id),
+  );
 
   if (unknownVariants.length > 0) {
     fail(
@@ -274,10 +226,6 @@ async function main() {
       `Все variantId изображений существуют: ${imageVariantIds.length}`,
     );
   }
-
-  // ----------------------------------------------------------
-  // Summary
-  // ----------------------------------------------------------
 
   console.log("");
   console.log("=== RESULT ===");
