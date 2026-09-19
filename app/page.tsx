@@ -54,26 +54,26 @@ export default function Home() {
               </p>
 
               <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
-                Не знаете, с чего начать?
+                Не знаете, что выбрать?
               </h2>
             </div>
 
             <div className="max-w-2xl">
               <p className="text-lg leading-8 text-neutral-600">
-                Расскажите, какой результат хотите получить. Можно начать
-                с фотографии, размеров или просто описания задачи — мы
-                поможем подобрать подходящие материалы и решение.
+                Начните с фотографии помещения. Выберите направление, стиль
+                и категорию материала — мы соберём сценарий для AI-визуализации
+                и привяжем его к каталогу DECOR.
               </p>
 
               <Link
-                href="#request"
+                href="/visualizer"
                 className="mt-8 inline-flex rounded-md bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
               >
-                Начать подбор
+                Запустить подбор
               </Link>
 
               <p className="mt-5 text-sm leading-6 text-neutral-500">
-                Не обязательно знать название материала или артикул.
+                Артикул знать не нужно — достаточно показать пространство.
               </p>
             </div>
           </div>
