@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { categories } from "@/data/categories";
-import { manufacturers } from "@/data/manufacturers";
-import { productImages } from "@/data/productImages";
-import { products } from "@/data/products";
+import {
+  getManufacturerBySlug,
+  getProductPreviewImage,
+  getPublishedProducts,
+} from "@/lib/catalog";
 
 type CategoryPageProps = {
   params: Promise<{
@@ -25,26 +28,9 @@ export default async function CategoryPage({
     notFound();
   }
 
-  const categoryProducts = products.filter(
-    (product) =>
-      product.category === category.slug && product.published,
+  const categoryProducts = getPublishedProducts().filter(
+    (product) => product.category === category.slug,
   );
-
-  function getPreviewImage(productSlug: string) {
-    return (
-      productImages.find(
-        (image) =>
-          image.productSlug === productSlug &&
-          image.status === "approved" &&
-          image.isPrimary,
-      ) ??
-      productImages.find(
-        (image) =>
-          image.productSlug === productSlug &&
-          image.status === "approved",
-      )
-    );
-  }
 
   return (
     <main>
@@ -94,11 +80,10 @@ export default async function CategoryPage({
           ) : (
             <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {categoryProducts.map((product) => {
-                const manufacturer = manufacturers.find(
-                  (item) => item.slug === product.manufacturer,
+                const manufacturer = getManufacturerBySlug(
+                  product.manufacturer,
                 );
-
-                const image = getPreviewImage(product.slug);
+                const image = getProductPreviewImage(product.slug);
 
                 return (
                   <Link
