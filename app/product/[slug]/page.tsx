@@ -4,8 +4,12 @@ import { notFound } from "next/navigation";
 import ProductOptions from "@/components/ProductOptions";
 import RequestForm from "@/components/RequestForm";
 
-import { productImages } from "@/data/productImages";
-import { products } from "@/data/products";
+import {
+  getCategoryBySlug,
+  getManufacturerBySlug,
+  getApprovedProductImages,
+  getPublishedProducts,
+} from "@/lib/catalog";
 import { productVariants } from "@/data/productVariants";
 
 type ProductPageProps = {
@@ -19,10 +23,8 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const { slug } = await params;
 
-  const product = products.find(
-    (item) =>
-      item.slug === slug &&
-      item.published,
+  const product = getPublishedProducts().find(
+    (item) => item.slug === slug,
   );
 
   if (!product) {
@@ -35,15 +37,14 @@ export default async function ProductPage({
       variant.published,
   );
 
-  const images = productImages.filter(
-    (image) =>
-      image.productSlug === product.slug &&
-      image.status === "approved",
+  const images = getApprovedProductImages(product.slug);
+  const manufacturer = getManufacturerBySlug(
+    product.manufacturer,
   );
+  const category = getCategoryBySlug(product.category);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      {/* Breadcrumbs */}
       <div className="mb-8 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
         <Link
           href="/"
@@ -54,25 +55,35 @@ export default async function ProductPage({
 
         <span>/</span>
 
+        {category && (
+          <>
+            <Link
+              href={`/category/${category.slug}`}
+              className="transition hover:text-neutral-900"
+            >
+              {category.name}
+            </Link>
+
+            <span>/</span>
+          </>
+        )}
+
         <span className="text-neutral-900">
           {product.name}
         </span>
       </div>
 
-      {/* Product */}
       <div className="grid gap-10 lg:grid-cols-2">
-        {/* Gallery + variants */}
         <ProductOptions
           productImages={images}
           productName={product.name}
           variants={variants}
         />
 
-        {/* Product information */}
         <div className="space-y-8">
           <div>
-            <div className="mb-3 text-sm text-neutral-500">
-              {product.manufacturer}
+            <div className="mb-3 text-sm uppercase tracking-[0.08em] text-neutral-500">
+              {manufacturer?.name ?? product.manufacturer}
             </div>
 
             <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
@@ -90,7 +101,6 @@ export default async function ProductPage({
             </div>
           )}
 
-          {/* Request form */}
           <div className="border-t border-neutral-200 pt-8">
             <RequestForm
               productName={product.name}
