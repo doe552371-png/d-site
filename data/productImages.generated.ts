@@ -19,7 +19,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: true,
     sortOrder: 1,
-  }
+  },
   {
     id: "dako-e-3017-catalog-02",
     productSlug: "dako-e-3017",
@@ -38,7 +38,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 2,
-  }
+  },
   {
     id: "dako-e-3017-catalog-03",
     productSlug: "dako-e-3017",
@@ -57,7 +57,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 3,
-  }
+  },
   {
     id: "dako-e-3017-catalog-04",
     productSlug: "dako-e-3017",
@@ -76,7 +76,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 4,
-  }
+  },
   {
     id: "dako-e-3017-catalog-05",
     productSlug: "dako-e-3017",
@@ -95,7 +95,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 5,
-  }
+  },
   {
     id: "dako-e-3017-catalog-06",
     productSlug: "dako-e-3017",
@@ -114,7 +114,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 6,
-  }
+  },
   {
     id: "dako-e-5015-catalog-21",
     productSlug: "dako-e-5015",
@@ -133,7 +133,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: true,
     sortOrder: 21,
-  }
+  },
   {
     id: "dako-e-5015-catalog-22",
     productSlug: "dako-e-5015",
@@ -152,7 +152,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 22,
-  }
+  },
   {
     id: "dako-e-5015-catalog-23",
     productSlug: "dako-e-5015",
@@ -171,7 +171,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 23,
-  }
+  },
   {
     id: "dako-e-5015-catalog-24",
     productSlug: "dako-e-5015",
@@ -190,7 +190,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 24,
-  }
+  },
   {
     id: "dako-e-5015-catalog-25",
     productSlug: "dako-e-5015",
@@ -209,7 +209,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 25,
-  }
+  },
   {
     id: "dako-e-5015-catalog-26",
     productSlug: "dako-e-5015",
@@ -228,7 +228,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 26,
-  }
+  },
   {
     id: "dako-e-5015-catalog-27",
     productSlug: "dako-e-5015",
@@ -247,7 +247,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 27,
-  }
+  },
   {
     id: "dako-e-5015-catalog-29",
     productSlug: "dako-e-5015",
@@ -266,7 +266,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 29,
-  }
+  },
   {
     id: "dako-e-5015-catalog-39",
     productSlug: "dako-e-5015",
@@ -285,7 +285,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 39,
-  }
+  },
   {
     id: "dako-e-5023-catalog-20",
     productSlug: "dako-e-5023",
@@ -304,7 +304,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 20,
-  }
+  },
   {
     id: "dako-e-5023-catalog-22",
     productSlug: "dako-e-5023",
@@ -323,7 +323,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: true,
     sortOrder: 22,
-  }
+  },
   {
     id: "dako-e-5023-catalog-23",
     productSlug: "dako-e-5023",
@@ -342,7 +342,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 23,
-  }
+  },
   {
     id: "dako-e-5023-catalog-24",
     productSlug: "dako-e-5023",
@@ -361,7 +361,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 24,
-  }
+  },
   {
     id: "dako-e-5023-catalog-25",
     productSlug: "dako-e-5023",
@@ -380,7 +380,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 25,
-  }
+  },
   {
     id: "dako-e-5023-catalog-26",
     productSlug: "dako-e-5023",
@@ -399,7 +399,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 26,
-  }
+  },
   {
     id: "dako-e-5023-catalog-27",
     productSlug: "dako-e-5023",
@@ -418,7 +418,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 27,
-  }
+  },
   {
     id: "dako-e-5023-catalog-28",
     productSlug: "dako-e-5023",
@@ -437,7 +437,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 28,
-  }
+  },
   {
     id: "dako-e-5023-catalog-29",
     productSlug: "dako-e-5023",
@@ -456,7 +456,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 29,
-  }
+  },
   {
     id: "dako-e-5023-catalog-31",
     productSlug: "dako-e-5023",
@@ -475,7 +475,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 31,
-  }
+  },
   {
     id: "decomaster-d001-catalog-01",
     productSlug: "decomaster-d001",
@@ -494,7 +494,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 1,
-  }
+  },
   {
     id: "decomaster-d235-115-catalog-01",
     productSlug: "decomaster-d235-115",
@@ -513,7 +513,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 1,
-  }
+  },
   {
     id: "decomaster-d235-115-interior-01",
     productSlug: "decomaster-d235-115",
@@ -532,7 +532,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 1,
-  }
+  },
   {
     id: "flatstone-bidasar-brown-catalog-01",
     productSlug: "flatstone-bidasar-brown",
@@ -551,7 +551,7 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 1,
-  }
+  },
   {
     id: "flatstone-bidasar-brown-interior-01",
     productSlug: "flatstone-bidasar-brown",
@@ -570,5 +570,5 @@ export const productImagesGenerated: ProductImage[] = [
     version: 1,
     isPrimary: false,
     sortOrder: 1,
-  }
+  },
 ];
