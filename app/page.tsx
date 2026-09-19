@@ -54,13 +54,13 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/catalog"
-                  className="bg-black px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+                  className="bg-black px-6 py-4 text-lg font-medium text-white transition-opacity hover:opacity-80"
                 >
                   Смотреть каталог
                 </Link>
                 <Link
                   href="/visualizer"
-                  className="border border-neutral-300 px-6 py-4 text-base font-medium transition-colors hover:border-black"
+                  className="border border-neutral-300 px-6 py-4 text-lg font-normal transition-colors hover:border-black"
                 >
                   Подобрать решение
                 </Link>
