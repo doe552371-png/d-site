@@ -28,14 +28,14 @@ export default function Home() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/catalog"
-                className="rounded-md bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+                className="rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
               >
                 Смотреть каталог
               </Link>
 
               <Link
                 href="#selection"
-                className="rounded-md border border-neutral-300 px-7 py-4 text-sm font-medium transition-colors hover:bg-neutral-100"
+                className="rounded-md border border-neutral-300 px-7 py-4 text-base font-medium transition-colors hover:bg-neutral-100"
               >
                 Помочь с подбором
               </Link>
@@ -67,7 +67,7 @@ export default function Home() {
 
               <Link
                 href="/visualizer"
-                className="mt-8 inline-flex rounded-md bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+                className="mt-8 inline-flex rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
               >
                 Запустить подбор
               </Link>
@@ -147,7 +147,7 @@ export default function Home() {
 
             <Link
               href="#request"
-              className="inline-flex w-fit rounded-md bg-black px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+              className="inline-flex w-fit rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
             >
               Оставить заявку
             </Link>
