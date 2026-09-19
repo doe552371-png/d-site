@@ -305,7 +305,7 @@ export const products: Product[] = [
     slug: "kudo-classic",
     sku: "KUDO-CLASSIC",
     name: "KUDO Classic",
-    manufacturer: "decomaster",
+    manufacturer: "kudo",
     category: "adhesives-accessories",
     description:
       "Клей-герметик KUDO Classic для монтажных работ.",
