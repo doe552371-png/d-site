@@ -270,7 +270,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
             <button
               type="button"
               onClick={startVisualization}
-              className="w-full bg-black px-6 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+              className="w-full bg-black px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
             >
               {file ? "Показать решение" : "Сначала загрузить фото"}
             </button>
