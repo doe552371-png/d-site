@@ -10,8 +10,8 @@ export default function Home() {
       <section className="flex min-h-[78vh] items-center border-b border-neutral-200">
         <div className="mx-auto w-full max-w-7xl px-6 py-20 lg:py-24">
           <div className="max-w-5xl">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
-              Архитектурный декор
+            <p className="text-sm font-medium tracking-[0.2em] text-neutral-500">
+              архитектурный декор
             </p>
 
             <h1 className="mt-20 max-w-4xl text-5xl font-semibold uppercase leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
