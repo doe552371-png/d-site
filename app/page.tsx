@@ -14,13 +14,13 @@ export default function Home() {
               архитектурный декор
             </p>
 
-            <h1 className="mt-20 max-w-4xl text-5xl font-semibold uppercase leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 max-w-4xl text-5xl font-semibold uppercase leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
               Детали, которые
               <br />
               создают пространство
             </h1>
 
-            <p className="mt-20 max-w-xl text-lg font-medium leading-8 text-neutral-500">
+            <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-neutral-500">
               Панели, молдинги, плинтусы, каменный шпон и другие
               материалы для современных интерьеров.
             </p>
