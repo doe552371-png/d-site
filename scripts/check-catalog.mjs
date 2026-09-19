@@ -9,6 +9,12 @@ const PRODUCTS_FILE = path.join(
   "products.ts",
 );
 
+const GENERATED_PRODUCTS_FILE = path.join(
+  ROOT,
+  "data",
+  "products.generated.ts",
+);
+
 const VARIANTS_FILE = path.join(
   ROOT,
   "data",
@@ -63,6 +69,7 @@ async function main() {
 
   for (const file of [
     PRODUCTS_FILE,
+    GENERATED_PRODUCTS_FILE,
     VARIANTS_FILE,
     IMAGES_FILE,
   ]) {
@@ -79,6 +86,11 @@ async function main() {
     "utf8",
   );
 
+  const generatedProductsText = await fs.readFile(
+    GENERATED_PRODUCTS_FILE,
+    "utf8",
+  );
+
   const variantsText = await fs.readFile(
     VARIANTS_FILE,
     "utf8",
@@ -89,13 +101,10 @@ async function main() {
     "utf8",
   );
 
-  // Товары уже собраны в data/products.ts через productsGenerated.
-  // Повторно подключать products.generated.ts здесь нельзя:
-  // это создавало ложные дубли slug во время проверки.
-  const productSlugs = extractStringValues(
-    productsText,
-    "slug",
-  );
+  const productSlugs = [
+    ...extractStringValues(productsText, "slug"),
+    ...extractStringValues(generatedProductsText, "slug"),
+  ];
 
   const duplicateProducts = productSlugs.filter(
     (slug, index) =>
