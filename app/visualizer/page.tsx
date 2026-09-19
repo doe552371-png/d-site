@@ -53,7 +53,7 @@ export default function VisualizerPage() {
               ← DECOR
             </Link>
             <p className="mt-12 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
-              AI-подбор · визуализация
+              Подбор · визуализация
             </p>
             <h1 className="mt-5 text-5xl font-semibold uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
               Покажите пространство.
@@ -62,7 +62,7 @@ export default function VisualizerPage() {
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-600 md:text-xl">
               Загрузите фотографию помещения, задайте направление и выберите материал.
-              В следующей версии AI покажет готовое решение прямо на вашем фото и привяжет его к каталогу DECOR.
+              Мы соберём подходящий сценарий и покажем релевантные позиции каталога DECOR.
             </p>
           </div>
         </div>
@@ -88,14 +88,14 @@ export default function VisualizerPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">02</p>
               <h2 className="mt-3 text-xl font-semibold uppercase tracking-tight">Сценарий</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
-                AI получает задачу, стиль и ограничения по материалам.
+                Формируется задача, стиль и направление материалов.
               </p>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">03</p>
               <h2 className="mt-3 text-xl font-semibold uppercase tracking-tight">Каталог</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
-                Визуализация связывается с конкретными позициями DECOR.
+                Подбор связывается с конкретными позициями DECOR.
               </p>
             </div>
           </div>
