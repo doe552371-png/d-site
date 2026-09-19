@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { categories } from "@/data/categories";
+import CategoryVisual from "@/components/CategoryVisual";
 import {
-  getProductPreviewImage,
   getPublishedProducts,
 } from "@/lib/catalog";
 
@@ -38,12 +37,6 @@ export default function CategoriesSection() {
               (product) => product.category === category.slug,
             );
 
-            const previewImage = categoryProducts
-              .map((product) =>
-                getProductPreviewImage(product.slug),
-              )
-              .find(Boolean);
-
             return (
               <Link
                 key={category.slug}
@@ -51,17 +44,7 @@ export default function CategoriesSection() {
                 className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-8"
               >
                 <div className="grid min-h-44 gap-6 sm:grid-cols-[9rem_1fr] sm:items-end">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
-                    {previewImage && (
-                      <Image
-                        src={previewImage.url}
-                        alt={previewImage.alt}
-                        fill
-                        sizes="144px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    )}
-                  </div>
+                  <CategoryVisual slug={category.slug} />
 
                   <div className="flex min-h-36 flex-col justify-between">
                     <span className="text-xs font-medium text-neutral-400">
