@@ -212,21 +212,21 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
 
             <fieldset>
               <legend className="text-sm font-semibold">Стиль</legend>
-              <div className="mt-3 grid grid-cols-2 gap-2">
+              <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                 {styles.map((item) => (
                   <button
                     key={item}
                     type="button"
                     onClick={() => setStyle(item)}
                     className={
-                      "overflow-hidden border text-left transition-colors " +
+                      "group overflow-hidden rounded-sm border bg-white text-left transition-all " +
                       (style === item
-                        ? "border-black ring-1 ring-black"
+                        ? "border-black shadow-[inset_0_-2px_0_#000]"
                         : "border-neutral-200 hover:border-neutral-400")
                     }
                   >
                     <StylePreview style={item} />
-                    <span className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-tight">
+                    <span className="block px-2.5 py-2 text-[11px] font-semibold leading-tight tracking-[-0.01em]">
                       {item}
                     </span>
                   </button>
