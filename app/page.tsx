@@ -20,7 +20,7 @@ export default function Home() {
               создают пространство
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-neutral-500">
+            <p className="mt-5 max-w-xl text-lg font-medium leading-8 text-neutral-500">
               Панели, молдинги, плинтусы, каменный шпон и другие
               материалы для современных интерьеров.
             </p>
