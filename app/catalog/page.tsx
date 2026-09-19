@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import CategoryVisual from "@/components/CategoryVisual";
+
 import {
   getCategoryBySlug,
   getManufacturerBySlug,
@@ -46,9 +48,11 @@ export default function CatalogPage() {
                 <Link
                   key={category.slug}
                   href={`/category/${category.slug}`}
-                  className="group border border-neutral-200 bg-white p-8 transition-colors hover:bg-neutral-50 md:p-10"
+                  className="group overflow-hidden border border-neutral-200 bg-white transition-colors hover:bg-neutral-50"
                 >
-                  <div className="flex min-h-56 flex-col justify-between">
+                  <CategoryVisual slug={category.slug} />
+
+                  <div className="flex min-h-56 flex-col justify-between p-8 md:p-10">
                     <div className="flex items-start justify-between">
                       <span className="text-sm font-medium text-neutral-400">
                         {String(index + 1).padStart(2, "0")}
