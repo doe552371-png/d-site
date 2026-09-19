@@ -196,6 +196,46 @@ function escapeTsString(value) {
     .replace(/"/g, '\\"');
 }
 
+const CURATED_FILE_WHITELISTS = {
+  "dako-e-3017": new Set([
+    "catalog-01.webp",
+    "catalog-02.webp",
+    "catalog-03.webp",
+    "catalog-04.webp",
+    "catalog-05.webp",
+    "catalog-06.webp",
+  ]),
+  "dako-e-5015": new Set([
+    "catalog-21.webp",
+    "catalog-22.webp",
+    "catalog-23.webp",
+    "catalog-24.webp",
+    "catalog-25.webp",
+    "catalog-26.webp",
+    "catalog-27.webp",
+    "catalog-29.webp",
+    "catalog-39.webp",
+  ]),
+  "dako-e-5023": new Set([
+    "catalog-20.webp",
+    "catalog-22.webp",
+    "catalog-23.webp",
+    "catalog-24.webp",
+    "catalog-25.webp",
+    "catalog-26.webp",
+    "catalog-27.webp",
+    "catalog-28.webp",
+    "catalog-29.webp",
+    "catalog-31.webp",
+  ]),
+};
+
+const CURATED_PRIMARY_FILES = {
+  "dako-e-3017": "catalog-01.webp",
+  "dako-e-5015": "catalog-21.webp",
+  "dako-e-5023": "catalog-22.webp",
+};
+
 async function main() {
   console.log("Importing product images...");
 
@@ -233,6 +273,19 @@ async function main() {
       productSlugFromPath(relativePath);
 
     const filename = path.basename(sourceFile);
+
+    const curatedFiles =
+      CURATED_FILE_WHITELISTS[productSlug];
+
+    if (
+      curatedFiles &&
+      !curatedFiles.has(filename)
+    ) {
+      console.log(
+        `↪ curated DAKO image skipped: ${relativePath}`,
+      );
+      continue;
+    }
 
     const pipeline = sharp(sourceFile).rotate();
     const metadata = await pipeline.metadata();
@@ -392,7 +445,11 @@ async function main() {
       version: "1.0",
     },
     version: 1,
-    isPrimary: ${item.sortOrder === 1},
+    isPrimary:
+      CURATED_PRIMARY_FILES[item.productSlug] ===
+        item.originalFilename ||
+      (!CURATED_FILE_WHITELISTS[item.productSlug] &&
+        item.sortOrder === 1),
     sortOrder: ${item.sortOrder},
   },`;
   });
