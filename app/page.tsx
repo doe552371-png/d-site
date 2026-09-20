@@ -14,7 +14,7 @@ export default function Home() {
               архитектурный декор
             </p>
 
-            <h1 className="mt-8 max-w-4xl text-5xl font-semibold uppercase leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 max-w-4xl text-5xl font-semibold leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
               Детали, которые
               <br />
               создают пространство
