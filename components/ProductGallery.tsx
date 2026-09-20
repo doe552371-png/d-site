@@ -128,7 +128,7 @@ export default function ProductGallery({
                 type="button"
                 onClick={() => handleTypeChange(type)}
                 className={[
-                  "rounded-full px-4 py-2 text-sm transition",
+                  "rounded-md px-4 py-2 text-sm transition-colors",
                   isActive
                     ? "bg-neutral-900 text-white"
                     : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
@@ -155,7 +155,7 @@ export default function ProductGallery({
                 onClick={() => handleImageChange(image)}
                 aria-label={`Показать ${image.alt}`}
                 className={[
-                  "relative aspect-square overflow-hidden rounded-lg transition",
+                  "relative aspect-square overflow-hidden rounded-md transition-opacity",
                   isSelected
                     ? "ring-2 ring-neutral-900 ring-offset-2"
                     : "hover:opacity-80",
@@ -165,7 +165,7 @@ export default function ProductGallery({
                   src={image.url}
                   alt={image.alt}
                   fill
-                  className="rounded-lg object-contain"
+                  className="rounded-md object-contain"
                   sizes="120px"
                 />
               </button>
