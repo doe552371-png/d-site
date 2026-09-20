@@ -45,7 +45,7 @@ export default function Home() {
               className="min-h-[520px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[620px]"
               style={{
                 backgroundImage:
-                  "url(https://www.oracdecor.com/media/converted/assets/d/3/4/4/d3441c2e8039071d5d7ec8390af32ea0007e25b8_orac_artdeco_hop_apid_sx157_sx207_cx196_cx190_69d722704f06f.webp)",
+                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
               }}
               role="img"
               aria-label="Интерьер Orac Decor с архитектурными молдингами"
