@@ -5,8 +5,8 @@ export default function ProLandingPage() {
     <main>
       {/* HERO */}
       <section className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-28">
-          <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="max-w-3xl">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
                 DECOR PRO
@@ -110,7 +110,7 @@ export default function ProLandingPage() {
 
       {/* VALUE */}
       <section className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
           <div className="max-w-3xl">
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
               Что даёт ПРО
@@ -169,8 +169,8 @@ export default function ProLandingPage() {
 
       {/* FOR WHOM */}
       <section className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
                 Для кого
@@ -232,8 +232,8 @@ export default function ProLandingPage() {
 
       {/* PARTNERSHIP */}
       <section id="partner">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
                 Партнёрство
