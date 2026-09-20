@@ -44,7 +44,7 @@ export default function VisualizerPage() {
   return (
     <main>
       <section className="border-b border-neutral-200 bg-[#f7f7f4]">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:py-20">
           <div className="max-w-4xl">
             <Link
               href="/"
@@ -55,12 +55,12 @@ export default function VisualizerPage() {
             <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
               Подбор · визуализация
             </p>
-            <h1 className="mt-5 text-5xl font-medium uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
+            <h1 className="mt-4 text-5xl font-medium uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
               Покажите пространство.
               <br />
               Мы подберём детали.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-600 md:text-xl">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600 md:text-xl">
               Загрузите фотографию помещения, задайте направление и выберите материал.
               Мы соберём подходящий сценарий и покажем релевантные позиции каталога DECOR.
             </p>
@@ -69,13 +69,13 @@ export default function VisualizerPage() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-6 py-10 md:py-14">
           <VisualizerMvp matches={matches} />
         </div>
       </section>
 
       <section className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">01</p>
