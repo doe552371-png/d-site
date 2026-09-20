@@ -11,8 +11,8 @@ export default function CategoriesSection() {
 
   return (
     <section className="border-t border-neutral-200">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-        <div className="mb-12 flex items-end justify-between gap-8">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+        <div className="mb-10 flex items-end justify-between gap-8">
           <div>
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
               Каталог
@@ -41,7 +41,7 @@ export default function CategoriesSection() {
               <Link
                 key={category.slug}
                 href={`/category/${category.slug}`}
-                className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-8"
+                className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-7"
               >
                 <div className="grid min-h-44 gap-6 sm:grid-cols-[9rem_1fr] sm:items-end">
                   <CategoryVisual slug={category.slug} />
@@ -73,7 +73,7 @@ export default function CategoriesSection() {
 
         <Link
           href="/catalog"
-          className="mt-8 inline-block text-base font-medium underline underline-offset-4 md:hidden"
+          className="mt-6 inline-block text-base font-medium underline underline-offset-4 md:hidden"
         >
           Смотреть весь каталог
         </Link>
