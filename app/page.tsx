@@ -8,52 +8,46 @@ export default function Home() {
     <main>
       {/* HERO */}
       <section className="border-b border-neutral-200">
-        <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:py-14">
-          <div
-            className="h-[360px] rounded-md bg-neutral-100 bg-cover bg-center md:h-[430px] lg:h-[470px]"
-            style={{
-              backgroundImage:
-                "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-            }}
-            role="img"
-            aria-label="Интерьер Orac Decor с архитектурными молдингами"
-          />
-
-          <div className="grid gap-10 pt-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16 lg:pt-14">
+        <div className="mx-auto w-full max-w-7xl px-6 py-16 lg:py-20">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-20">
             <div>
               <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
                 архитектурный декор
               </p>
 
-              <h1 className="mt-7 max-w-4xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[78px]">
+              <h1 className="mt-8 max-w-4xl text-6xl font-normal leading-[0.9] tracking-[-0.04em] text-neutral-900 sm:text-7xl lg:text-[88px]">
                 Детали, которые
                 <br />
                 создают пространство
               </h1>
-            </div>
 
-            <div>
-              <p className="font-body max-w-xl text-lg font-normal leading-8 text-neutral-500">
+              <p className="font-body mt-8 max-w-xl text-lg font-normal leading-8 text-neutral-500">
                 Панели, молдинги, плинтусы, каменный шпон и другие материалы для
                 современных интерьеров.
               </p>
 
-              <div className="mt-8 grid gap-3">
+              <div className="mt-10 flex max-w-3xl flex-wrap gap-3">
                 <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
                   Смотреть каталог
                 </Link>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-5 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                    Не знаете, что выбрать?
-                    <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
-                  </Link>
-                  <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-5 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                    Есть проект / ТЗ?
-                    <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
-                  </Link>
-                </div>
+                <Link href="/visualizer" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+                  Поможем с подбором
+                </Link>
+                <Link href="/pro" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+                  Передать проект
+                </Link>
               </div>
             </div>
+
+            <div
+              className="aspect-[4/5] rounded-md bg-neutral-100 bg-cover bg-center"
+              style={{
+                backgroundImage:
+                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
+              }}
+              role="img"
+              aria-label="Интерьер Orac Decor с архитектурными молдингами"
+            />
           </div>
         </div>
       </section>
