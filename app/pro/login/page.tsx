@@ -16,10 +16,10 @@ export default function ProLoginPage() {
             Сейчас можно оставить заявку на доступ к DECOR PRO.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/pro/partner" className="bg-black px-7 py-4 text-lg font-semibold text-white transition-opacity hover:opacity-80">
+            <Link href="/pro/partner" className="rounded-md bg-black px-7 py-4 text-lg font-semibold text-white transition-opacity hover:opacity-80">
               Запросить доступ
             </Link>
-            <Link href="/pro" className="border border-neutral-300 px-7 py-4 text-lg font-medium transition-colors hover:bg-neutral-100">
+            <Link href="/pro" className="rounded-md border border-neutral-300 px-7 py-4 text-lg font-medium transition-colors hover:bg-neutral-100">
               Вернуться в ПРО
             </Link>
           </div>
