@@ -12,13 +12,13 @@ export default function ProLandingPage() {
                 DECOR PRO
               </p>
 
-              <h1 className="mt-6 max-w-3xl text-5xl font-semibold leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+              <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
                 Всё для работы
                 <br />
                 с проектом
               </h1>
 
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-600">
+              <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-neutral-600">
                 Рабочая среда для дизайнеров, архитекторов, строителей
                 и комплектаторов — от проекта и ТЗ до подбора материалов,
                 расчёта и заказа.
@@ -27,14 +27,14 @@ export default function ProLandingPage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/pro/login"
-                  className="bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+                  className="rounded-md bg-black px-6 py-3 text-[15px] font-medium text-white transition-opacity hover:opacity-80"
                 >
                   Войти в ПРО
                 </Link>
 
                 <Link
                   href="/pro/partner"
-                  className="border border-neutral-300 px-7 py-4 text-base font-medium transition-colors hover:bg-neutral-100"
+                  className="rounded-md border border-neutral-300 px-6 py-3 text-[15px] font-medium transition-colors hover:bg-neutral-100"
                 >
                   Стать партнёром
                 </Link>
@@ -51,7 +51,7 @@ export default function ProLandingPage() {
                   <span className="text-sm text-neutral-400">01</span>
 
                   <div>
-                    <p className="font-semibold text-neutral-900">
+                    <p className="font-medium text-neutral-900">
                       Проект или ТЗ
                     </p>
 
@@ -65,7 +65,7 @@ export default function ProLandingPage() {
                   <span className="text-sm text-neutral-400">02</span>
 
                   <div>
-                    <p className="font-semibold text-neutral-900">
+                    <p className="font-medium text-neutral-900">
                       Материалы и комплектация
                     </p>
 
@@ -79,7 +79,7 @@ export default function ProLandingPage() {
                   <span className="text-sm text-neutral-400">03</span>
 
                   <div>
-                    <p className="font-semibold text-neutral-900">
+                    <p className="font-medium text-neutral-900">
                       Расчёт и КП
                     </p>
 
@@ -93,7 +93,7 @@ export default function ProLandingPage() {
                   <span className="text-sm text-neutral-400">04</span>
 
                   <div>
-                    <p className="font-semibold text-neutral-900">
+                    <p className="font-medium text-neutral-900">
                       Заказ и поставка
                     </p>
 
@@ -116,7 +116,7 @@ export default function ProLandingPage() {
               Что даёт ПРО
             </p>
 
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
               Инструменты для работы,
               <br />
               а не просто каталог
@@ -125,7 +125,7 @@ export default function ProLandingPage() {
 
           <div className="mt-12 grid gap-px overflow-hidden border border-neutral-200 bg-neutral-200 md:grid-cols-2 lg:grid-cols-4">
             <div className="bg-white p-7">
-              <p className="text-sm font-semibold text-neutral-900">
+              <p className="text-sm font-medium text-neutral-900">
                 Проекты
               </p>
 
@@ -135,7 +135,7 @@ export default function ProLandingPage() {
             </div>
 
             <div className="bg-white p-7">
-              <p className="text-sm font-semibold text-neutral-900">
+              <p className="text-sm font-medium text-neutral-900">
                 Подбор
               </p>
 
@@ -145,7 +145,7 @@ export default function ProLandingPage() {
             </div>
 
             <div className="bg-white p-7">
-              <p className="text-sm font-semibold text-neutral-900">
+              <p className="text-sm font-medium text-neutral-900">
                 Спецификация
               </p>
 
@@ -155,7 +155,7 @@ export default function ProLandingPage() {
             </div>
 
             <div className="bg-white p-7">
-              <p className="text-sm font-semibold text-neutral-900">
+              <p className="text-sm font-medium text-neutral-900">
                 КП и заказы
               </p>
 
@@ -176,7 +176,7 @@ export default function ProLandingPage() {
                 Для кого
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
                 Для тех, кто работает
                 <br />
                 с интерьерными проектами
@@ -185,7 +185,7 @@ export default function ProLandingPage() {
 
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <p className="font-semibold text-neutral-900">
+                <p className="font-medium text-neutral-900">
                   Дизайнеры
                 </p>
 
@@ -196,7 +196,7 @@ export default function ProLandingPage() {
               </div>
 
               <div>
-                <p className="font-semibold text-neutral-900">
+                <p className="font-medium text-neutral-900">
                   Архитекторы
                 </p>
 
@@ -206,7 +206,7 @@ export default function ProLandingPage() {
               </div>
 
               <div>
-                <p className="font-semibold text-neutral-900">
+                <p className="font-medium text-neutral-900">
                   Строители
                 </p>
 
@@ -216,7 +216,7 @@ export default function ProLandingPage() {
               </div>
 
               <div>
-                <p className="font-semibold text-neutral-900">
+                <p className="font-medium text-neutral-900">
                   Комплектаторы
                 </p>
 
@@ -239,7 +239,7 @@ export default function ProLandingPage() {
                 Партнёрство
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
                 Работайте с DECOR
                 <br />
                 на своих условиях
@@ -247,7 +247,7 @@ export default function ProLandingPage() {
             </div>
 
             <div className="max-w-2xl">
-              <p className="text-lg leading-8 text-neutral-600">
+              <p className="text-lg font-normal leading-8 text-neutral-600">
                 Индивидуальные условия сотрудничества, работа с проектами
                 и доступ к инструментам DECOR PRO.
               </p>
@@ -255,14 +255,14 @@ export default function ProLandingPage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/pro/login"
-                  className="bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+                  className="rounded-md bg-black px-6 py-3 text-[15px] font-medium text-white transition-opacity hover:opacity-80"
                 >
                   Войти в ПРО
                 </Link>
 
                 <Link
                   href="/pro/partner"
-                  className="border border-neutral-300 px-7 py-4 text-base font-medium transition-colors hover:bg-neutral-100"
+                  className="rounded-md border border-neutral-300 px-6 py-3 text-[15px] font-medium transition-colors hover:bg-neutral-100"
                 >
                   Стать партнёром
                 </Link>
