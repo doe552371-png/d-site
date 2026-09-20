@@ -41,18 +41,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative min-h-[420px] overflow-hidden rounded-md bg-neutral-100 lg:min-h-[500px]">
-              <div
-                className="decor-hero-motion absolute inset-[-3%] bg-cover bg-center"
-                style={{
-                  backgroundImage:
-                    "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-                }}
-                role="img"
-                aria-label="Интерьер Orac Decor с архитектурными молдингами"
-              />
-              <div className="decor-hero-light pointer-events-none absolute inset-y-[-20%] left-[-35%] w-[28%] rotate-[12deg] bg-gradient-to-r from-transparent via-white/40 to-transparent blur-2xl" />
-            </div>
+            <div className="min-h-[420px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[500px]"
+              style={{
+                backgroundImage:
+                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
+              }}
+              role="img"
+              aria-label="Интерьер Orac Decor с архитектурными молдингами"
+            />
           </div>
         </div>
       </section>
