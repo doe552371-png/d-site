@@ -48,11 +48,11 @@ export default function VisualizerPage() {
           <div className="max-w-4xl">
             <Link
               href="/"
-              className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-400 transition-colors hover:text-black"
+              className="text-sm font-medium uppercase tracking-[0.16em] text-neutral-400 transition-colors hover:text-black"
             >
               ← DECOR
             </Link>
-            <p className="mt-12 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
+            <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
               Подбор · визуализация
             </p>
             <h1 className="mt-5 text-5xl font-semibold uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
