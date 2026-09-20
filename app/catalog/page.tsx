@@ -19,17 +19,17 @@ export default function CatalogPage() {
     <main>
       <section className="border-b border-neutral-200">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-neutral-500">
+          <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
             Каталог
           </p>
 
-          <h1 className="max-w-4xl text-5xl font-semibold leading-[0.96] tracking-[-0.045em] md:text-7xl">
+          <h1 className="max-w-4xl text-5xl font-medium uppercase leading-[0.98] tracking-tight md:text-7xl">
             Материалы
             <br />
             для интерьера
           </h1>
 
-          <p className="mt-8 max-w-2xl text-lg font-medium leading-8 text-neutral-500">
+          <p className="mt-8 max-w-2xl text-lg font-normal leading-8 text-neutral-500">
             Декоративные и отделочные материалы для жилых,
             коммерческих и общественных пространств.
           </p>
@@ -64,11 +64,11 @@ export default function CatalogPage() {
                     </div>
 
                     <div>
-                      <h2 className="max-w-xl text-2xl font-semibold leading-tight tracking-[-0.025em] md:text-3xl">
+                      <h2 className="max-w-xl text-2xl font-medium uppercase leading-tight tracking-tight md:text-3xl">
                         {category.name}
                       </h2>
 
-                      <p className="mt-4 max-w-md text-base font-medium leading-7 text-neutral-500">
+                      <p className="mt-4 max-w-md text-base font-normal leading-7 text-neutral-500">
                         {category.description}
                       </p>
 
@@ -92,7 +92,7 @@ export default function CatalogPage() {
                 Производители
               </p>
 
-              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">
+              <h2 className="text-3xl font-medium uppercase leading-tight tracking-tight md:text-5xl">
                 Бренды в каталоге
               </h2>
             </div>
@@ -117,7 +117,7 @@ export default function CatalogPage() {
                   key={manufacturer.slug}
                   className="border border-neutral-200 p-8"
                 >
-                  <p className="text-xl font-semibold uppercase tracking-tight">
+                  <p className="text-xl font-medium uppercase tracking-tight">
                     {manufacturer.name}
                   </p>
 
@@ -140,7 +140,7 @@ export default function CatalogPage() {
                 Избранное
               </p>
 
-              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">
+              <h2 className="text-3xl font-medium uppercase leading-tight tracking-tight md:text-5xl">
                 Популярные материалы
               </h2>
             </div>
@@ -183,11 +183,11 @@ export default function CatalogPage() {
                       {category?.name}
                     </p>
 
-                    <h3 className="mt-2 text-lg font-semibold leading-tight tracking-[-0.02em]">
+                    <h3 className="mt-2 text-lg font-medium uppercase tracking-tight">
                       {product.name}
                     </h3>
 
-                    <p className="mt-2 text-base font-medium leading-7 text-neutral-500">
+                    <p className="mt-2 text-sm font-normal leading-6 text-neutral-500">
                       {product.description}
                     </p>
 
