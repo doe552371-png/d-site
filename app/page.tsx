@@ -24,7 +24,7 @@ export default function Home() {
             </p>
 
             <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-              <Link href="/catalog" className="font-body rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">Смотреть каталог</Link>
+              <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">Смотреть каталог</Link>
               <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
                 Не знаете, что выбрать?
                 <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
