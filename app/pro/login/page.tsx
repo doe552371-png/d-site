@@ -8,7 +8,7 @@ export default function ProLoginPage() {
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
             DECOR PRO
           </p>
-          <h1 className="mt-4 text-4xl font-medium uppercase leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl">
+          <h1 className="mt-4 font-display text-4xl font-normal leading-[0.98] tracking-[-0.025em] text-neutral-900 sm:text-6xl">
             Вход в рабочее пространство
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
@@ -16,10 +16,10 @@ export default function ProLoginPage() {
             Сейчас можно оставить заявку на доступ к DECOR PRO.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/pro/partner" className="rounded-md bg-black px-7 py-4 text-lg font-semibold text-white transition-opacity hover:opacity-80">
+            <Link href="/pro/partner" className="rounded-md bg-black px-7 py-4 text-sm font-medium text-white transition-opacity hover:opacity-80">
               Запросить доступ
             </Link>
-            <Link href="/pro" className="rounded-md border border-neutral-300 px-7 py-4 text-lg font-medium transition-colors hover:bg-neutral-100">
+            <Link href="/pro" className="rounded-md border border-neutral-300 px-7 py-4 text-sm font-medium transition-colors hover:bg-neutral-100">
               Вернуться в ПРО
             </Link>
           </div>
