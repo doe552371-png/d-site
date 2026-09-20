@@ -6,6 +6,8 @@
   --muted: #6b6b6b;
   --border: #e5e5e5;
   --surface: #f7f7f7;
+  --font-body: "CN Sans", var(--font-manrope), Arial, Helvetica, sans-serif;
+  --font-display: "Adobe Garamond Pro", "Adobe Garamond", Garamond, Georgia, serif;
 }
 
 * {
@@ -21,7 +23,7 @@ html {
     margin: 0;
     background: var(--background);
     color: var(--foreground);
-    font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+    font-family: var(--font-body);
     font-size: 18px;
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
@@ -35,9 +37,10 @@ html {
   h5,
   h6 {
     margin: 0;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.025em;
   }
 
   nav,
@@ -56,10 +59,14 @@ html {
   }
 
   a {
+    font-family: var(--font-display);
     text-decoration: none;
   }
 
-  button,
+  button {
+    font-family: var(--font-display);
+  }
+
   input,
   textarea {
     font: inherit;
