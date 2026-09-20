@@ -12,7 +12,7 @@ export default function ProLandingPage() {
                 DECOR PRO
               </p>
 
-              <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+              <h1 className="mt-6 max-w-3xl font-display text-5xl font-normal leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
                 Всё для работы
                 <br />
                 с проектом
@@ -116,7 +116,7 @@ export default function ProLandingPage() {
               Что даёт ПРО
             </p>
 
-            <h2 className="mt-4 text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-normal tracking-tight text-neutral-900 sm:text-4xl">
               Инструменты для работы,
               <br />
               а не просто каталог
@@ -176,7 +176,7 @@ export default function ProLandingPage() {
                 Для кого
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl font-display text-3xl font-normal tracking-tight text-neutral-900 sm:text-4xl">
                 Для тех, кто работает
                 <br />
                 с интерьерными проектами
@@ -239,7 +239,7 @@ export default function ProLandingPage() {
                 Партнёрство
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl font-display text-3xl font-normal tracking-tight text-neutral-900 sm:text-4xl">
                 Работайте с DECOR
                 <br />
                 на своих условиях
