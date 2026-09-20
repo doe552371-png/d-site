@@ -52,10 +52,10 @@ export default function VisualizerPage() {
             >
               ← DECOR
             </Link>
-            <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
+            <p className="mt-8 text-sm font-medium uppercase tracking-[0.16em] text-neutral-400">
               Подбор · визуализация
             </p>
-            <h1 className="mt-4 text-5xl font-medium uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
+            <h1 className="mt-4 font-display text-5xl font-normal leading-[0.94] tracking-[-0.035em] md:text-7xl">
               Покажите пространство.
               <br />
               Мы подберём детали.
