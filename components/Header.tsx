@@ -11,31 +11,31 @@ export default function Header() {
           DECOR
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 text-base md:flex">
           <Link
             href="/catalog"
-            className="text-[15px] font-normal transition-colors hover:text-neutral-500"
+            className="transition-colors hover:text-neutral-500"
           >
             Каталог
           </Link>
 
           <Link
             href="/visualizer"
-            className="text-[15px] font-normal transition-colors hover:text-neutral-500"
+            className="transition-colors hover:text-neutral-500"
           >
             Подбор
           </Link>
 
           <Link
             href="/#about"
-            className="text-[15px] font-normal transition-colors hover:text-neutral-500"
+            className="transition-colors hover:text-neutral-500"
           >
             О нас
           </Link>
 
           <Link
             href="/#contacts"
-            className="text-[15px] font-normal transition-colors hover:text-neutral-500"
+            className="transition-colors hover:text-neutral-500"
           >
             Контакты
           </Link>
@@ -44,14 +44,14 @@ export default function Header() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/pro"
-            className="rounded-md border border-black px-4 py-2.5 text-[15px] font-medium transition-colors hover:bg-black hover:text-white"
+            className="rounded-md border border-black px-5 py-3 text-base font-medium transition-colors hover:bg-black hover:text-white"
           >
             ПРО
           </Link>
 
           <Link
             href="/#request"
-            className="rounded-md bg-black px-4 py-2.5 text-[15px] font-medium text-white transition-opacity hover:opacity-80"
+            className="rounded-md bg-black px-5 py-3 text-base font-semibold text-white transition-opacity hover:opacity-80"
           >
             Оставить заявку
           </Link>
@@ -59,7 +59,7 @@ export default function Header() {
 
         <Link
           href="/#request"
-          className="text-[15px] font-normal md:hidden"
+          className="text-base md:hidden"
           aria-label="Перейти к заявке"
         >
           Заявка
