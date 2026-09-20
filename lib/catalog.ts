@@ -8,6 +8,35 @@ export function getPublishedProducts() {
   return products.filter((product) => product.published);
 }
 
+export function searchPublishedProducts(query: string) {
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+
+  if (!normalizedQuery) {
+    return getPublishedProducts();
+  }
+
+  return getPublishedProducts().filter((product) => {
+    const category = getCategoryBySlug(product.category)?.name ?? "";
+    const manufacturer = getManufacturerBySlug(product.manufacturer)?.name ?? "";
+
+    return [
+      product.name,
+      product.sku,
+      product.slug,
+      product.description,
+      product.collection,
+      product.dimensions,
+      product.color,
+      category,
+      manufacturer,
+    ]
+      .filter(Boolean)
+      .some((value) =>
+        String(value).toLocaleLowerCase().includes(normalizedQuery),
+      );
+  });
+}
+
 export function getCategoryBySlug(slug: string) {
   return categories.find((category) => category.slug === slug);
 }
