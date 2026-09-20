@@ -23,7 +23,7 @@ export default function CatalogPage() {
             Каталог
           </p>
 
-          <h1 className="max-w-4xl text-5xl font-medium uppercase leading-[0.98] tracking-tight md:text-7xl">
+          <h1 className="max-w-4xl font-display text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl">
             Материалы
             <br />
             для интерьера
@@ -48,7 +48,7 @@ export default function CatalogPage() {
                 <Link
                   key={category.slug}
                   href={`/category/${category.slug}`}
-                  className="group overflow-hidden border border-neutral-200 bg-white transition-colors hover:bg-neutral-50"
+                  className="group overflow-hidden border border-neutral-200 bg-white transition-colors duration-200 hover:border-neutral-300 hover:bg-neutral-50"
                 >
                   <CategoryVisual slug={category.slug} />
 
@@ -64,7 +64,7 @@ export default function CatalogPage() {
                     </div>
 
                     <div>
-                      <h2 className="max-w-xl text-2xl font-medium uppercase leading-tight tracking-tight md:text-3xl">
+                      <h2 className="max-w-xl font-display text-2xl font-normal leading-tight tracking-[-0.015em] md:text-3xl">
                         {category.name}
                       </h2>
 
@@ -92,7 +92,7 @@ export default function CatalogPage() {
                 Производители
               </p>
 
-              <h2 className="text-3xl font-medium uppercase leading-tight tracking-tight md:text-5xl">
+              <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
                 Бренды в каталоге
               </h2>
             </div>
@@ -117,7 +117,7 @@ export default function CatalogPage() {
                   key={manufacturer.slug}
                   className="border border-neutral-200 p-8"
                 >
-                  <p className="text-xl font-medium uppercase tracking-tight">
+                  <p className="font-display text-xl font-normal tracking-tight">
                     {manufacturer.name}
                   </p>
 
