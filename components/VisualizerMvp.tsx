@@ -153,7 +153,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                 <button
                   type="button"
                   onClick={() => inputRef.current?.click()}
-                  className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-xs font-semibold backdrop-blur transition-colors hover:bg-white hover:text-black"
+                  className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-sm font-semibold backdrop-blur transition-colors hover:bg-white hover:text-black"
                 >
                   Заменить
                 </button>
@@ -208,7 +208,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     type="button"
                     onClick={() => setTask(item)}
                     className={
-                      "w-full border px-4 py-3 text-left text-[15px] font-normal transition-colors " +
+                      "w-full border px-4 py-3 text-left text-base font-normal transition-colors " +
                       (task === item
                         ? "border-black bg-black text-white"
                         : "border-neutral-200 bg-white hover:border-neutral-400")
@@ -231,7 +231,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                       type="button"
                       onClick={() => setStyle(item)}
                       className={
-                        "shrink-0 pb-2 text-xs font-medium uppercase tracking-tight transition-colors " +
+                        "shrink-0 pb-2 text-sm font-medium uppercase tracking-tight transition-colors " +
                         (style === item
                           ? "border-b-2 border-black text-black"
                           : "border-b-2 border-transparent text-neutral-400 hover:text-black")
@@ -253,7 +253,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     type="button"
                     onClick={() => setMaterial(item)}
                     className={
-                      "rounded-full border px-4 py-2 text-xs font-semibold transition-colors " +
+                      "rounded-full border px-4 py-2 text-sm font-semibold transition-colors " +
                       (material === item
                         ? "border-black bg-black text-white"
                         : "border-neutral-200 hover:border-neutral-400")
@@ -270,7 +270,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
             <button
               type="button"
               onClick={startVisualization}
-              className="w-full bg-black px-6 py-3 text-[15px] font-medium text-white transition-opacity hover:opacity-80"
+              className="w-full bg-black px-6 py-3 text-base font-medium text-white transition-opacity hover:opacity-80"
             >
               {file ? "Показать решение" : "Сначала загрузить фото"}
             </button>
