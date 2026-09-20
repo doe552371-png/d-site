@@ -8,10 +8,43 @@ export default function Home() {
     <main>
       {/* HERO */}
       <section className="border-b border-neutral-200">
-        <div className="mx-auto w-full max-w-7xl px-6 py-16 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+        <div className="mx-auto w-full max-w-7xl px-6 py-14 lg:py-16">
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
+            <div>
+              <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
+                архитектурный декор
+              </p>
+
+              <h1 className="mt-7 max-w-3xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[76px]">
+                Детали, которые
+                <br />
+                создают пространство
+              </h1>
+
+              <p className="font-body mt-7 max-w-lg text-lg font-normal leading-8 text-neutral-500">
+                Панели, молдинги, плинтусы, каменный шпон и другие материалы для
+                современных интерьеров.
+              </p>
+
+              <div className="mt-9 grid max-w-xl gap-3">
+                <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
+                  Смотреть каталог
+                </Link>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-5 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+                    Не знаете, что выбрать?
+                    <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
+                  </Link>
+                  <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-5 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+                    Есть проект / ТЗ?
+                    <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             <div
-              className="order-2 min-h-[520px] rounded-md bg-neutral-100 bg-cover bg-center lg:order-1 lg:min-h-[620px]"
+              className="min-h-[500px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[600px]"
               style={{
                 backgroundImage:
                   "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
@@ -19,37 +52,6 @@ export default function Home() {
               role="img"
               aria-label="Интерьер Orac Decor с архитектурными молдингами"
             />
-
-            <div className="order-1 lg:order-2">
-              <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
-                архитектурный декор
-              </p>
-
-              <h1 className="mt-8 max-w-4xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[82px]">
-                Детали, которые
-                <br />
-                создают пространство
-              </h1>
-
-              <p className="font-body mt-8 max-w-xl text-lg font-normal leading-8 text-neutral-500">
-                Панели, молдинги, плинтусы, каменный шпон и другие материалы для
-                современных интерьеров.
-              </p>
-
-              <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-                <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
-                  Смотреть каталог
-                </Link>
-                <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                  Не знаете, что выбрать?
-                  <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
-                </Link>
-                <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                  Есть проект / ТЗ?
-                  <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>
