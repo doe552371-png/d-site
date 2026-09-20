@@ -208,7 +208,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     type="button"
                     onClick={() => setTask(item)}
                     className={
-                      "w-full rounded-md border px-4 py-3 text-left text-base font-normal transition-colors " +
+                      "w-full rounded-md border px-4 py-3 text-center text-base font-normal transition-colors " +
                       (task === item
                         ? "border-black bg-black text-white"
                         : "border-neutral-200 bg-white hover:border-neutral-400")
