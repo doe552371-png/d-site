@@ -18,7 +18,7 @@ export default function CatalogPage() {
   return (
     <main>
       <section className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
             Каталог
           </p>
@@ -37,7 +37,7 @@ export default function CatalogPage() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <div className="grid gap-4 md:grid-cols-2">
             {categories.map((category, index) => {
               const categoryProducts = publishedProducts.filter(
@@ -52,7 +52,7 @@ export default function CatalogPage() {
                 >
                   <CategoryVisual slug={category.slug} />
 
-                  <div className="flex min-h-56 flex-col justify-between p-8 md:p-10">
+                  <div className="flex min-h-56 flex-col justify-between p-7 md:p-8">
                     <div className="flex items-start justify-between">
                       <span className="text-sm font-medium text-neutral-400">
                         {String(index + 1).padStart(2, "0")}
@@ -72,7 +72,7 @@ export default function CatalogPage() {
                         {category.description}
                       </p>
 
-                      <span className="mt-8 block text-2xl font-light transition-transform duration-300 group-hover:translate-x-2">
+                      <span className="mt-6 block text-2xl font-light transition-transform duration-300 group-hover:translate-x-2">
                         →
                       </span>
                     </div>
@@ -85,8 +85,8 @@ export default function CatalogPage() {
       </section>
 
       <section className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="mb-12 flex items-end justify-between gap-8">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+          <div className="mb-10 flex items-end justify-between gap-8">
             <div>
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
                 Производители
@@ -133,8 +133,8 @@ export default function CatalogPage() {
       </section>
 
       <section className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="mb-12 flex items-end justify-between gap-8">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+          <div className="mb-10 flex items-end justify-between gap-8">
             <div>
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
                 Избранное
