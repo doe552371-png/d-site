@@ -80,7 +80,7 @@ export default function RequestForm({
         onChange={(event) => setMessage(event.target.value)}
         maxLength={2000}
         rows={5}
-        className="mt-4 w-full resize-y border border-neutral-300 px-5 py-4 outline-none transition-colors focus:border-black"
+        className="mt-4 w-full resize-y px-5 py-4 outline-none transition-colors focus:border-neutral-900"
       />
 
       <div
@@ -116,7 +116,7 @@ export default function RequestForm({
           required
           maxLength={100}
           autoComplete="name"
-          className="border border-neutral-300 px-5 py-4 outline-none transition-colors focus:border-black"
+          className="px-5 py-4 outline-none transition-colors focus:border-neutral-900"
         />
 
         <input
