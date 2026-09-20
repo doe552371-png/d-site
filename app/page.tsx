@@ -7,44 +7,55 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative min-h-[calc(100vh-76px)] overflow-hidden border-b border-neutral-200">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-          }}
-          role="img"
-          aria-label="Интерьер Orac Decor с архитектурными молдингами"
-        />
+      <section className="border-b border-neutral-200">
+        <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:py-14">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-stretch lg:gap-12">
+            <div
+              className="min-h-[520px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[650px]"
+              style={{
+                backgroundImage:
+                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
+              }}
+              role="img"
+              aria-label="Интерьер Orac Decor с архитектурными молдингами"
+            />
 
-        <div className="absolute inset-x-0 bottom-0 bg-white/95">
-          <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-16 lg:py-10">
-            <div>
-              <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-600">
+            <div className="flex flex-col justify-center">
+              <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
                 архитектурный декор
               </p>
 
-              <h1 className="mt-5 max-w-4xl text-5xl font-normal leading-[0.9] tracking-[-0.04em] text-neutral-900 sm:text-6xl lg:text-[76px]">
-                Детали, которые создают пространство
+              <h1 className="mt-7 max-w-3xl text-6xl font-normal leading-[0.9] tracking-[-0.04em] text-neutral-900 sm:text-7xl lg:text-[84px]">
+                Детали, которые
+                <br />
+                создают пространство
               </h1>
-            </div>
 
-            <div>
-              <p className="font-body max-w-xl text-base font-normal leading-7 text-neutral-600">
+              <p className="font-body mt-7 max-w-xl text-lg font-normal leading-8 text-neutral-500">
                 Панели, молдинги, плинтусы, каменный шпон и другие материалы для
                 современных интерьеров.
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-3.5 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
+              <div className="mt-9 grid max-w-xl gap-3 sm:grid-cols-2">
+                <Link
+                  href="/catalog"
+                  className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80 sm:col-span-2"
+                >
                   Смотреть каталог
                 </Link>
-                <Link href="/visualizer" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-6 py-3.5 text-center text-sm font-medium transition-colors hover:border-black">
-                  Поможем с подбором
+
+                <Link
+                  href="/visualizer"
+                  className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-5 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50"
+                >
+                  Не знаете, что выбрать?
                 </Link>
-                <Link href="/pro" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-6 py-3.5 text-center text-sm font-medium transition-colors hover:border-black">
-                  Передать проект
+
+                <Link
+                  href="/pro"
+                  className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-5 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50"
+                >
+                  Есть проект / ТЗ?
                 </Link>
               </div>
             </div>
