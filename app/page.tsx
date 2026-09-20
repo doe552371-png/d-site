@@ -15,7 +15,7 @@ export default function Home() {
                 архитектурный декор
               </p>
 
-              <h1 className="font-body mt-8 max-w-4xl text-6xl font-medium leading-[0.92] tracking-[-0.045em] text-neutral-900 sm:text-7xl lg:text-[82px]">
+              <h1 className="mt-8 max-w-4xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[82px]">
                 Детали, которые
                 <br />
                 создают пространство
