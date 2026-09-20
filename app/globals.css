@@ -22,8 +22,8 @@ html {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -35,9 +35,20 @@ html {
   h5,
   h6 {
     margin: 0;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: -0.03em;
+  }
+
+  nav,
+  button {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .text-sm {
+    font-size: 14px;
+    font-weight: 500;
   }
 
   p {
@@ -52,9 +63,5 @@ html {
   input,
   textarea {
     font: inherit;
-  }
-
-  button {
-    font-weight: 500;
   }
 }
