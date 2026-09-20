@@ -24,12 +24,12 @@ export default function Home() {
             </p>
 
             <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-              <Link href="/catalog" className="font-body bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">Смотреть каталог</Link>
-              <Link href="/visualizer" className="font-body border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+              <Link href="/catalog" className="font-body rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">Смотреть каталог</Link>
+              <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
                 Не знаете, что выбрать?
                 <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
               </Link>
-              <Link href="/pro" className="font-body border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+              <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
                 Есть проект / ТЗ?
                 <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
               </Link>
@@ -52,7 +52,7 @@ export default function Home() {
                 категорию материала — мы соберём сценарий для AI-визуализации и
                 привяжем его к каталогу DECOR.
               </p>
-              <Link href="/visualizer" className="font-body mt-7 inline-flex bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Запустить подбор</Link>
+              <Link href="/visualizer" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Запустить подбор</Link>
               <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Артикул знать не нужно — достаточно показать пространство.</p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function Home() {
                 Передайте проект — поможем подобрать материалы, собрать
                 комплектацию и подготовить решение под объект.
               </p>
-              <Link href="/pro" className="font-body mt-7 inline-flex bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Передать проект</Link>
+              <Link href="/pro" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Передать проект</Link>
               <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Один каталог для частных клиентов, дизайнеров и строительных компаний.</p>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function Home() {
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Контакты</p>
               <p className="font-body mt-3 text-base font-normal text-neutral-500">Подбор, расчёт и вопросы по материалам — через заявку.</p>
             </div>
-            <Link href="#request" className="font-body inline-flex w-fit bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Оставить заявку</Link>
+            <Link href="#request" className="font-body inline-flex w-fit rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Оставить заявку</Link>
           </div>
         </div>
       </section>
