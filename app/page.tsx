@@ -21,23 +21,36 @@ export default function Home() {
             </h1>
 
             <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-neutral-500">
-              Панели, молдинги, плинтусы, каменный шпон и другие
-              материалы для современных интерьеров.
+              Панели, молдинги, плинтусы, каменный шпон и другие материалы для
+              современных интерьеров.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
               <Link
                 href="/catalog"
-                className="rounded-md bg-black px-6 py-3 text-lg font-semibold text-white transition-opacity hover:opacity-80"
+                className="rounded-md bg-black px-6 py-4 text-center text-base font-semibold text-white transition-opacity hover:opacity-80"
               >
                 Смотреть каталог
               </Link>
 
               <Link
-                href="#selection"
-                className="rounded-md border border-neutral-300 px-6 py-3 text-lg font-medium transition-colors hover:bg-neutral-100"
+                href="/visualizer"
+                className="rounded-md border border-neutral-300 px-6 py-4 text-center text-base font-semibold transition-colors hover:bg-neutral-100"
               >
-                Помочь с подбором
+                Не знаете, что выбрать?
+                <span className="mt-1 block text-sm font-normal text-neutral-500">
+                  Поможем с подбором
+                </span>
+              </Link>
+
+              <Link
+                href="/pro"
+                className="rounded-md border border-neutral-300 px-6 py-4 text-center text-base font-semibold transition-colors hover:bg-neutral-100"
+              >
+                Есть проект / ТЗ?
+                <span className="mt-1 block text-sm font-normal text-neutral-500">
+                  Передать проект
+                </span>
               </Link>
             </div>
           </div>
@@ -60,9 +73,9 @@ export default function Home() {
 
             <div className="max-w-2xl">
               <p className="text-lg leading-8 text-neutral-600">
-                Начните с фотографии помещения. Выберите направление, стиль
-                и категорию материала — мы соберём сценарий для AI-визуализации
-                и привяжем его к каталогу DECOR.
+                Начните с фотографии помещения. Выберите направление, стиль и
+                категорию материала — мы соберём сценарий для AI-визуализации и
+                привяжем его к каталогу DECOR.
               </p>
 
               <Link
@@ -74,6 +87,42 @@ export default function Home() {
 
               <p className="mt-4 text-sm leading-6 text-neutral-500">
                 Артикул знать не нужно — достаточно показать пространство.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* B2B */}
+      <section id="b2b" className="border-b border-neutral-200">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+                Для дизайнеров и бизнеса
+              </p>
+
+              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+                Есть проект или ТЗ?
+              </h2>
+            </div>
+
+            <div className="max-w-2xl">
+              <p className="text-lg leading-8 text-neutral-600">
+                Передайте проект — поможем подобрать материалы, собрать
+                комплектацию и подготовить решение под объект.
+              </p>
+
+              <Link
+                href="/pro"
+                className="mt-7 inline-flex rounded-md bg-black px-6 py-3 text-lg font-semibold text-white transition-opacity hover:opacity-80"
+              >
+                Передать проект
+              </Link>
+
+              <p className="mt-4 text-sm leading-6 text-neutral-500">
+                Один каталог для частных клиентов, дизайнеров и строительных
+                компаний.
               </p>
             </div>
           </div>
@@ -123,9 +172,9 @@ export default function Home() {
             </div>
 
             <p className="max-w-2xl text-lg leading-8 text-neutral-600">
-              Мы собираем каталог интерьерных материалов и помогаем
-              подобрать конкретное решение под задачу, пространство и
-              бюджет — от первого выбора до поставки.
+              Мы собираем каталог интерьерных материалов и помогаем подобрать
+              конкретное решение под задачу, пространство и бюджет — от первого
+              выбора до поставки.
             </p>
           </div>
         </div>
