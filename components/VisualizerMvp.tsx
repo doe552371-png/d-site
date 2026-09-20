@@ -52,10 +52,10 @@ function StyleHeroPreview({ style }: { style: string }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-white md:p-6">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+          <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-white/70">
             Стиль
           </p>
-          <p className="mt-1 text-lg font-semibold uppercase tracking-tight md:text-xl">
+          <p className="mt-1 text-lg font-medium uppercase tracking-tight md:text-xl">
             {style}
           </p>
         </div>
@@ -168,7 +168,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
               <span className="flex h-16 w-16 items-center justify-center rounded-full border border-neutral-300 bg-white text-2xl">
                 +
               </span>
-              <span className="mt-6 text-xl font-semibold uppercase tracking-tight">
+              <span className="mt-6 text-xl font-medium uppercase tracking-tight">
                 Загрузить фото помещения
               </span>
               <span className="mt-3 max-w-sm text-sm leading-6 text-neutral-500">
@@ -189,10 +189,10 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
         <div className="flex flex-col bg-white p-7 md:p-9">
           <div className="flex items-start justify-between gap-6">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-400">
+              <p className="text-xs font-medium uppercase tracking-[0.16em] text-neutral-400">
                 Шаг 01 / 03
               </p>
-              <h2 className="mt-3 text-3xl font-semibold uppercase leading-[1.02] tracking-tight">
+              <h2 className="mt-3 text-3xl font-medium uppercase leading-[1.02] tracking-tight">
                 Задача
               </h2>
             </div>
@@ -208,7 +208,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     type="button"
                     onClick={() => setTask(item)}
                     className={
-                      "w-full border px-4 py-3 text-left text-sm font-medium transition-colors " +
+                      "w-full border px-4 py-3 text-left text-[15px] font-normal transition-colors " +
                       (task === item
                         ? "border-black bg-black text-white"
                         : "border-neutral-200 bg-white hover:border-neutral-400")
@@ -231,7 +231,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                       type="button"
                       onClick={() => setStyle(item)}
                       className={
-                        "shrink-0 pb-2 text-xs font-semibold uppercase tracking-tight transition-colors " +
+                        "shrink-0 pb-2 text-xs font-medium uppercase tracking-tight transition-colors " +
                         (style === item
                           ? "border-b-2 border-black text-black"
                           : "border-b-2 border-transparent text-neutral-400 hover:text-black")
@@ -270,7 +270,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
             <button
               type="button"
               onClick={startVisualization}
-              className="w-full bg-black px-6 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+              className="w-full bg-black px-6 py-3 text-[15px] font-medium text-white transition-opacity hover:opacity-80"
             >
               {file ? "Показать решение" : "Сначала загрузить фото"}
             </button>
@@ -281,10 +281,10 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
       {submitted && (
         <section className="grid gap-px overflow-hidden border border-neutral-200 bg-neutral-200 lg:grid-cols-[1fr_1.1fr]">
           <div className="bg-black p-7 text-white md:p-9">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/45">
               Шаг 02 / 03
             </p>
-            <h2 className="mt-3 max-w-xl text-3xl font-semibold uppercase leading-[1.02] tracking-tight">
+            <h2 className="mt-3 max-w-xl text-3xl font-medium uppercase leading-[1.02] tracking-tight">
               Сценарий готов
             </h2>
             <div className="mt-8 border-t border-white/15 pt-6">
@@ -308,10 +308,10 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
           <div className="bg-white p-7 md:p-9">
             <div className="flex items-end justify-between gap-6">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-400">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-neutral-400">
                   Шаг 03 / 03
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold uppercase leading-[1.02] tracking-tight">
+                <h2 className="mt-3 text-3xl font-medium uppercase leading-[1.02] tracking-tight">
                   Материалы DECOR
                 </h2>
               </div>
@@ -327,10 +327,10 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     ) : null}
                   </div>
                   <div className="min-w-0 self-center">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-400">
                       {item.manufacturer}
                     </p>
-                    <p className="mt-1 text-sm font-semibold uppercase leading-tight">{item.name}</p>
+                    <p className="mt-1 text-sm font-medium uppercase leading-tight">{item.name}</p>
                     <p className="mt-2 text-xs leading-5 text-neutral-500">{item.categoryName}</p>
                     {item.price ? <p className="mt-2 text-xs font-semibold">{item.price}</p> : null}
                   </div>
