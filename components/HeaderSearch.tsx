@@ -31,7 +31,7 @@ export default function HeaderSearch() {
 
       {open && (
         <form
-          action="/catalog"
+          action="/search"
           method="get"
           className="absolute right-0 top-11 z-20 w-[min(82vw,360px)] rounded-md border border-neutral-300 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
         >
