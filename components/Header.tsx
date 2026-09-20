@@ -11,7 +11,7 @@ export default function Header() {
           DECOR
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex text-base">
+        <nav className="hidden items-center gap-8 text-lg md:flex">
           <Link
             href="/catalog"
             className="transition-colors hover:text-neutral-500"
@@ -44,14 +44,14 @@ export default function Header() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/pro"
-            className="rounded-md border border-black px-5 py-3 text-base font-medium transition-colors hover:bg-black hover:text-white"
+            className="rounded-md border border-black px-5 py-3 text-lg font-medium transition-colors hover:bg-black hover:text-white"
           >
             ПРО
           </Link>
 
           <Link
             href="/#request"
-            className="rounded-md bg-black px-5 py-3 text-base font-semibold text-white transition-opacity hover:opacity-80"
+            className="rounded-md bg-black px-5 py-3 text-lg font-semibold text-white transition-opacity hover:opacity-80"
           >
             Оставить заявку
           </Link>
@@ -59,7 +59,7 @@ export default function Header() {
 
         <Link
           href="/#request"
-          className="text-base md:hidden"
+          className="text-lg md:hidden"
           aria-label="Перейти к заявке"
         >
           Заявка
