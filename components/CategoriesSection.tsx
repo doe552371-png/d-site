@@ -18,7 +18,7 @@ export default function CategoriesSection() {
               Каталог
             </p>
 
-            <h2 className="text-3xl font-medium uppercase leading-tight tracking-tight md:text-5xl">
+            <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
               Материалы для интерьера
             </h2>
           </div>
@@ -41,7 +41,7 @@ export default function CategoriesSection() {
               <Link
                 key={category.slug}
                 href={`/category/${category.slug}`}
-                className="group bg-white p-6 transition-colors hover:bg-neutral-50 md:p-7"
+                className="group bg-white p-6 transition-colors duration-200 hover:bg-neutral-50 md:p-7"
               >
                 <div className="grid min-h-44 gap-6 sm:grid-cols-[9rem_1fr] sm:items-end">
                   <CategoryVisual slug={category.slug} />
@@ -52,7 +52,7 @@ export default function CategoriesSection() {
                     </span>
 
                     <div>
-                      <h3 className="text-2xl font-medium uppercase tracking-tight">
+                      <h3 className="font-display text-2xl font-normal tracking-[-0.015em]">
                         {category.name}
                       </h3>
 
