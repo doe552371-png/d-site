@@ -7,33 +7,49 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="flex min-h-[78vh] items-center border-b border-neutral-200">
+      <section className="border-b border-neutral-200">
         <div className="mx-auto w-full max-w-7xl px-6 py-16 lg:py-20">
-          <div className="max-w-5xl">
-            <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">архитектурный декор</p>
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+            <div>
+              <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
+                архитектурный декор
+              </p>
 
-            <h1 className="mt-8 max-w-4xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[88px]">
-              Детали, которые
-              <br />
-              создают пространство
-            </h1>
+              <h1 className="mt-8 max-w-4xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[82px]">
+                Детали, которые
+                <br />
+                создают пространство
+              </h1>
 
-            <p className="font-body mt-8 max-w-xl text-lg font-normal leading-8 text-neutral-500">
-              Панели, молдинги, плинтусы, каменный шпон и другие материалы для
-              современных интерьеров.
-            </p>
+              <p className="font-body mt-8 max-w-xl text-lg font-normal leading-8 text-neutral-500">
+                Панели, молдинги, плинтусы, каменный шпон и другие материалы для
+                современных интерьеров.
+              </p>
 
-            <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-              <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">Смотреть каталог</Link>
-              <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                Не знаете, что выбрать?
-                <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
-              </Link>
-              <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                Есть проект / ТЗ?
-                <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
-              </Link>
+              <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
+                <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
+                  Смотреть каталог
+                </Link>
+                <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+                  Не знаете, что выбрать?
+                  <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
+                </Link>
+                <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
+                  Есть проект / ТЗ?
+                  <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
+                </Link>
+              </div>
             </div>
+
+            <div
+              className="min-h-[520px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[620px]"
+              style={{
+                backgroundImage:
+                  "url(https://www.oracdecor.com/media/converted/assets/d/3/4/4/d3441c2e8039071d5d7ec8390af32ea0007e25b8_orac_artdeco_hop_apid_sx157_sx207_cx196_cx190_69d722704f06f.webp)",
+              }}
+              role="img"
+              aria-label="Интерьер Orac Decor с архитектурными молдингами"
+            />
           </div>
         </div>
       </section>
