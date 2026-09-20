@@ -35,7 +35,7 @@ export default async function CategoryPage({
   return (
     <main>
       <section className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <Link
             href="/catalog"
             className="text-sm font-medium text-neutral-500 underline underline-offset-4"
@@ -43,7 +43,7 @@ export default async function CategoryPage({
             ← Вернуться в каталог
           </Link>
 
-          <p className="mb-5 mt-12 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
+          <p className="mb-5 mt-10 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
             Категория
           </p>
 
@@ -58,8 +58,8 @@ export default async function CategoryPage({
       </section>
 
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="mb-12 flex items-end justify-between gap-8">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+          <div className="mb-10 flex items-end justify-between gap-8">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
                 Коллекция
@@ -78,7 +78,7 @@ export default async function CategoryPage({
               </p>
             </div>
           ) : (
-            <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {categoryProducts.map((product, index) => {
                 const manufacturer = getManufacturerBySlug(
                   product.manufacturer,
