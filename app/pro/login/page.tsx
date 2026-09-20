@@ -8,7 +8,7 @@ export default function ProLoginPage() {
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
             DECOR PRO
           </p>
-          <h1 className="mt-5 text-4xl font-semibold uppercase leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl">
+          <h1 className="mt-5 text-4xl font-medium uppercase leading-[0.98] tracking-tight text-neutral-900 sm:text-6xl">
             Вход в рабочее пространство
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-600">

@@ -86,7 +86,7 @@ export default async function ProductPage({
               {manufacturer?.name ?? product.manufacturer}
             </div>
 
-            <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+            <h1 className="text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
               {product.name}
             </h1>
 

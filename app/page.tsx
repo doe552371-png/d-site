@@ -14,7 +14,7 @@ export default function Home() {
               архитектурный декор
             </p>
 
-            <h1 className="mt-8 max-w-4xl text-5xl font-semibold leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 max-w-4xl text-5xl font-medium leading-[0.96] tracking-tight text-neutral-900 sm:text-6xl lg:text-7xl">
               Детали, которые
               <br />
               создают пространство
@@ -28,7 +28,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/catalog"
-                className="rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+                className="rounded-md bg-black px-7 py-4 text-base font-medium text-white transition-opacity hover:opacity-80"
               >
                 Смотреть каталог
               </Link>
@@ -53,7 +53,7 @@ export default function Home() {
                 Подбор
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
                 Не знаете, что выбрать?
               </h2>
             </div>
@@ -67,7 +67,7 @@ export default function Home() {
 
               <Link
                 href="/visualizer"
-                className="mt-8 inline-flex rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+                className="mt-8 inline-flex rounded-md bg-black px-7 py-4 text-base font-medium text-white transition-opacity hover:opacity-80"
               >
                 Запустить подбор
               </Link>
@@ -89,7 +89,7 @@ export default function Home() {
                 Заявка
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
                 Расскажите о задаче
               </h2>
 
@@ -117,7 +117,7 @@ export default function Home() {
                 DECOR
               </p>
 
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
                 Материалы как часть решения
               </h2>
             </div>
@@ -147,7 +147,7 @@ export default function Home() {
 
             <Link
               href="#request"
-              className="inline-flex w-fit rounded-md bg-black px-7 py-4 text-base font-semibold text-white transition-opacity hover:opacity-80"
+              className="inline-flex w-fit rounded-md bg-black px-7 py-4 text-base font-medium text-white transition-opacity hover:opacity-80"
             >
               Оставить заявку
             </Link>

@@ -55,7 +55,7 @@ export default function VisualizerPage() {
             <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
               Подбор · визуализация
             </p>
-            <h1 className="mt-5 text-5xl font-semibold uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
+            <h1 className="mt-5 text-5xl font-medium uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
               Покажите пространство.
               <br />
               Мы подберём детали.
@@ -79,21 +79,21 @@ export default function VisualizerPage() {
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">01</p>
-              <h2 className="mt-3 text-xl font-semibold uppercase tracking-tight">Фото</h2>
+              <h2 className="mt-3 text-xl font-medium uppercase tracking-tight">Фото</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
                 Загружается реальное помещение заказчика.
               </p>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">02</p>
-              <h2 className="mt-3 text-xl font-semibold uppercase tracking-tight">Сценарий</h2>
+              <h2 className="mt-3 text-xl font-medium uppercase tracking-tight">Сценарий</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
                 Формируется задача, стиль и направление материалов.
               </p>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">03</p>
-              <h2 className="mt-3 text-xl font-semibold uppercase tracking-tight">Каталог</h2>
+              <h2 className="mt-3 text-xl font-medium uppercase tracking-tight">Каталог</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
                 Подбор связывается с конкретными позициями DECOR.
               </p>
