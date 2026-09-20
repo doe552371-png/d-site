@@ -16,8 +16,8 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-4 py-2.5 text-sm font-medium tracking-[0.06em] transition-colors hover:border-black hover:bg-black hover:text-white">ПРО</Link>
-          <Link href="/#request" className="font-body rounded-md bg-black px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-80">Оставить заявку</Link>
+          <Link href="/pro" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-4 py-2.5 text-sm font-medium tracking-[0.06em] transition-colors hover:border-black hover:bg-black hover:text-white">ПРО</Link>
+          <Link href="/#request" className="font-body inline-flex items-center justify-center rounded-md bg-black px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-80">Оставить заявку</Link>
         </div>
 
         <Link href="/#request" className="font-body text-sm font-medium md:hidden" aria-label="Перейти к заявке">Заявка</Link>
