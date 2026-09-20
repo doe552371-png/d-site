@@ -87,7 +87,7 @@ export default function ProductOptions({
                     setSelectedVariantId(variant.id)
                   }
                   className={[
-                    "rounded-md border px-4 py-3 text-left text-sm transition-colors",
+                    "rounded-md border px-4 py-3 text-center text-sm transition-colors",
                     isSelected
                       ? "border-neutral-900 bg-neutral-900 text-white"
                       : "border-neutral-200 bg-white hover:border-neutral-400",
