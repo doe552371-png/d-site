@@ -9,8 +9,18 @@ export default function Home() {
       {/* HERO */}
       <section className="border-b border-neutral-200">
         <div className="mx-auto w-full max-w-7xl px-6 py-16 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
-            <div>
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+            <div
+              className="order-2 min-h-[520px] rounded-md bg-neutral-100 bg-cover bg-center lg:order-1 lg:min-h-[620px]"
+              style={{
+                backgroundImage:
+                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
+              }}
+              role="img"
+              aria-label="Интерьер Orac Decor с архитектурными молдингами"
+            />
+
+            <div className="order-1 lg:order-2">
               <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
                 архитектурный декор
               </p>
@@ -40,16 +50,6 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-
-            <div
-              className="min-h-[520px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[620px]"
-              style={{
-                backgroundImage:
-                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-              }}
-              role="img"
-              aria-label="Интерьер Orac Decor с архитектурными молдингами"
-            />
           </div>
         </div>
       </section>
