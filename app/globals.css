@@ -6,7 +6,7 @@
   --muted: #6b6b6b;
   --border: #e5e5e5;
   --surface: #f7f7f7;
-  --font-body: "CN Sans", var(--font-manrope), Arial, Helvetica, sans-serif;
+  --font-body: var(--font-manrope), Arial, Helvetica, sans-serif;
   --font-display: "Adobe Garamond Pro", "Adobe Garamond", Garamond, Georgia, serif;
 }
 
@@ -24,8 +24,8 @@ html {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-body);
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -40,18 +40,15 @@ html {
     font-family: var(--font-display);
     font-weight: 400;
     text-transform: none;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
 
-  nav,
-  button {
-    font-size: 18px;
-    font-weight: 500;
+  .font-display {
+    font-family: var(--font-display);
   }
 
-  .text-sm {
-    font-size: 14px;
-    font-weight: 500;
+  .font-body {
+    font-family: var(--font-body);
   }
 
   p {
@@ -59,7 +56,6 @@ html {
   }
 
   a {
-    font-family: var(--font-body);
     text-decoration: none;
   }
 
