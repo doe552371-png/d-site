@@ -25,7 +25,7 @@ export default function CategoriesSection() {
 
           <Link
             href="/catalog"
-            className="hidden text-sm font-medium underline underline-offset-4 md:block"
+            className="hidden text-base font-medium underline underline-offset-4 md:block"
           >
             Смотреть весь каталог
           </Link>
@@ -73,7 +73,7 @@ export default function CategoriesSection() {
 
         <Link
           href="/catalog"
-          className="mt-8 inline-block text-sm font-medium underline underline-offset-4 md:hidden"
+          className="mt-8 inline-block text-base font-medium underline underline-offset-4 md:hidden"
         >
           Смотреть весь каталог
         </Link>
