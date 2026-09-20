@@ -67,5 +67,6 @@ html {
   input,
   textarea {
     font: inherit;
+    border-radius: 0.375rem;
   }
 }
