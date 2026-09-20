@@ -7,48 +7,46 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="border-b border-neutral-200">
-        <div className="mx-auto w-full max-w-7xl px-6 py-14 lg:py-16">
-          <div className="relative overflow-hidden rounded-md bg-neutral-100">
-            <div
-              className="h-[520px] bg-cover bg-center lg:h-[600px]"
-              style={{
-                backgroundImage:
-                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-              }}
-              role="img"
-              aria-label="Интерьер Orac Decor с архитектурными молдингами"
-            />
+      <section className="relative min-h-[calc(100vh-76px)] overflow-hidden border-b border-neutral-200">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
+          }}
+          role="img"
+          aria-label="Интерьер Orac Decor с архитектурными молдингами"
+        />
 
-            <div className="absolute inset-y-0 left-0 flex w-full max-w-2xl items-center bg-white/95 px-7 py-10 md:px-10 lg:px-14">
-              <div>
-                <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
-                  архитектурный декор
-                </p>
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/55 to-transparent" />
 
-                <h1 className="mt-8 max-w-xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[78px]">
-                  Детали, которые
-                  <br />
-                  создают пространство
-                </h1>
+        <div className="relative mx-auto flex min-h-[calc(100vh-76px)] max-w-7xl items-center px-6 py-16 lg:py-20">
+          <div className="max-w-3xl">
+            <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-600">
+              архитектурный декор
+            </p>
 
-                <p className="font-body mt-8 max-w-lg text-lg font-normal leading-8 text-neutral-500">
-                  Панели, молдинги, плинтусы, каменный шпон и другие материалы
-                  для современных интерьеров.
-                </p>
+            <h1 className="mt-8 max-w-3xl text-6xl font-normal leading-[0.9] tracking-[-0.04em] text-neutral-900 sm:text-7xl lg:text-[90px]">
+              Детали, которые
+              <br />
+              создают пространство
+            </h1>
 
-                <div className="mt-9 flex flex-wrap gap-3">
-                  <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
-                    Смотреть каталог
-                  </Link>
-                  <Link href="/visualizer" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black">
-                    Поможем с подбором
-                  </Link>
-                  <Link href="/pro" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black">
-                    Передать проект
-                  </Link>
-                </div>
-              </div>
+            <p className="font-body mt-8 max-w-xl text-lg font-normal leading-8 text-neutral-600">
+              Панели, молдинги, плинтусы, каменный шпон и другие материалы для
+              современных интерьеров.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
+                Смотреть каталог
+              </Link>
+              <Link href="/visualizer" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-400 bg-white/85 px-6 py-4 text-center text-sm font-medium backdrop-blur-sm transition-colors hover:border-black">
+                Поможем с подбором
+              </Link>
+              <Link href="/pro" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-400 bg-white/85 px-6 py-4 text-center text-sm font-medium backdrop-blur-sm transition-colors hover:border-black">
+                Передать проект
+              </Link>
             </div>
           </div>
         </div>
