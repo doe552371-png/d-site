@@ -11,7 +11,7 @@ export default function Header() {
           DECOR
         </Link>
 
-        <nav className="hidden items-center gap-8 text-base md:flex">
+        <nav className="hidden items-center gap-8 md:flex text-base">
           <Link
             href="/catalog"
             className="transition-colors hover:text-neutral-500"
