@@ -8,7 +8,7 @@ export default function Home() {
     <main>
       {/* HERO */}
       <section className="flex min-h-[78vh] items-center border-b border-neutral-200">
-        <div className="mx-auto w-full max-w-7xl px-6 py-20 lg:py-24">
+        <div className="mx-auto w-full max-w-7xl px-6 py-16 lg:py-20">
           <div className="max-w-5xl">
             <p className="text-sm font-medium tracking-[0.2em] text-neutral-500">
               архитектурный декор
@@ -46,7 +46,7 @@ export default function Home() {
 
       {/* SELECTION */}
       <section id="selection" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
@@ -82,7 +82,7 @@ export default function Home() {
 
       {/* REQUEST */}
       <section id="request" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
@@ -110,7 +110,7 @@ export default function Home() {
 
       {/* ABOUT */}
       <section id="about" className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
