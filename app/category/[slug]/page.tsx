@@ -47,11 +47,11 @@ export default async function CategoryPage({
             Категория
           </p>
 
-          <h1 className="max-w-5xl text-5xl font-medium uppercase leading-[0.98] tracking-tight md:text-7xl">
+          <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl">
             {category.name}
           </h1>
 
-          <p className="mt-8 max-w-2xl text-lg font-medium leading-8 text-neutral-500">
+          <p className="mt-8 max-w-2xl text-lg font-normal leading-8 text-neutral-500">
             {category.description}
           </p>
         </div>
@@ -65,7 +65,7 @@ export default async function CategoryPage({
                 Коллекция
               </p>
 
-              <h2 className="mt-3 text-3xl font-medium uppercase tracking-tight md:text-4xl">
+              <h2 className="mt-3 font-display text-3xl font-normal tracking-[-0.02em] md:text-4xl">
                 {categoryProducts.length} материалов
               </h2>
             </div>
