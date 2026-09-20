@@ -6,15 +6,15 @@ export default function Header() {
   return (
     <header className="border-b border-neutral-200">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="font-body text-[25px] font-medium leading-none tracking-[0.04em]">
+        <Link href="/" className="font-display text-[25px] leading-none tracking-[0.04em]">
           DECOR
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          <Link href="/catalog" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Каталог</Link>
-          <Link href="/visualizer" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Подбор</Link>
-          <Link href="/#about" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">О нас</Link>
-          <Link href="/#contacts" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Контакты</Link>
+          <Link href="/catalog" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">Каталог</Link>
+          <Link href="/visualizer" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">Подбор</Link>
+          <Link href="/#about" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">О нас</Link>
+          <Link href="/#contacts" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">Контакты</Link>
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
