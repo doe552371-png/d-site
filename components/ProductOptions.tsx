@@ -89,7 +89,7 @@ export default function ProductOptions({
                   className={[
                     "decor-button decor-button-secondary min-h-[52px] h-auto px-4 py-3 text-center text-sm transition-colors",
                     isSelected
-                      ? "border-neutral-900 bg-neutral-900 text-white"
+                      ? "decor-button-selected"
                       : "border-neutral-200 bg-white hover:border-neutral-400",
                   ].join(" ")}
                 >
