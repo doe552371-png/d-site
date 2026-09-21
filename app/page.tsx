@@ -7,48 +7,60 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="border-b border-neutral-200">
-        <div className="mx-auto w-full max-w-7xl px-6 py-16 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16">
-            <div>
-              <p className="font-body text-sm font-medium tracking-[0.16em] text-neutral-500">
-                архитектурный декор
-              </p>
+      <section className="relative min-h-[calc(100svh-76px)] overflow-hidden bg-neutral-900 text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
+          }}
+          role="img"
+          aria-label="Интерьер с архитектурными молдингами"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-black/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
 
-              <h1 className="mt-8 max-w-4xl text-6xl font-normal leading-[0.92] tracking-[-0.035em] text-neutral-900 sm:text-7xl lg:text-[82px]">
-                Детали, которые
-                <br />
-                создают пространство
-              </h1>
+        <div className="relative mx-auto flex min-h-[calc(100svh-76px)] w-full max-w-[1600px] flex-col justify-between px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
+          <div className="max-w-5xl pt-[18vh]">
+            <p className="font-body text-xs font-medium uppercase tracking-[0.28em] text-white/75">
+              архитектурный декор
+            </p>
 
-              <p className="font-body mt-8 max-w-xl text-lg font-normal leading-8 text-neutral-500">
-                Панели, молдинги, плинтусы, каменный шпон и другие материалы для
-                современных интерьеров.
-              </p>
+            <h1 className="mt-6 max-w-5xl text-[clamp(56px,8vw,128px)] font-normal leading-[0.86] tracking-[-0.055em] text-white">
+              Архитектура
+              <br />
+              начинается
+              <br />
+              с деталей.
+            </h1>
 
-              <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-                <Link href="/catalog" className="font-body inline-flex items-center justify-center rounded-md bg-black px-6 py-4 text-center text-sm font-medium text-white transition-opacity hover:opacity-80">
-                  Смотреть каталог
-                </Link>
-                <Link href="/visualizer" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                  Не знаете, что выбрать?
-                  <span className="mt-1 block text-sm font-normal text-neutral-500">Поможем с подбором</span>
-                </Link>
-                <Link href="/pro" className="font-body rounded-md border border-neutral-300 px-6 py-4 text-center text-sm font-medium transition-colors hover:border-black hover:bg-neutral-50">
-                  Есть проект / ТЗ?
-                  <span className="mt-1 block text-sm font-normal text-neutral-500">Передать проект</span>
-                </Link>
-              </div>
+            <p className="font-body mt-8 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
+              Молдинги, панели и декоративные элементы для современных интерьеров.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                href="/catalog"
+                className="font-body inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-transform hover:scale-[1.02]"
+              >
+                Смотреть каталог
+              </Link>
+              <Link
+                href="/visualizer"
+                className="font-body inline-flex items-center justify-center rounded-full border border-white/45 bg-white/5 px-7 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+              >
+                Не знаете, что выбрать?
+              </Link>
             </div>
+          </div>
 
-            <div className="min-h-[420px] rounded-md bg-neutral-100 bg-cover bg-center lg:min-h-[500px]"
-              style={{
-                backgroundImage:
-                  "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-              }}
-              role="img"
-              aria-label="Интерьер Orac Decor с архитектурными молдингами"
-            />
+          <div className="flex items-end justify-between border-t border-white/25 pt-4">
+            <span className="font-body text-[11px] uppercase tracking-[0.22em] text-white/65">
+              Scroll to explore
+            </span>
+            <span className="font-body text-xs tracking-[0.16em] text-white/70">
+              01 / 05
+            </span>
           </div>
         </div>
       </section>
