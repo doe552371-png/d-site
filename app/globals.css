@@ -128,6 +128,19 @@ html {
   background: #f7f7f7;
 }
 
+.decor-button-selected {
+  border-color: #111111;
+  background: #111111;
+  color: #ffffff;
+}
+
+.decor-button-selected:hover {
+  border-color: #111111;
+  background: #111111;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
 .decor-button-light {
   background: #ffffff;
   color: #111111;
