@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import Hero from "@/components/Hero";
 import CategoriesSection from "@/components/CategoriesSection";
 import RequestForm from "@/components/RequestForm";
 
@@ -7,51 +8,7 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative min-h-[calc(100svh-76px)] overflow-hidden bg-neutral-900 text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url(https://www.oracdecor.com/media/wysiwyg/homepage/hero-RoelfienVos_1.png)",
-          }}
-          role="img"
-          aria-label="Интерьер с архитектурными молдингами"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-black/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
-
-        <div className="relative mx-auto flex min-h-[calc(100svh-76px)] w-full max-w-[1600px] flex-col justify-between px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
-          <div className="max-w-5xl pt-[18vh]">
-            <h1 className="mt-6 max-w-5xl text-[clamp(56px,8vw,128px)] font-normal leading-[0.86] tracking-[-0.055em] text-white">
-              Архитектура
-              <br />
-              начинается
-              <br />
-              с деталей.
-            </h1>
-
-            <p className="font-body mt-8 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
-              Молдинги, панели и декоративные элементы для современных интерьеров.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="/catalog"
-                className="decor-button decor-button-light"
-              >
-                Смотреть каталог
-              </Link>
-              <Link
-                href="/visualizer"
-                className="decor-button decor-button-light-outline"
-              >
-                Не знаете, что выбрать?
-              </Link>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      <Hero />
 
       {/* SELECTION */}
       <section id="selection">
