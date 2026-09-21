@@ -128,10 +128,10 @@ export default function ProductGallery({
                 type="button"
                 onClick={() => handleTypeChange(type)}
                 className={[
-                  "rounded-md px-4 py-2 text-sm transition-colors",
+                  "decor-button decor-button-secondary decor-button-compact",
                   isActive
-                    ? "bg-neutral-900 text-white"
-                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
+                    ? "decor-button-selected"
+                    : "",
                 ].join(" ")}
               >
                 {imageTypeLabels[type]}
