@@ -7,12 +7,14 @@ const HERO_VARIANTS = {
   panel: {
     label: "Панель",
     image:
-      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:c0194bb0-c95d-4f05-b9c3-e94837ff4586",
+      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:8e15446d-5432-4120-acda-b11923f6a7da",
+    imageClass: "object-contain object-right scale-[1.04]",
   },
   moulding: {
     label: "Молдинг",
     image:
-      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:6ab6c7e0-3c32-4425-aa5c-24839e6d5345",
+      "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:cfe0180a-7715-4790-af87-669ede0082f2",
+    imageClass: "object-contain object-center scale-[1.06]",
   },
 } as const;
 
@@ -23,17 +25,21 @@ export default function Hero() {
   const current = HERO_VARIANTS[variant];
 
   return (
-    <section className="relative min-h-[calc(100svh-76px)] overflow-hidden bg-neutral-900 text-neutral-950">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${current.image})`,
-        }}
-        role="img"
-        aria-label={`Тестовый Hero DECOR — ${current.label}`}
+    <section className="relative min-h-[calc(100svh-76px)] overflow-hidden bg-[#C48912] text-neutral-950">
+      <div className="absolute inset-0 bg-[#C48912]" />
+
+      <img
+        key={current.image}
+        src={current.image}
+        alt={"Тестовый Hero DECOR — " + current.label}
+        className={[
+          "absolute inset-0 h-full w-full",
+          "transition-transform duration-500 ease-out",
+          current.imageClass,
+        ].join(" ")}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/0 to-white/5" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#C48912]/0 via-[#C48912]/0 to-[#C48912]/6" />
 
       <div className="absolute right-6 top-6 z-20 flex items-center rounded-full border border-black/15 bg-white/75 p-1 backdrop-blur-md sm:right-8 sm:top-8 lg:right-12">
         {(Object.keys(HERO_VARIANTS) as HeroVariant[]).map((key) => (
