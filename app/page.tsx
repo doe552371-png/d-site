@@ -67,9 +67,9 @@ export default function Home() {
 
       {/* SELECTION */}
       <section id="selection" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div>
+            <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Подбор</p>
               <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Не знаете, что выбрать?</h2>
             </div>
@@ -88,9 +88,9 @@ export default function Home() {
 
       {/* B2B */}
       <section id="b2b" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div>
+            <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Для дизайнеров и бизнеса</p>
               <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Есть проект или ТЗ?</h2>
             </div>
@@ -108,9 +108,9 @@ export default function Home() {
 
       {/* REQUEST */}
       <section id="request" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div>
+            <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Заявка</p>
               <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Расскажите о задаче</h2>
               <p className="font-body mt-4 max-w-xl text-base font-normal leading-7 text-neutral-500">
@@ -127,9 +127,9 @@ export default function Home() {
 
       {/* ABOUT */}
       <section id="about" className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div>
+            <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">DECOR</p>
               <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Материалы как часть решения</h2>
             </div>
