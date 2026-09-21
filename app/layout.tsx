@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const manrope = localFont({
   src: "../public/fonts/ManropeVariable.woff2",
@@ -22,14 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ru"
-      className={`${manrope.variable} h-full`}
-      data-scroll-behavior="smooth"
-    >
+    <html lang="ru" className={`${manrope.variable} h-full`}>
       <body className="min-h-full flex flex-col">
-        <Header />
-        {children}
+        <SmoothScroll>
+          <Header />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
