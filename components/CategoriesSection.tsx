@@ -28,7 +28,7 @@ export default function CategoriesSection() {
           </Link>
         </div>
 
-        <div className="grid gap-px bg-neutral-200 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           {categories.map((category, index) => {
             const categoryProducts = publishedProducts.filter(
               (product) => product.category === category.slug,
