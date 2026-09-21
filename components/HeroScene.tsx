@@ -1,11 +1,11 @@
 "use client";
 
-import { useFrame } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, type MutableRefObject } from "react";
 
-type MotionRef = React.MutableRefObject<{ progress: number }>;
+type MotionRef = MutableRefObject<{ progress: number }>;
 
 type HeroSceneProps = {
   motion: MotionRef;
