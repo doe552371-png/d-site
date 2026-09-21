@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { categories } from "@/data/categories";
-import CategoryVisual from "@/components/CategoryVisual";
 import { getPublishedProducts } from "@/lib/catalog";
 
 export default function CategoriesSection() {
@@ -41,10 +40,8 @@ export default function CategoriesSection() {
                 href={`/category/${category.slug}`}
                 className="group bg-white p-6 transition-colors duration-200 hover:bg-neutral-50 md:p-7"
               >
-                <div className="grid min-h-44 gap-6 sm:grid-cols-[9rem_1fr] sm:items-end">
-                  <CategoryVisual slug={category.slug} />
-
-                  <div className="flex min-h-36 flex-col justify-between">
+                <div className="min-h-44">
+                  <div className="flex min-h-44 flex-col justify-between">
                     <span className="text-xs font-medium text-neutral-400">
                       {String(index + 1).padStart(2, "0")}
                     </span>
