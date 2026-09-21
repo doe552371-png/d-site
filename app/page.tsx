@@ -66,8 +66,8 @@ export default function Home() {
       </section>
 
       {/* SELECTION */}
-      <section id="selection" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
+      <section id="selection">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Подбор</p>
@@ -87,8 +87,8 @@ export default function Home() {
       </section>
 
       {/* B2B */}
-      <section id="b2b" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
+      <section id="b2b">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Для дизайнеров и бизнеса</p>
@@ -107,8 +107,8 @@ export default function Home() {
       </section>
 
       {/* REQUEST */}
-      <section id="request" className="border-b border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
+      <section id="request">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Заявка</p>
@@ -126,8 +126,8 @@ export default function Home() {
       <CategoriesSection />
 
       {/* ABOUT */}
-      <section id="about" className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
+      <section id="about">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">DECOR</p>
@@ -143,8 +143,8 @@ export default function Home() {
       </section>
 
       {/* CONTACTS */}
-      <section id="contacts" className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-14">
+      <section id="contacts">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Контакты</p>
