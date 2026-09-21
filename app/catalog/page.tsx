@@ -48,34 +48,23 @@ export default function CatalogPage() {
                 <Link
                   key={category.slug}
                   href={`/category/${category.slug}`}
-                  className="group overflow-hidden border border-neutral-200 bg-white transition-colors duration-200 hover:border-neutral-300 hover:bg-neutral-50"
+                  className="group overflow-hidden border border-neutral-200 bg-white transition-colors duration-200 hover:border-neutral-400"
                 >
                   <CategoryVisual slug={category.slug} />
 
-                  <div className="flex min-h-56 flex-col justify-between p-7 md:p-8">
-                    <div className="flex items-start justify-between">
-                      <span className="text-sm font-medium text-neutral-400">
+                  <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-6">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span className="shrink-0 text-xs font-medium text-neutral-400">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-
-                      <span className="text-sm text-neutral-400">
-                        {categoryProducts.length} товаров
-                      </span>
-                    </div>
-
-                    <div>
-                      <h2 className="max-w-xl font-display text-2xl font-normal leading-tight tracking-[-0.015em] md:text-3xl">
+                      <h2 className="truncate font-display text-xl font-normal leading-tight tracking-[-0.015em] md:text-2xl">
                         {category.name}
                       </h2>
-
-                      <p className="mt-4 max-w-md text-base font-normal leading-7 text-neutral-500">
-                        {category.description}
-                      </p>
-
-                      <span className="mt-6 block text-2xl font-light transition-transform duration-300 group-hover:translate-x-2">
-                        →
-                      </span>
                     </div>
+
+                    <span className="shrink-0 text-xs text-neutral-400">
+                      {categoryProducts.length}
+                    </span>
                   </div>
                 </Link>
               );
