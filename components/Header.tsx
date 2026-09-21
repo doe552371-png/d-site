@@ -11,10 +11,10 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          <Link href="/catalog" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">Каталог</Link>
-          <Link href="/visualizer" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">Подбор</Link>
-          <Link href="/#about" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">О нас</Link>
-          <Link href="/#contacts" className="font-display text-[21px] leading-none text-neutral-900 transition-colors hover:text-neutral-500">Контакты</Link>
+          <Link href="/catalog" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Каталог</Link>
+          <Link href="/visualizer" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Подбор</Link>
+          <Link href="/#about" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">О нас</Link>
+          <Link href="/#contacts" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Контакты</Link>
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
