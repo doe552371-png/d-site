@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 import { categories } from "@/data/categories";
-import {
-  getPublishedProducts,
-} from "@/lib/catalog";
+import CategoryVisual from "@/components/CategoryVisual";
+import { getPublishedProducts } from "@/lib/catalog";
 
 export default function CategoriesSection() {
   const publishedProducts = getPublishedProducts();
@@ -13,7 +12,7 @@ export default function CategoriesSection() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
         <div className="mb-10 flex items-end justify-between gap-8">
           <div>
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
+            <p className="font-body mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
               Каталог
             </p>
 
@@ -24,14 +23,14 @@ export default function CategoriesSection() {
 
           <Link
             href="/catalog"
-            className="hidden text-base font-medium underline underline-offset-4 md:block"
+            className="font-body hidden text-base font-medium underline underline-offset-4 md:block"
           >
             Смотреть весь каталог
           </Link>
         </div>
 
-        <div className="grid gap-px bg-neutral-200 md:grid-cols-2">
-          {categories.map((category, index) => {
+        <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+          {categories.map((category) => {
             const categoryProducts = publishedProducts.filter(
               (product) => product.category === category.slug,
             );
@@ -40,28 +39,23 @@ export default function CategoriesSection() {
               <Link
                 key={category.slug}
                 href={`/category/${category.slug}`}
-                className="group bg-white p-6 transition-colors duration-200 hover:bg-neutral-50 md:p-7"
+                className="group block"
               >
-                <div className="min-h-44">
-                  <div className="flex h-full min-h-44 flex-col justify-between">
-                    <span className="text-xs font-medium text-neutral-400">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <div>
-                      <h3 className="font-display text-2xl font-normal tracking-[-0.015em]">
-                        {category.name}
-                      </h3>
-
-                      <p className="mt-3 text-base font-normal text-neutral-500">
-                        {category.description}
-                      </p>
-
-                      <p className="mt-4 text-sm text-neutral-400">
-                        {categoryProducts.length} товаров
-                      </p>
-                    </div>
+                <div className="relative overflow-hidden bg-[#f5f5f2]">
+                  <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                    <CategoryVisual slug={category.slug} />
                   </div>
+
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+
+                <div className="mt-4">
+                  <h3 className="font-display text-2xl font-normal leading-none tracking-[-0.015em]">
+                    {category.name}
+                  </h3>
+                  <p className="font-body mt-2 text-sm text-neutral-400">
+                    {categoryProducts.length} товаров
+                  </p>
                 </div>
               </Link>
             );
@@ -70,7 +64,7 @@ export default function CategoriesSection() {
 
         <Link
           href="/catalog"
-          className="mt-6 inline-block text-base font-medium underline underline-offset-4 md:hidden"
+          className="font-body mt-8 inline-block text-base font-medium underline underline-offset-4 md:hidden"
         >
           Смотреть весь каталог
         </Link>
