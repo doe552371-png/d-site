@@ -7,10 +7,10 @@ export default function CategoriesSection() {
   const publishedProducts = getPublishedProducts();
 
   return (
-    <section className="border-t border-neutral-200">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
-        <div className="mb-14 flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-          <div>
+    <section>
+      <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
+        <div className="mb-16 flex flex-col items-center justify-center gap-6 text-center">
+          <div className="text-center">
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
               Каталог
             </p>
@@ -22,7 +22,7 @@ export default function CategoriesSection() {
 
           <Link
             href="/catalog"
-            className="hidden text-base font-medium underline underline-offset-4 md:block"
+            className="text-base font-medium underline underline-offset-4"
           >
             Смотреть весь каталог
           </Link>
