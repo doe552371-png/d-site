@@ -27,14 +27,14 @@ export default function ProLandingPage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/pro/login"
-                  className="rounded-md bg-black px-6 py-3 text-lg font-medium text-white transition-opacity hover:opacity-80"
+                  className="decor-button decor-button-primary"
                 >
                   Войти в ПРО
                 </Link>
 
                 <Link
                   href="/pro/partner"
-                  className="rounded-md border border-neutral-300 px-6 py-3 text-lg font-medium transition-colors hover:bg-neutral-100"
+                  className="decor-button decor-button-secondary"
                 >
                   Стать партнёром
                 </Link>
