@@ -41,13 +41,13 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/catalog"
-                className="font-body inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-transform hover:scale-[1.02]"
+                className="decor-button decor-button-light"
               >
                 Смотреть каталог
               </Link>
               <Link
                 href="/visualizer"
-                className="font-body inline-flex items-center justify-center rounded-full border border-white/45 bg-white/5 px-7 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="decor-button decor-button-light-outline"
               >
                 Не знаете, что выбрать?
               </Link>
@@ -79,7 +79,7 @@ export default function Home() {
                 категорию материала — мы соберём сценарий для AI-визуализации и
                 привяжем его к каталогу DECOR.
               </p>
-              <Link href="/visualizer" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Запустить подбор</Link>
+              <Link href="/visualizer" className="decor-button decor-button-primary mt-7">Запустить подбор</Link>
               <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Артикул знать не нужно — достаточно показать пространство.</p>
             </div>
           </div>
