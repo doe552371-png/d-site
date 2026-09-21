@@ -1,0 +1,31 @@
+name: Import Visualizer Source
+
+on:
+  push:
+    branches:
+      - visualizer-import-20260921
+
+permissions:
+  contents: write
+
+jobs:
+  extract-source:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract feature branch from Git bundle
+        run: |
+          rm -rf /tmp/visualizer _visualizer_source
+          git clone --branch feature/ai-visualizer --single-branch _visualizer_import/decor-ai-visualizer.bundle /tmp/visualizer
+          mkdir -p _visualizer_source
+          rsync -a --exclude='.git' --exclude='node_modules' --exclude='.next' /tmp/visualizer/ _visualizer_source/
+          find _visualizer_source -maxdepth 3 -type f | sort | head -500 > /tmp/files.txt
+          cp /tmp/files.txt _visualizer_source/FILE_LIST.txt
+      - name: Commit extracted source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _visualizer_source
+          git commit -m "chore: import Decor AI Visualizer source" || exit 0
+          git push
