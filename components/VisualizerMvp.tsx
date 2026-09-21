@@ -210,7 +210,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     className={
                       "decor-button decor-button-secondary w-full " +
                       (task === item
-                        ? "border-black bg-black text-white"
+                        ? "decor-button-selected"
                         : "border-neutral-200 bg-white hover:border-neutral-400")
                     }
                   >
@@ -255,7 +255,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     className={
                       "decor-button decor-button-secondary decor-button-compact " +
                       (material === item
-                        ? "border-black bg-black text-white"
+                        ? "decor-button-selected"
                         : "border-neutral-200 hover:border-neutral-400")
                     }
                   >
