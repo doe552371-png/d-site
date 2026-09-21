@@ -89,3 +89,69 @@ html {
   }
 }
 
+.decor-button {
+  display: inline-flex;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 0 24px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.decor-button-primary {
+  background: #111111;
+  color: #ffffff;
+}
+
+.decor-button-primary:hover {
+  opacity: 0.8;
+}
+
+.decor-button-secondary {
+  border: 1px solid #d8d8d8;
+  background: #ffffff;
+  color: #111111;
+}
+
+.decor-button-secondary:hover {
+  border-color: #111111;
+  background: #f7f7f7;
+}
+
+.decor-button-light {
+  background: #ffffff;
+  color: #111111;
+}
+
+.decor-button-light:hover {
+  opacity: 0.86;
+}
+
+.decor-button-light-outline {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+}
+
+.decor-button-light-outline:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.decor-button-compact {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
