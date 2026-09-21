@@ -91,14 +91,14 @@ html {
 
 .decor-button {
   display: inline-flex;
-  height: 48px;
+  height: 52px;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  padding: 0 24px;
+  padding: 0 28px;
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   transition:
@@ -150,8 +150,8 @@ html {
 }
 
 .decor-button-compact {
-  height: 40px;
-  padding: 0 16px;
-  font-size: 13px;
+  height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
 }
 
