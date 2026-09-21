@@ -45,7 +45,7 @@ export default function HeaderSearch() {
             />
             <button
               type="submit"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-black px-4 text-center text-[13px] font-medium text-white transition-opacity hover:opacity-80"
+              className="decor-button decor-button-primary decor-button-compact"
             >
               Найти
             </button>
