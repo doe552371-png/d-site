@@ -72,7 +72,7 @@ function MouldingModel({ motion }: HeroSceneProps) {
     <group ref={group} position={[0.7, -0.05, -0.15]}>
       <mesh geometry={geometry} rotation={[0, Math.PI / 2, 0]} castShadow>
         <meshPhysicalMaterial
-          color="#B56E43"
+          color="#FFFFFF"
           roughness={0.3}
           metalness={0}
           clearcoat={0.12}
