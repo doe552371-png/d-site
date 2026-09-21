@@ -22,10 +22,6 @@ export default function Home() {
 
         <div className="relative mx-auto flex min-h-[calc(100svh-76px)] w-full max-w-[1600px] flex-col justify-between px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
           <div className="max-w-5xl pt-[18vh]">
-            <p className="font-body text-xs font-medium uppercase tracking-[0.28em] text-white/75">
-              архитектурный декор
-            </p>
-
             <h1 className="mt-6 max-w-5xl text-[clamp(56px,8vw,128px)] font-normal leading-[0.86] tracking-[-0.055em] text-white">
               Архитектура
               <br />
