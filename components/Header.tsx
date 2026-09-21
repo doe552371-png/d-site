@@ -19,13 +19,13 @@ export default function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <HeaderSearch />
-          <Link href="/pro" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-4 py-2.5 text-sm font-medium tracking-[0.06em] transition-colors hover:border-black hover:bg-black hover:text-white">ПРО</Link>
-          <Link href="/#request" className="font-body inline-flex items-center justify-center rounded-md bg-black px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-80">Оставить заявку</Link>
+          <Link href="/pro" className="decor-button decor-button-secondary decor-button-compact">ПРО</Link>
+          <Link href="/#request" className="decor-button decor-button-primary decor-button-compact">Оставить заявку</Link>
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
           <HeaderSearch />
-          <Link href="/#request" className="font-body inline-flex items-center justify-center rounded-md border border-neutral-300 px-3.5 py-2 text-center text-sm font-medium" aria-label="Перейти к заявке">Заявка</Link>
+          <Link href="/#request" className="decor-button decor-button-secondary decor-button-compact" aria-label="Перейти к заявке">Заявка</Link>
         </div>
       </div>
     </header>
