@@ -5,20 +5,20 @@ const REPLICATE_MODEL = "black-forest-labs/flux-fill-pro";
 
 const TASK_PROMPTS: Record<string, string> = {
   "Молдинги и стеновой декор":
-    "decorative wall moldings and architectural stucco trim, clean straight lines, matte painted finish",
+    "decorative wall moulding panels and architectural trim, clean straight lines, realistic painted finish",
   "Плинтусы и примыкания":
-    "a matching skirting board (plinth) along the floor line, simple modern profile, matte painted finish",
+    "a matching skirting board (plinth) along the existing floor line, simple profile, realistic painted finish",
   "Панели и фактурные стены":
-    "decorative textured wall panels with a subtle 3D relief pattern, matte finish",
+    "decorative textured wall panels with subtle 3D relief, realistic matte finish",
   "Несколько решений сразу":
-    "a coordinated set of decorative wall moldings, skirting boards and textured wall panels, matte finish",
+    "a coordinated set of decorative wall moulding panels, skirting boards and textured wall panels",
 };
 
 const STYLE_PROMPTS: Record<string, string> = {
-  "Современный": "in a clean contemporary style, neutral off-white color",
-  "Минимализм": "in a minimalist style, flat white color, no ornamentation",
-  "Japandi": "in a Japandi style, warm light wood and soft off-white tones",
-  "Soft Classic": "in a soft classic style, gentle profile mouldings, warm white color",
+  "Современный": "clean contemporary style, neutral off-white finish",
+  "Минимализм": "minimalist style, simple flat white finish, no ornamentation",
+  "Japandi": "Japandi style, warm light wood and soft off-white tones",
+  "Soft Classic": "soft classic style, elegant restrained moulding profiles, warm white finish",
 };
 
 export type VisualizeParams = {
@@ -30,7 +30,7 @@ export type VisualizeParams = {
 
 export type VisualizeResult = {
   imageBuffer: Buffer;
-  contentType: "image/png";
+  contentType: "image/jpeg";
 };
 
 const EDIT_SIZE = 1024;
@@ -53,12 +53,9 @@ async function maskToReplicateFormat(maskBuffer: Buffer) {
   const out = Buffer.alloc(info.width * info.height * 4);
 
   for (let i = 0, j = 0; i < data.length; i += info.channels, j += 4) {
-    const brightness = data[i];
-    const painted = brightness > 80;
-
-    // FLUX Fill uses white for the area to regenerate and black for the
-    // area that should remain unchanged.
+    const painted = data[i] > 80;
     const value = painted ? 255 : 0;
+
     out[j] = value;
     out[j + 1] = value;
     out[j + 2] = value;
@@ -82,10 +79,12 @@ function buildPrompt(task: string, style: string) {
   const stylePhrase = STYLE_PROMPTS[style] ?? STYLE_PROMPTS["Современный"];
 
   return [
-    `Edit the room photo by adding ${taskPhrase}, ${stylePhrase}, only in the masked area.`,
-    "Preserve everything outside the mask exactly: room geometry, windows, doors, furniture, camera angle, perspective, lighting and colors.",
-    "Photorealistic interior photography. The new material must follow the existing wall planes and perspective naturally.",
-    "No text, no watermark, no people.",
+    `Add only ${taskPhrase} in the masked area, ${stylePhrase}.`,
+    "The new material must be physically attached to the existing wall and follow its exact planes, perspective and proportions.",
+    "Preserve everything outside the mask exactly: architecture, ceiling, cornice, chandelier, lighting fixtures, windows, doors, furniture, floor, camera position, perspective, lighting and colors.",
+    "Do not add, remove, replace or redesign any object outside the masked area.",
+    "Do not invent decorative objects or lighting fixtures.",
+    "Photorealistic interior photography. No text. No watermark. No people.",
   ].join(" ");
 }
 
@@ -131,6 +130,9 @@ async function createPrediction(
           image: toDataUri(image),
           mask: toDataUri(mask),
           prompt,
+          output_format: "jpg",
+          safety_tolerance: 2,
+          prompt_upsampling: false,
         },
       }),
     },
@@ -138,16 +140,12 @@ async function createPrediction(
 }
 
 async function waitForPrediction(id: string) {
-  const maxAttempts = 60;
-
-  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+  for (let attempt = 0; attempt < 60; attempt += 1) {
     const prediction = await replicateRequest<ReplicatePrediction>(
       `/predictions/${id}`,
     );
 
-    if (prediction.status === "succeeded") {
-      return prediction;
-    }
+    if (prediction.status === "succeeded") return prediction;
 
     if (
       prediction.status === "failed" ||
@@ -195,17 +193,17 @@ export async function generateVisualization({
     maskToReplicateFormat(maskBuffer),
   ]);
 
-  const prompt = buildPrompt(task, style);
   const prediction = await createPrediction(
     normalizedImage,
     normalizedMask,
-    prompt,
+    buildPrompt(task, style),
   );
+
   const completed = await waitForPrediction(prediction.id);
   const result = await downloadOutput(completed.output ?? []);
 
   return {
     imageBuffer: result,
-    contentType: "image/png",
+    contentType: "image/jpeg",
   };
 }
