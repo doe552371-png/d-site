@@ -1,0 +1,41 @@
+name: Import Decor AI Visualizer
+
+on:
+  push:
+    branches:
+      - visualizer-import-20260921
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download split archive parts
+        run: |
+          curl -L --fail -o decor-ai-visualizer.zip https://raw.githubusercontent.com/doe552371-png/d-site/visualizer-import-20260921/decor-ai-visualizer.zip
+          curl -L --fail -o decor-ai-visualizer.z01 https://raw.githubusercontent.com/doe552371-png/d-site/visualizer-import-20260921/decor-ai-visualizer.z01
+          curl -L --fail -o decor-ai-visualizer.z02 https://raw.githubusercontent.com/doe552371-png/d-site/visualizer-import-20260921/decor-ai-visualizer.z02
+
+      - name: Extract archive
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y p7zip-full
+          mkdir -p _visualizer_import
+          7z x decor-ai-visualizer.zip -o_visualizer_import -y
+
+      - name: Remove temporary archive parts
+        run: |
+          rm -f decor-ai-visualizer.zip decor-ai-visualizer.z01 decor-ai-visualizer.z02
+
+      - name: Commit extracted source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _visualizer_import
+          git commit -m "chore: import Decor AI Visualizer source" || exit 0
+          git push
