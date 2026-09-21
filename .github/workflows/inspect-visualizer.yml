@@ -1,0 +1,44 @@
+name: Inspect Decor AI Visualizer Bundle
+
+on:
+  push:
+    branches:
+      - visualizer-import-20260921
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect bundle
+        run: |
+          git bundle verify _visualizer_import/decor-ai-visualizer.bundle > /tmp/verify.txt 2>&1 || true
+          git bundle list-heads _visualizer_import/decor-ai-visualizer.bundle > /tmp/heads.txt 2>&1 || true
+          rm -rf /tmp/visualizer
+          git clone _visualizer_import/decor-ai-visualizer.bundle /tmp/visualizer > /tmp/clone.txt 2>&1 || true
+          {
+            echo "# Decor AI Visualizer bundle inspection"
+            echo
+            echo "## Verify"
+            cat /tmp/verify.txt
+            echo
+            echo "## Heads"
+            cat /tmp/heads.txt
+            echo
+            echo "## Clone"
+            cat /tmp/clone.txt
+            echo
+            echo "## Root"
+            find /tmp/visualizer -maxdepth 2 -type f -not -path '*/.git/*' | sed 's#^/tmp/visualizer/##' | sort | head -300
+          } > _visualizer_import/INSPECTION.md
+      - name: Commit inspection
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _visualizer_import/INSPECTION.md
+          git commit -m "chore: inspect Visualizer bundle" || exit 0
+          git push
