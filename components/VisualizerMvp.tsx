@@ -153,7 +153,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                 <button
                   type="button"
                   onClick={() => inputRef.current?.click()}
-                  className="rounded-md border border-white/40 bg-white/10 px-4 py-2 text-sm font-semibold backdrop-blur transition-colors hover:bg-white hover:text-black"
+                  className="decor-button decor-button-light-outline decor-button-compact"
                 >
                   Заменить
                 </button>
@@ -208,7 +208,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     type="button"
                     onClick={() => setTask(item)}
                     className={
-                      "w-full rounded-md border px-4 py-3 text-center text-base font-normal transition-colors " +
+                      "decor-button decor-button-secondary w-full " +
                       (task === item
                         ? "border-black bg-black text-white"
                         : "border-neutral-200 bg-white hover:border-neutral-400")
@@ -231,7 +231,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                       type="button"
                       onClick={() => setStyle(item)}
                       className={
-                        "shrink-0 pb-2 text-sm font-medium uppercase tracking-tight transition-colors " +
+                        "shrink-0 pb-2 font-body text-sm font-medium uppercase tracking-tight transition-colors " +
                         (style === item
                           ? "border-b-2 border-black text-black"
                           : "border-b-2 border-transparent text-neutral-400 hover:text-black")
@@ -253,7 +253,7 @@ export default function VisualizerMvp({ matches }: VisualizerMvpProps) {
                     type="button"
                     onClick={() => setMaterial(item)}
                     className={
-                      "rounded-full border px-4 py-2 text-sm font-semibold transition-colors " +
+                      "decor-button decor-button-secondary decor-button-compact " +
                       (material === item
                         ? "border-black bg-black text-white"
                         : "border-neutral-200 hover:border-neutral-400")
