@@ -3,7 +3,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import { useEffect, useMemo, useRef, type MutableRefObject } from "react";
+import { useMemo, useRef, type MutableRefObject } from "react";
 
 type MotionRef = MutableRefObject<{ progress: number }>;
 
@@ -56,15 +56,14 @@ function DecorModel({
     const longestAxisIndex = dimensions.indexOf(Math.max(...dimensions));
     const sourceAxis = sourceAxes[longestAxisIndex];
 
-    const orientation = new THREE.Quaternion().setFromUnitVectors(
-      sourceAxis,
-      targetAxis.clone().normalize(),
+    clone.quaternion.copy(
+      new THREE.Quaternion().setFromUnitVectors(
+        sourceAxis,
+        targetAxis.clone().normalize(),
+      ),
     );
 
-    clone.quaternion.copy(orientation);
-
-    const scale = targetLength / dimensions[longestAxisIndex];
-    clone.scale.setScalar(scale);
+    clone.scale.setScalar(targetLength / dimensions[longestAxisIndex]);
 
     clone.traverse((object) => {
       if (object instanceof THREE.Mesh) {
@@ -75,16 +74,6 @@ function DecorModel({
 
     return clone;
   }, [scene, targetAxis, targetLength]);
-
-  useEffect(() => {
-    return () => {
-      model.traverse((object) => {
-        if (object instanceof THREE.Mesh) {
-          object.geometry?.dispose();
-        }
-      });
-    };
-  }, [model]);
 
   useFrame(() => {
     if (!group.current) return;
@@ -144,7 +133,7 @@ function VerticalTrimModel({
       motion={motion}
       startPosition={[startX, 0.8, 0.5]}
       finalPosition={[finalX, 0.1, -0.05]}
-      startRotation={[side === "left" ? 0 : 0, side === "left" ? -0.6 : 0.6, -0.12]}
+      startRotation={[-0.12, side === "left" ? -0.6 : 0.6, 0]}
       finalRotation={[0, 0, 0]}
       startAt={0.18}
       endAt={0.78}
@@ -170,16 +159,15 @@ function TopTrimModel({ motion }: HeroAssemblySceneProps) {
 }
 
 function Architecture({ motion: _motion }: HeroAssemblySceneProps) {
-  const opening = useMemo(() => {
-    const material = new THREE.MeshPhysicalMaterial({
-      color: "#111111",
-      roughness: 0.7,
-      metalness: 0,
-    });
-    return material;
-  }, []);
-
-  useEffect(() => () => opening.dispose(), [opening]);
+  const opening = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        color: "#111111",
+        roughness: 0.7,
+        metalness: 0,
+      }),
+    [],
+  );
 
   return (
     <>
@@ -188,7 +176,11 @@ function Architecture({ motion: _motion }: HeroAssemblySceneProps) {
         <meshPhysicalMaterial color="#F7F7F5" roughness={0.82} />
       </mesh>
 
-      <mesh position={[0.04, -1.75, -0.48]} receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh
+        position={[0.04, -1.75, -0.48]}
+        receiveShadow
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
         <planeGeometry args={[10, 8]} />
         <meshPhysicalMaterial color="#FBFBF9" roughness={0.9} />
       </mesh>
