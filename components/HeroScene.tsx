@@ -12,7 +12,7 @@ type HeroSceneProps = {
   motion: MotionRef;
 };
 
-const MODEL_URL = "/api/orac-model/c303";
+const MODEL_URL = "/models/C303_border.obj";
 
 function C303Model({ motion }: HeroSceneProps) {
   const model = useLoader(OBJLoader, MODEL_URL);
