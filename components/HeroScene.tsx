@@ -67,7 +67,7 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.rotation.z = -0.02 + progress * 0.04;
 
     group.current.position.x = 1.3 - progress * 0.35;
-    group.current.position.y = 1.4 + reveal * 0.18;
+    group.current.position.y = 2.4 + reveal * 0.18;
     group.current.position.z = 0;
 
     const scale = 1.0 + reveal * 0.08;
@@ -75,7 +75,7 @@ function C303Model({ motion }: HeroSceneProps) {
   });
 
   return (
-    <group ref={group} position={[1.3, 1.4, 0]}>
+    <group ref={group} position={[1.3, 2.4, 0]}>
       <primitive object={preparedModel} />
     </group>
   );
@@ -87,7 +87,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
       <Canvas
         dpr={[1, 1.5]}
         shadows="basic"
-        camera={{ position: [0, 0.3, 10], fov: 36 }}
+        camera={{ position: [0, 0.3, 2], fov: 36 }}
         gl={{
           antialias: true,
           alpha: true,
