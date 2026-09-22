@@ -29,7 +29,7 @@ function C303Model({ motion }: HeroSceneProps) {
     box.getCenter(center);
 
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-    const scale = 6.2 / maxDimension;
+    const scale = 7.2 / maxDimension;
 
     clone.position.sub(center);
 
@@ -39,12 +39,10 @@ function C303Model({ motion }: HeroSceneProps) {
       child.castShadow = true;
       child.receiveShadow = true;
 
-      const material = new THREE.MeshPhysicalMaterial({
-        color: "#E6E6E6",
-        roughness: 0.34,
+      const material = new THREE.MeshStandardMaterial({
+        color: "#555555",
+        roughness: 0.42,
         metalness: 0,
-        clearcoat: 0.1,
-        clearcoatRoughness: 0.35,
         side: THREE.DoubleSide,
       });
 
@@ -83,16 +81,16 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.rotation.y = 0.12 + progress * 0.52;
     group.current.rotation.z = -0.02 + progress * 0.04;
 
-    group.current.position.x = 0.95 - progress * 0.45;
+    group.current.position.x = 1.1 - progress * 0.35;
     group.current.position.y = reveal * 0.18;
-    group.current.position.z = -0.2 + progress * 0.25;
+    group.current.position.z = 0;
 
     const scale = 1.08 + reveal * 0.08;
     group.current.scale.setScalar(scale);
   });
 
   return (
-    <group ref={group} position={[0.95, 0, -0.2]}>
+    <group ref={group} position={[1.1, 0, 0]}>
       <primitive object={preparedModel} />
     </group>
   );
@@ -112,6 +110,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
         }}
       >
         <ambientLight intensity={1.25} />
+        <pointLight intensity={80} distance={20} position={[2, 3, 6]} />
         <hemisphereLight
           intensity={0.75}
           groundColor="#EEE7DF"
