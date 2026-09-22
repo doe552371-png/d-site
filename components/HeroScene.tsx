@@ -85,125 +85,90 @@ function MouldingModel({ motion }: HeroSceneProps) {
 
 
 
-function OrnamentFragment({ motion }: HeroSceneProps) {
+function BaguetteFragment({ motion }: HeroSceneProps) {
   const group = useRef<THREE.Group>(null);
-  const timeRef = useRef(0);
+
+  const profile = useMemo(() => {
+    const shape = new THREE.Shape();
+
+    shape.moveTo(0, 0);
+    shape.lineTo(0.12, 0);
+    shape.lineTo(0.18, 0.06);
+    shape.lineTo(0.33, 0.08);
+    shape.lineTo(0.42, 0.14);
+    shape.lineTo(0.58, 0.16);
+    shape.lineTo(0.68, 0.23);
+    shape.lineTo(0.68, 0.38);
+    shape.lineTo(0.52, 0.4);
+    shape.lineTo(0.38, 0.34);
+    shape.lineTo(0.22, 0.31);
+    shape.lineTo(0.14, 0.25);
+    shape.lineTo(0, 0.22);
+    shape.closePath();
+
+    return shape;
+  }, []);
+
+  const geometry = useMemo(
+    () =>
+      new THREE.ExtrudeGeometry(profile, {
+        depth: 4.8,
+        steps: 1,
+        curveSegments: 10,
+        bevelEnabled: true,
+        bevelSegments: 3,
+        bevelSize: 0.03,
+        bevelThickness: 0.03,
+      }),
+    [profile],
+  );
 
   const material = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
         color: "#FFFFFF",
-        roughness: 0.34,
+        roughness: 0.3,
         metalness: 0,
-        clearcoat: 0.1,
-        clearcoatRoughness: 0.35,
+        clearcoat: 0.14,
+        clearcoatRoughness: 0.32,
       }),
     [],
   );
 
-  const voluteGeometry = useMemo(() => {
-    const points: THREE.Vector3[] = [];
-
-    for (let i = 0; i <= 90; i += 1) {
-      const t = i / 90;
-      const angle = t * Math.PI * 2.35;
-      const radius = 0.72 * (1 - t * 0.82);
-
-      points.push(
-        new THREE.Vector3(
-          Math.cos(angle) * radius,
-          Math.sin(angle) * radius,
-          0,
-        ),
-      );
-    }
-
-    const curve = new THREE.CatmullRomCurve3(points);
-    return new THREE.TubeGeometry(curve, 90, 0.075, 8, false);
-  }, []);
-
-  const leafGeometry = useMemo(() => {
-    const shape = new THREE.Shape();
-    shape.moveTo(0, 0);
-    shape.quadraticCurveTo(0.34, 0.18, 0.66, 0);
-    shape.quadraticCurveTo(0.34, -0.2, 0, 0);
-    shape.closePath();
-
-    return new THREE.ExtrudeGeometry(shape, {
-      depth: 0.08,
-      bevelEnabled: true,
-      bevelSegments: 2,
-      bevelSize: 0.02,
-      bevelThickness: 0.015,
-      curveSegments: 8,
-    });
-  }, []);
-
   useEffect(
     () => () => {
-      voluteGeometry.dispose();
-      leafGeometry.dispose();
+      geometry.dispose();
       material.dispose();
     },
-    [voluteGeometry, leafGeometry, material],
+    [geometry, material],
   );
 
   useFrame((_, delta) => {
     if (!group.current) return;
 
-    timeRef.current += delta;
-
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-    const reveal = THREE.MathUtils.smoothstep(progress, 0.08, 0.92);
 
-    group.current.rotation.y = 0.18 + progress * 0.42;
-    group.current.rotation.z = -0.05 + progress * 0.12;
-    group.current.position.x = 2.95 - progress * 1.0;
-    group.current.position.y = 0.45 + reveal * 0.22;
-    group.current.position.z = 0.1 + progress * 0.3;
+    group.current.rotation.y = -0.48 + progress * 0.82;
+    group.current.rotation.z = -0.035 + progress * 0.06;
+    group.current.rotation.x = 0.08;
 
-    const breathe = 1 + Math.sin(timeRef.current * 0.35) * 0.015;
-    const scale = 1.55 + reveal * 0.18;
-    group.current.scale.setScalar(scale * breathe);
+    group.current.position.x = 3.05 - progress * 0.9;
+    group.current.position.y = 0.1 + Math.sin(progress * Math.PI) * 0.26;
+    group.current.position.z = 0.05 + progress * 0.25;
+
+    const scale = 1.0 + Math.sin(progress * Math.PI) * 0.12;
+    group.current.scale.setScalar(scale);
   });
 
   return (
-    <group ref={group} position={[2.95, 0.45, 0.1]}>
-      <mesh geometry={voluteGeometry} material={material} castShadow />
-
+    <group ref={group} position={[3.05, 0.1, 0.05]}>
+      <mesh geometry={geometry} material={material} castShadow />
       <mesh
-        geometry={voluteGeometry}
+        geometry={geometry}
         material={material}
-        position={[0.92, -0.05, 0.02]}
-        rotation={[0, 0, Math.PI * 0.72]}
-        scale={0.82}
-        castShadow
-      />
-
-      <mesh
-        geometry={leafGeometry}
-        material={material}
-        position={[-0.15, 0.62, 0.03]}
-        rotation={[0, 0, -0.4]}
-        scale={1.2}
-        castShadow
-      />
-
-      <mesh
-        geometry={leafGeometry}
-        material={material}
-        position={[0.46, 0.26, 0.03]}
-        rotation={[0, 0, 0.8]}
-        scale={1.0}
-        castShadow
-      />
-
-      <mesh
-        geometry={leafGeometry}
-        material={material}
-        position={[0.05, -0.55, 0.03]}
-        rotation={[0, 0, 2.15]}
-        scale={0.92}
+        position={[0.18, -0.62, 0.02]}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={[0.72, 0.72, 1]}
         castShadow
       />
     </group>
@@ -240,7 +205,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
         <directionalLight intensity={1.4} position={[-5, 2, 1]} />
 
         <MouldingModel motion={motion} />
-        <OrnamentFragment motion={motion} />
+        <BaguetteFragment motion={motion} />
 
         <ContactShadows
           position={[0, -0.62, 0]}
