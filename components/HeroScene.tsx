@@ -40,7 +40,7 @@ function C303Model({ motion }: HeroSceneProps) {
       child.receiveShadow = true;
 
       const material = new THREE.MeshPhysicalMaterial({
-        color: "#FFFFFF",
+        color: "#E6E6E6",
         roughness: 0.34,
         metalness: 0,
         clearcoat: 0.1,
@@ -83,16 +83,16 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.rotation.y = 0.12 + progress * 0.52;
     group.current.rotation.z = -0.02 + progress * 0.04;
 
-    group.current.position.x = 1.55 - progress * 0.55;
+    group.current.position.x = 0.95 - progress * 0.45;
     group.current.position.y = reveal * 0.18;
-    group.current.position.z = progress * 0.25;
+    group.current.position.z = -0.2 + progress * 0.25;
 
-    const scale = 0.95 + reveal * 0.08;
+    const scale = 1.08 + reveal * 0.08;
     group.current.scale.setScalar(scale);
   });
 
   return (
-    <group ref={group} position={[1.9, 0, 0]}>
+    <group ref={group} position={[0.95, 0, -0.2]}>
       <primitive object={preparedModel} />
     </group>
   );
@@ -104,7 +104,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
       <Canvas
         dpr={[1, 1.5]}
         shadows="basic"
-        camera={{ position: [0, 0.2, 8.2], fov: 34 }}
+        camera={{ position: [0, 0.15, 7.2], fov: 32 }}
         gl={{
           antialias: true,
           alpha: true,
@@ -135,7 +135,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
         </Suspense>
 
         <ContactShadows
-          position={[0, -0.62, 0]}
+          position={[0, -0.28, 0]}
           opacity={0.2}
           scale={10}
           blur={2.6}
