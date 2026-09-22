@@ -1,9 +1,10 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import * as THREE from "three";
-import { useMemo, useRef, type MutableRefObject } from "react";
+import { Suspense, useEffect, useMemo, useRef, type MutableRefObject } from "react";
 
 type MotionRef = MutableRefObject<{ progress: number }>;
 
@@ -11,83 +12,86 @@ type HeroSceneProps = {
   motion: MotionRef;
 };
 
-function StuccoRosette({ motion }: HeroSceneProps) {
+const MODEL_URL =
+  "https://oracdecor.ru/assets/download/file/asset/C303_border/file/file_4/";
+
+function C303Model({ motion }: HeroSceneProps) {
+  const model = useLoader(OBJLoader, MODEL_URL);
   const group = useRef<THREE.Group>(null);
 
-  const petalGeometry = useMemo(() => {
-    const geometry = new THREE.SphereGeometry(0.22, 24, 16);
-    geometry.scale(1.55, 0.72, 0.22);
-    return geometry;
-  }, []);
+  const preparedModel = useMemo(() => {
+    const clone = model.clone(true);
+    const box = new THREE.Box3().setFromObject(clone);
+    const size = new THREE.Vector3();
+    const center = new THREE.Vector3();
+
+    box.getSize(size);
+    box.getCenter(center);
+
+    const maxDimension = Math.max(size.x, size.y, size.z) || 1;
+    const scale = 5.8 / maxDimension;
+
+    clone.position.sub(center);
+
+    clone.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+
+      child.castShadow = true;
+      child.receiveShadow = true;
+
+      const material = new THREE.MeshPhysicalMaterial({
+        color: "#FFFFFF",
+        roughness: 0.34,
+        metalness: 0,
+        clearcoat: 0.1,
+        clearcoatRoughness: 0.35,
+      });
+
+      child.material = material;
+    });
+
+    clone.scale.setScalar(scale);
+
+    return clone;
+  }, [model]);
+
+  useEffect(() => {
+    return () => {
+      preparedModel.traverse((child) => {
+        if (!(child instanceof THREE.Mesh)) return;
+        child.geometry.dispose();
+
+        if (Array.isArray(child.material)) {
+          child.material.forEach((material) => material.dispose());
+        } else {
+          child.material.dispose();
+        }
+      });
+    };
+  }, [preparedModel]);
 
   useFrame((state) => {
     if (!group.current) return;
 
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-    const reveal = THREE.MathUtils.smoothstep(progress, 0.1, 0.9);
+    const reveal = Math.sin(progress * Math.PI);
 
-    group.current.rotation.z = -0.08 + progress * Math.PI * 0.28;
-    group.current.rotation.y =
-      Math.sin(state.clock.elapsedTime * 0.3) * 0.025 + progress * 0.22;
+    group.current.rotation.y = -0.35 + progress * 1.05;
+    group.current.rotation.z = -0.02 + progress * 0.04;
+    group.current.rotation.x =
+      0.05 + Math.sin(state.clock.elapsedTime * 0.4) * 0.008;
 
-    group.current.position.x = 3.15 - progress * 1.05;
-    group.current.position.y = 0.95 - progress * 0.18;
-    group.current.position.z = 0.15 + progress * 0.35;
+    group.current.position.x = 1.9 - progress * 0.75;
+    group.current.position.y = reveal * 0.18;
+    group.current.position.z = progress * 0.25;
 
-    const scale = 0.72 + reveal * 0.36;
+    const scale = 0.95 + reveal * 0.08;
     group.current.scale.setScalar(scale);
   });
 
   return (
-    <group ref={group} position={[3.15, 0.95, 0.15]}>
-      <mesh castShadow>
-        <cylinderGeometry args={[0.52, 0.62, 0.12, 48]} />
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          roughness={0.38}
-          metalness={0}
-          clearcoat={0.1}
-          clearcoatRoughness={0.35}
-        />
-      </mesh>
-
-      {Array.from({ length: 10 }).map((_, index) => {
-        const angle = (index / 10) * Math.PI * 2;
-        const radius = 0.42;
-
-        return (
-          <mesh
-            key={index}
-            geometry={petalGeometry}
-            position={[
-              Math.cos(angle) * radius,
-              Math.sin(angle) * radius,
-              0.12,
-            ]}
-            rotation={[0, 0, angle]}
-            castShadow
-          >
-            <meshPhysicalMaterial
-              color="#FFFFFF"
-              roughness={0.34}
-              metalness={0}
-              clearcoat={0.1}
-              clearcoatRoughness={0.35}
-            />
-          </mesh>
-        );
-      })}
-
-      <mesh position={[0, 0, 0.2]} castShadow>
-        <cylinderGeometry args={[0.24, 0.29, 0.16, 48]} />
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          roughness={0.3}
-          metalness={0}
-          clearcoat={0.12}
-          clearcoatRoughness={0.32}
-        />
-      </mesh>
+    <group ref={group} position={[1.9, 0, 0]}>
+      <primitive object={preparedModel} />
     </group>
   );
 }
@@ -95,37 +99,6 @@ function StuccoRosette({ motion }: HeroSceneProps) {
 export default function HeroScene({ motion }: HeroSceneProps) {
   return (
     <div className="pointer-events-none absolute inset-0">
-      <svg
-        aria-hidden="true"
-        className="absolute h-0 w-0 overflow-hidden"
-      >
-        <defs>
-          <filter
-            id="decor-cornice-cutout"
-            colorInterpolationFilters="sRGB"
-          >
-            <feColorMatrix
-              type="matrix"
-              values="
-                1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                2.95 2.95 2.95 -6.2 0
-              "
-            />
-          </filter>
-        </defs>
-      </svg>
-
-      <div className="hero-cornice absolute left-[56%] top-[46%] h-[230px] w-[760px] overflow-hidden [transform-style:preserve-3d]">
-        <img
-          src="https://decomastershop.ru/d/95145.jpg"
-          alt=""
-          className="absolute left-[-32px] top-[-51px] max-w-none w-[1100px] select-none [filter:url(#decor-cornice-cutout)]"
-          draggable={false}
-        />
-      </div>
-
       <Canvas
         dpr={[1, 1.5]}
         shadows
@@ -155,7 +128,9 @@ export default function HeroScene({ motion }: HeroSceneProps) {
         />
         <directionalLight intensity={1.4} position={[-5, 2, 1]} />
 
-        <StuccoRosette motion={motion} />
+        <Suspense fallback={null}>
+          <C303Model motion={motion} />
+        </Suspense>
 
         <ContactShadows
           position={[0, -0.62, 0]}
