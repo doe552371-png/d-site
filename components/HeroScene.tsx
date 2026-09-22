@@ -67,10 +67,10 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.rotation.z = -0.02 + progress * 0.04;
 
     group.current.position.x = 1.3 - progress * 0.35;
-    group.current.position.y = 32.4 + reveal * 0.18;
+    group.current.position.y = 37.4 + reveal * 0.18;
     group.current.position.z = 0;
 
-    const scale = 10.0 + reveal * 0.8;
+    const scale = 100.0 + reveal * 8.0;
     group.current.scale.setScalar(scale);
   });
 
