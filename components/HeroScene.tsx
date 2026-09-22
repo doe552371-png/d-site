@@ -29,7 +29,7 @@ function C303Model({ motion }: HeroSceneProps) {
     box.getCenter(center);
 
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-    const scale = 5.8 / maxDimension;
+    const scale = 6.2 / maxDimension;
 
     clone.position.sub(center);
 
@@ -45,6 +45,7 @@ function C303Model({ motion }: HeroSceneProps) {
         metalness: 0,
         clearcoat: 0.1,
         clearcoatRoughness: 0.35,
+        side: THREE.DoubleSide,
       });
 
       child.material = material;
@@ -77,12 +78,12 @@ function C303Model({ motion }: HeroSceneProps) {
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
     const reveal = Math.sin(progress * Math.PI);
 
-    group.current.rotation.y = -0.35 + progress * 1.05;
-    group.current.rotation.z = -0.02 + progress * 0.04;
     group.current.rotation.x =
-      0.05 + Math.sin(timeRef.current * 0.4) * 0.008;
+      -Math.PI / 2 + Math.sin(timeRef.current * 0.4) * 0.008;
+    group.current.rotation.y = 0.12 + progress * 0.52;
+    group.current.rotation.z = -0.02 + progress * 0.04;
 
-    group.current.position.x = 1.9 - progress * 0.75;
+    group.current.position.x = 1.55 - progress * 0.55;
     group.current.position.y = reveal * 0.18;
     group.current.position.z = progress * 0.25;
 
