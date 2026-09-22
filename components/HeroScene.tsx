@@ -70,7 +70,7 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.position.y = 32.4 + reveal * 0.18;
     group.current.position.z = 0;
 
-    const scale = 1.0 + reveal * 0.08;
+    const scale = 10.0 + reveal * 0.8;
     group.current.scale.setScalar(scale);
   });
 
