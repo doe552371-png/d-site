@@ -92,20 +92,7 @@ export default function Hero() {
           },
           0,
         )
-        .to(
-          ".hero-cornice",
-          {
-            xPercent: 8,
-            yPercent: -8,
-            rotationY: 18,
-            rotationZ: 2,
-            scale: 1.08,
-            transformPerspective: 1200,
-            ease: "none",
-            duration: 1,
-          },
-          0,
-        );
+;
     }, sectionRef);
 
     return () => ctx.revert();
