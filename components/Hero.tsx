@@ -91,6 +91,20 @@ export default function Hero() {
             duration: 0.8,
           },
           0,
+        )
+        .to(
+          ".hero-cornice",
+          {
+            xPercent: 8,
+            yPercent: -8,
+            rotationY: 18,
+            rotationZ: 2,
+            scale: 1.08,
+            transformPerspective: 1200,
+            ease: "none",
+            duration: 1,
+          },
+          0,
         );
     }, sectionRef);
 
