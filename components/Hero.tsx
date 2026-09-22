@@ -6,7 +6,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const HeroScene = dynamic(() => import("./HeroScene"), {
+const HeroScene = dynamic(() => import("./HeroAssemblyScene"), {
   ssr: false,
 });
 
