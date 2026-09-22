@@ -11,43 +11,67 @@ type HeroSceneProps = {
   motion: MotionRef;
 };
 
-function MouldingModel({ motion }: HeroSceneProps) {
+function C303Model({ motion }: HeroSceneProps) {
   const group = useRef<THREE.Group>(null);
+  const source = useLoader(OBJLoader, "/models/C303_border.obj");
 
-  const profile = useMemo(() => {
-    const shape = new THREE.Shape();
+  const model = useMemo(() => {
+    const clone = source.clone(true);
+    const box = new THREE.Box3().setFromObject(clone);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
 
-    shape.moveTo(0, 0);
-    shape.lineTo(0.46, 0);
-    shape.lineTo(0.46, 0.07);
-    shape.lineTo(0.34, 0.1);
-    shape.lineTo(0.31, 0.17);
-    shape.lineTo(0.25, 0.23);
-    shape.lineTo(0.16, 0.27);
-    shape.lineTo(0.11, 0.34);
-    shape.lineTo(0.4, 0.34);
-    shape.lineTo(0.4, 0.47);
-    shape.lineTo(0, 0.47);
-    shape.closePath();
+    clone.position.sub(center);
 
-    return shape;
-  }, []);
+    // C303 OBJ is authored in millimetres. Convert it to a stable Hero-world size.
+    // The source length is ~2000 mm; the presentation target is ~6.2 world units.
+    const targetLength = 6.2;
+    const sourceLength = Math.max(size.x, 1);
+    const presentationScale = targetLength / sourceLength;
+    clone.scale.setScalar(presentationScale);
 
-  const geometry = useMemo(
-    () =>
-      new THREE.ExtrudeGeometry(profile, {
-        depth: 6.7,
-        steps: 1,
-        curveSegments: 8,
-        bevelEnabled: true,
-        bevelSegments: 3,
-        bevelSize: 0.025,
-        bevelThickness: 0.025,
-      }),
-    [profile],
-  );
+    clone.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) return;
 
-  useEffect(() => () => geometry.dispose(), [geometry]);
+      object.castShadow = true;
+      object.receiveShadow = true;
+
+      const materials = Array.isArray(object.material)
+        ? object.material
+        : [object.material];
+
+      const whiteMaterials = materials.map(
+        () =>
+          new THREE.MeshPhysicalMaterial({
+            color: "#FFFFFF",
+            roughness: 0.3,
+            metalness: 0,
+            clearcoat: 0.12,
+            clearcoatRoughness: 0.35,
+          }),
+      );
+
+      object.material = Array.isArray(object.material)
+        ? whiteMaterials
+        : whiteMaterials[0];
+    });
+
+    return clone;
+  }, [source]);
+
+  useEffect(() => {
+    return () => {
+      model.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+
+        const materials = Array.isArray(object.material)
+          ? object.material
+          : [object.material];
+
+        materials.forEach((material) => material.dispose());
+      });
+    };
+  }, [model]);
 
   useFrame((state) => {
     if (!group.current) return;
@@ -69,20 +93,11 @@ function MouldingModel({ motion }: HeroSceneProps) {
   });
 
   return (
-    <group ref={group} position={[0.7, -0.05, -0.15]}>
-      <mesh geometry={geometry} rotation={[0, -Math.PI / 2, 0]} castShadow>
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          roughness={0.3}
-          metalness={0}
-          clearcoat={0.12}
-          clearcoatRoughness={0.35}
-        />
-      </mesh>
+    <group ref={group}>
+      <primitive object={model} />
     </group>
   );
 }
-
 
 
 function BaguetteFragment({ motion }: HeroSceneProps) {
@@ -204,7 +219,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
         />
         <directionalLight intensity={1.4} position={[-5, 2, 1]} />
 
-        <MouldingModel motion={motion} />
+        <C303Model motion={motion} />
         <BaguetteFragment motion={motion} />
 
         <ContactShadows
