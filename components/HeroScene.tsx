@@ -17,6 +17,7 @@ const MODEL_URL = "/api/orac-model/c303";
 function C303Model({ motion }: HeroSceneProps) {
   const model = useLoader(OBJLoader, MODEL_URL);
   const group = useRef<THREE.Group>(null);
+  const timeRef = useRef(0);
 
   const preparedModel = useMemo(() => {
     const clone = model.clone(true);
@@ -69,16 +70,17 @@ function C303Model({ motion }: HeroSceneProps) {
     };
   }, [preparedModel]);
 
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (!group.current) return;
 
+    timeRef.current += delta;
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
     const reveal = Math.sin(progress * Math.PI);
 
     group.current.rotation.y = -0.35 + progress * 1.05;
     group.current.rotation.z = -0.02 + progress * 0.04;
     group.current.rotation.x =
-      0.05 + Math.sin(state.clock.elapsedTime * 0.4) * 0.008;
+      0.05 + Math.sin(timeRef.current * 0.4) * 0.008;
 
     group.current.position.x = 1.9 - progress * 0.75;
     group.current.position.y = reveal * 0.18;
