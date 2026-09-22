@@ -67,7 +67,7 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.rotation.z = -0.02 + progress * 0.04;
 
     group.current.position.x = 1.3 - progress * 0.35;
-    group.current.position.y = 2.4 + reveal * 0.18;
+    group.current.position.y = 102.4 + reveal * 0.18;
     group.current.position.z = 0;
 
     const scale = 1.0 + reveal * 0.08;
@@ -75,7 +75,7 @@ function C303Model({ motion }: HeroSceneProps) {
   });
 
   return (
-    <group ref={group} position={[1.3, 2.4, 0]}>
+    <group ref={group} position={[1.3, 102.4, 0]}>
       <primitive object={preparedModel} />
     </group>
   );
