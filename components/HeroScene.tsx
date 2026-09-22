@@ -54,21 +54,6 @@ function C303Model({ motion }: HeroSceneProps) {
     return clone;
   }, [model]);
 
-  useEffect(() => {
-    return () => {
-      preparedModel.traverse((child) => {
-        if (!(child instanceof THREE.Mesh)) return;
-        child.geometry.dispose();
-
-        if (Array.isArray(child.material)) {
-          child.material.forEach((material) => material.dispose());
-        } else {
-          child.material.dispose();
-        }
-      });
-    };
-  }, [preparedModel]);
-
   useFrame((_, delta) => {
     if (!group.current) return;
 
