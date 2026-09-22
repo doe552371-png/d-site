@@ -29,7 +29,7 @@ function C303Model({ motion }: HeroSceneProps) {
     box.getCenter(center);
 
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-    const scale = 7.2 / maxDimension;
+    const scale = 6.7 / maxDimension;
 
     clone.position.sub(center);
 
@@ -66,16 +66,16 @@ function C303Model({ motion }: HeroSceneProps) {
     group.current.rotation.y = 0.12 + progress * 0.52;
     group.current.rotation.z = -0.02 + progress * 0.04;
 
-    group.current.position.x = 1.1 - progress * 0.35;
-    group.current.position.y = reveal * 0.18;
+    group.current.position.x = 1.3 - progress * 0.35;
+    group.current.position.y = 0.4 + reveal * 0.18;
     group.current.position.z = 0;
 
-    const scale = 1.08 + reveal * 0.08;
+    const scale = 1.0 + reveal * 0.08;
     group.current.scale.setScalar(scale);
   });
 
   return (
-    <group ref={group} position={[1.1, 0, 0]}>
+    <group ref={group} position={[1.3, 0.4, 0]}>
       <primitive object={preparedModel} />
     </group>
   );
@@ -87,7 +87,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
       <Canvas
         dpr={[1, 1.5]}
         shadows="basic"
-        camera={{ position: [0, 0.15, 7.2], fov: 32 }}
+        camera={{ position: [0, 0.3, 10], fov: 36 }}
         gl={{
           antialias: true,
           alpha: true,
