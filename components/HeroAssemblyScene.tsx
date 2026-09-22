@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { ContactShadows } from "@react-three/drei";
+import { ContactShadows, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useEffect, useMemo, useRef, type MutableRefObject } from "react";
 
@@ -11,70 +11,121 @@ type HeroAssemblySceneProps = {
   motion: MotionRef;
 };
 
-function TrimProfile() {
-  return useMemo(() => {
-    const shape = new THREE.Shape();
+type DecorModelProps = {
+  url: string;
+  targetLength: number;
+  targetAxis: THREE.Vector3;
+  motion: MotionRef;
+  startPosition: [number, number, number];
+  finalPosition: [number, number, number];
+  startRotation: [number, number, number];
+  finalRotation?: [number, number, number];
+  startAt: number;
+  endAt: number;
+};
 
-    shape.moveTo(0, 0);
-    shape.lineTo(0.18, 0);
-    shape.lineTo(0.18, 0.07);
-    shape.lineTo(0.13, 0.09);
-    shape.lineTo(0.12, 0.15);
-    shape.lineTo(0.08, 0.2);
-    shape.lineTo(0.25, 0.2);
-    shape.lineTo(0.25, 0.29);
-    shape.lineTo(0, 0.29);
-    shape.closePath();
-
-    return shape;
-  }, []);
-}
-
-function BaseboardModel({ motion }: HeroAssemblySceneProps) {
+function DecorModel({
+  url,
+  targetLength,
+  targetAxis,
+  motion,
+  startPosition,
+  finalPosition,
+  startRotation,
+  finalRotation = [0, 0, 0],
+  startAt,
+  endAt,
+}: DecorModelProps) {
   const group = useRef<THREE.Group>(null);
-  const profile = TrimProfile();
+  const { scene } = useGLTF(url);
 
-  const geometry = useMemo(
-    () =>
-      new THREE.ExtrudeGeometry(profile, {
-        depth: 5.2,
-        steps: 1,
-        curveSegments: 8,
-        bevelEnabled: true,
-        bevelSegments: 3,
-        bevelSize: 0.018,
-        bevelThickness: 0.018,
-      }),
-    [profile],
-  );
+  const model = useMemo(() => {
+    const clone = scene.clone(true);
+    const bounds = new THREE.Box3().setFromObject(clone);
+    const size = bounds.getSize(new THREE.Vector3());
+    const center = bounds.getCenter(new THREE.Vector3());
 
-  useEffect(() => () => geometry.dispose(), [geometry]);
+    clone.position.sub(center);
+
+    const sourceAxes = [
+      new THREE.Vector3(1, 0, 0),
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(0, 0, 1),
+    ];
+    const dimensions = [size.x, size.y, size.z];
+    const longestAxisIndex = dimensions.indexOf(Math.max(...dimensions));
+    const sourceAxis = sourceAxes[longestAxisIndex];
+
+    const orientation = new THREE.Quaternion().setFromUnitVectors(
+      sourceAxis,
+      targetAxis.clone().normalize(),
+    );
+
+    clone.quaternion.copy(orientation);
+
+    const scale = targetLength / dimensions[longestAxisIndex];
+    clone.scale.setScalar(scale);
+
+    clone.traverse((object) => {
+      if (object instanceof THREE.Mesh) {
+        object.castShadow = true;
+        object.receiveShadow = true;
+      }
+    });
+
+    return clone;
+  }, [scene, targetAxis, targetLength]);
+
+  useEffect(() => {
+    return () => {
+      model.traverse((object) => {
+        if (object instanceof THREE.Mesh) {
+          object.geometry?.dispose();
+        }
+      });
+    };
+  }, [model]);
 
   useFrame(() => {
     if (!group.current) return;
 
     const p = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-    const t = THREE.MathUtils.smoothstep(p, 0.04, 0.62);
+    const t = THREE.MathUtils.smoothstep(p, startAt, endAt);
 
-    group.current.position.x = THREE.MathUtils.lerp(-4.7, 0.2, t);
-    group.current.position.y = THREE.MathUtils.lerp(-2.1, -1.72, t);
-    group.current.position.z = THREE.MathUtils.lerp(0.8, -0.15, t);
-    group.current.rotation.y = THREE.MathUtils.lerp(0.6, 0, t);
-    group.current.rotation.z = THREE.MathUtils.lerp(0.08, 0, t);
+    group.current.position.set(
+      THREE.MathUtils.lerp(startPosition[0], finalPosition[0], t),
+      THREE.MathUtils.lerp(startPosition[1], finalPosition[1], t),
+      THREE.MathUtils.lerp(startPosition[2], finalPosition[2], t),
+    );
+
+    group.current.rotation.set(
+      THREE.MathUtils.lerp(startRotation[0], finalRotation[0], t),
+      THREE.MathUtils.lerp(startRotation[1], finalRotation[1], t),
+      THREE.MathUtils.lerp(startRotation[2], finalRotation[2], t),
+    );
   });
 
   return (
     <group ref={group}>
-      <mesh geometry={geometry} rotation={[0, -Math.PI / 2, 0]} castShadow>
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          roughness={0.28}
-          metalness={0}
-          clearcoat={0.12}
-          clearcoatRoughness={0.35}
-        />
-      </mesh>
+      <primitive object={model} />
     </group>
+  );
+}
+
+function BaseboardModel({ motion }: HeroAssemblySceneProps) {
+  return (
+    <DecorModel
+      url="/models/plintus_glb.glb"
+      targetLength={5.2}
+      targetAxis={new THREE.Vector3(1, 0, 0)}
+      motion={motion}
+      startPosition={[-4.7, -2.1, 0.8]}
+      finalPosition={[0.2, -1.72, -0.15]}
+      startRotation={[0, 0.6, 0.08]}
+      finalRotation={[0, 0, 0]}
+      startAt={0.04}
+      endAt={0.62}
+    />
   );
 }
 
@@ -82,112 +133,43 @@ function VerticalTrimModel({
   motion,
   side,
 }: HeroAssemblySceneProps & { side: "left" | "right" }) {
-  const group = useRef<THREE.Group>(null);
-  const profile = TrimProfile();
-
-  const geometry = useMemo(
-    () =>
-      new THREE.ExtrudeGeometry(profile, {
-        depth: 3.9,
-        steps: 1,
-        curveSegments: 8,
-        bevelEnabled: true,
-        bevelSegments: 3,
-        bevelSize: 0.018,
-        bevelThickness: 0.018,
-      }),
-    [profile],
-  );
-
-  useEffect(() => () => geometry.dispose(), [geometry]);
-
-  useFrame(() => {
-    if (!group.current) return;
-
-    const p = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-    const t = THREE.MathUtils.smoothstep(p, 0.18, 0.78);
-    const finalX = side === "left" ? 0.22 : 3.14;
-    const startX = side === "left" ? -4.8 : 5.5;
-
-    group.current.position.x = THREE.MathUtils.lerp(startX, finalX, t);
-    group.current.position.y = THREE.MathUtils.lerp(0.8, 0.1, t);
-    group.current.position.z = THREE.MathUtils.lerp(0.5, -0.05, t);
-    group.current.rotation.y = THREE.MathUtils.lerp(
-      side === "left" ? -0.6 : 0.6,
-      0,
-      t,
-    );
-    group.current.rotation.x = THREE.MathUtils.lerp(-0.12, 0, t);
-  });
+  const finalX = side === "left" ? 0.22 : 3.14;
+  const startX = side === "left" ? -4.8 : 5.5;
 
   return (
-    <group ref={group}>
-      <mesh
-        geometry={geometry}
-        rotation={[Math.PI / 2, 0, 0]}
-        castShadow
-      >
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          roughness={0.28}
-          metalness={0}
-          clearcoat={0.12}
-          clearcoatRoughness={0.35}
-        />
-      </mesh>
-    </group>
+    <DecorModel
+      url="/models/molding_glb.glb"
+      targetLength={3.9}
+      targetAxis={new THREE.Vector3(0, 1, 0)}
+      motion={motion}
+      startPosition={[startX, 0.8, 0.5]}
+      finalPosition={[finalX, 0.1, -0.05]}
+      startRotation={[side === "left" ? 0 : 0, side === "left" ? -0.6 : 0.6, -0.12]}
+      finalRotation={[0, 0, 0]}
+      startAt={0.18}
+      endAt={0.78}
+    />
   );
 }
 
 function TopTrimModel({ motion }: HeroAssemblySceneProps) {
-  const group = useRef<THREE.Group>(null);
-  const profile = TrimProfile();
-
-  const geometry = useMemo(
-    () =>
-      new THREE.ExtrudeGeometry(profile, {
-        depth: 3.35,
-        steps: 1,
-        curveSegments: 8,
-        bevelEnabled: true,
-        bevelSegments: 3,
-        bevelSize: 0.018,
-        bevelThickness: 0.018,
-      }),
-    [profile],
-  );
-
-  useEffect(() => () => geometry.dispose(), [geometry]);
-
-  useFrame(() => {
-    if (!group.current) return;
-
-    const p = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-    const t = THREE.MathUtils.smoothstep(p, 0.34, 0.94);
-
-    group.current.position.x = THREE.MathUtils.lerp(4.8, 1.68, t);
-    group.current.position.y = THREE.MathUtils.lerp(4.4, 3.98, t);
-    group.current.position.z = THREE.MathUtils.lerp(0.7, -0.04, t);
-    group.current.rotation.y = THREE.MathUtils.lerp(0.58, 0, t);
-    group.current.rotation.z = THREE.MathUtils.lerp(0.09, 0, t);
-  });
-
   return (
-    <group ref={group}>
-      <mesh geometry={geometry} rotation={[0, -Math.PI / 2, 0]} castShadow>
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          roughness={0.28}
-          metalness={0}
-          clearcoat={0.12}
-          clearcoatRoughness={0.35}
-        />
-      </mesh>
-    </group>
+    <DecorModel
+      url="/models/molding_glb.glb"
+      targetLength={3.35}
+      targetAxis={new THREE.Vector3(1, 0, 0)}
+      motion={motion}
+      startPosition={[4.8, 4.4, 0.7]}
+      finalPosition={[1.68, 3.98, -0.04]}
+      startRotation={[0, 0.58, 0.09]}
+      finalRotation={[0, 0, 0]}
+      startAt={0.34}
+      endAt={0.94}
+    />
   );
 }
 
-function Architecture({ motion }: HeroAssemblySceneProps) {
+function Architecture({ motion: _motion }: HeroAssemblySceneProps) {
   const opening = useMemo(() => {
     const material = new THREE.MeshPhysicalMaterial({
       color: "#111111",
@@ -274,3 +256,6 @@ export default function HeroAssemblyScene({
     </div>
   );
 }
+
+useGLTF.preload("/models/molding_glb.glb");
+useGLTF.preload("/models/plintus_glb.glb");
