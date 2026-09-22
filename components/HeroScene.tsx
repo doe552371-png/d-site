@@ -1,9 +1,8 @@
 "use client";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { useEffect, useMemo, useRef, type MutableRefObject } from "react";
 
 type MotionRef = MutableRefObject<{ progress: number }>;
@@ -12,67 +11,43 @@ type HeroSceneProps = {
   motion: MotionRef;
 };
 
-function C303Model({ motion }: HeroSceneProps) {
+function MouldingModel({ motion }: HeroSceneProps) {
   const group = useRef<THREE.Group>(null);
-  const source = useLoader(OBJLoader, "/models/C303_border.obj");
 
-  const model = useMemo(() => {
-    const clone = source.clone(true);
-    const box = new THREE.Box3().setFromObject(clone);
-    const size = box.getSize(new THREE.Vector3());
-    const center = box.getCenter(new THREE.Vector3());
+  const profile = useMemo(() => {
+    const shape = new THREE.Shape();
 
-    clone.position.sub(center);
+    shape.moveTo(0, 0);
+    shape.lineTo(0.46, 0);
+    shape.lineTo(0.46, 0.07);
+    shape.lineTo(0.34, 0.1);
+    shape.lineTo(0.31, 0.17);
+    shape.lineTo(0.25, 0.23);
+    shape.lineTo(0.16, 0.27);
+    shape.lineTo(0.11, 0.34);
+    shape.lineTo(0.4, 0.34);
+    shape.lineTo(0.4, 0.47);
+    shape.lineTo(0, 0.47);
+    shape.closePath();
 
-    // C303 OBJ is authored in millimetres. Convert it to a stable Hero-world size.
-    // The source length is ~2000 mm; the presentation target is ~6.2 world units.
-    const targetLength = 6.2;
-    const sourceLength = Math.max(size.x, 1);
-    const presentationScale = targetLength / sourceLength;
-    clone.scale.setScalar(presentationScale);
+    return shape;
+  }, []);
 
-    clone.traverse((object) => {
-      if (!(object instanceof THREE.Mesh)) return;
+  const geometry = useMemo(
+    () =>
+      new THREE.ExtrudeGeometry(profile, {
+        depth: 6.7,
+        steps: 1,
+        curveSegments: 8,
+        bevelEnabled: true,
+        bevelSegments: 3,
+        bevelSize: 0.025,
+        bevelThickness: 0.025,
+      }),
+    [profile],
+  );
 
-      object.castShadow = true;
-      object.receiveShadow = true;
-
-      const materials = Array.isArray(object.material)
-        ? object.material
-        : [object.material];
-
-      const whiteMaterials = materials.map(
-        () =>
-          new THREE.MeshPhysicalMaterial({
-            color: "#FFFFFF",
-            roughness: 0.3,
-            metalness: 0,
-            clearcoat: 0.12,
-            clearcoatRoughness: 0.35,
-          }),
-      );
-
-      object.material = Array.isArray(object.material)
-        ? whiteMaterials
-        : whiteMaterials[0];
-    });
-
-    return clone;
-  }, [source]);
-
-  useEffect(() => {
-    return () => {
-      model.traverse((object) => {
-        if (!(object instanceof THREE.Mesh)) return;
-
-        const materials = Array.isArray(object.material)
-          ? object.material
-          : [object.material];
-
-        materials.forEach((material) => material.dispose());
-      });
-    };
-  }, [model]);
+  useEffect(() => () => geometry.dispose(), [geometry]);
 
   useFrame((state) => {
     if (!group.current) return;
@@ -94,99 +69,101 @@ function C303Model({ motion }: HeroSceneProps) {
   });
 
   return (
-    <group ref={group}>
-      <primitive object={model} />
+    <group ref={group} position={[0.7, -0.05, -0.15]}>
+      <mesh geometry={geometry} rotation={[0, -Math.PI / 2, 0]} castShadow>
+        <meshPhysicalMaterial
+          color="#FFFFFF"
+          roughness={0.3}
+          metalness={0}
+          clearcoat={0.12}
+          clearcoatRoughness={0.35}
+        />
+      </mesh>
     </group>
   );
 }
 
 
-function BaguetteFragment({ motion }: HeroSceneProps) {
+
+function StuccoRosette({ motion }: HeroSceneProps) {
   const group = useRef<THREE.Group>(null);
 
-  const profile = useMemo(() => {
-    const shape = new THREE.Shape();
-
-    shape.moveTo(0, 0);
-    shape.lineTo(0.12, 0);
-    shape.lineTo(0.18, 0.06);
-    shape.lineTo(0.33, 0.08);
-    shape.lineTo(0.42, 0.14);
-    shape.lineTo(0.58, 0.16);
-    shape.lineTo(0.68, 0.23);
-    shape.lineTo(0.68, 0.38);
-    shape.lineTo(0.52, 0.4);
-    shape.lineTo(0.38, 0.34);
-    shape.lineTo(0.22, 0.31);
-    shape.lineTo(0.14, 0.25);
-    shape.lineTo(0, 0.22);
-    shape.closePath();
-
-    return shape;
+  const petalGeometry = useMemo(() => {
+    const geometry = new THREE.SphereGeometry(0.22, 24, 16);
+    geometry.scale(1.55, 0.72, 0.22);
+    return geometry;
   }, []);
 
-  const geometry = useMemo(
-    () =>
-      new THREE.ExtrudeGeometry(profile, {
-        depth: 4.8,
-        steps: 1,
-        curveSegments: 10,
-        bevelEnabled: true,
-        bevelSegments: 3,
-        bevelSize: 0.03,
-        bevelThickness: 0.03,
-      }),
-    [profile],
-  );
+  useEffect(() => () => petalGeometry.dispose(), [petalGeometry]);
 
-  const material = useMemo(
-    () =>
-      new THREE.MeshPhysicalMaterial({
-        color: "#FFFFFF",
-        roughness: 0.3,
-        metalness: 0,
-        clearcoat: 0.14,
-        clearcoatRoughness: 0.32,
-      }),
-    [],
-  );
-
-  useEffect(
-    () => () => {
-      geometry.dispose();
-      material.dispose();
-    },
-    [geometry, material],
-  );
-
-  useFrame((_, delta) => {
+  useFrame((state) => {
     if (!group.current) return;
 
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
+    const reveal = THREE.MathUtils.smoothstep(progress, 0.1, 0.9);
 
-    group.current.rotation.y = -0.48 + progress * 0.82;
-    group.current.rotation.z = -0.035 + progress * 0.06;
-    group.current.rotation.x = 0.08;
+    group.current.rotation.z = -0.08 + progress * Math.PI * 0.28;
+    group.current.rotation.y =
+      Math.sin(state.clock.elapsedTime * 0.3) * 0.025 + progress * 0.22;
 
-    group.current.position.x = 3.05 - progress * 0.9;
-    group.current.position.y = 0.1 + Math.sin(progress * Math.PI) * 0.26;
-    group.current.position.z = 0.05 + progress * 0.25;
+    group.current.position.x = 3.15 - progress * 1.05;
+    group.current.position.y = 0.95 - progress * 0.18;
+    group.current.position.z = 0.15 + progress * 0.35;
 
-    const scale = 1.0 + Math.sin(progress * Math.PI) * 0.12;
+    const scale = 0.72 + reveal * 0.36;
     group.current.scale.setScalar(scale);
   });
 
   return (
-    <group ref={group} position={[3.05, 0.1, 0.05]}>
-      <mesh geometry={geometry} material={material} castShadow />
-      <mesh
-        geometry={geometry}
-        material={material}
-        position={[0.18, -0.62, 0.02]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={[0.72, 0.72, 1]}
-        castShadow
-      />
+    <group ref={group} position={[3.15, 0.95, 0.15]}>
+      <mesh rotation={[0, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.52, 0.62, 0.12, 48]} />
+        <meshPhysicalMaterial
+          color="#FFFFFF"
+          roughness={0.38}
+          metalness={0}
+          clearcoat={0.1}
+          clearcoatRoughness={0.35}
+        />
+      </mesh>
+
+      {Array.from({ length: 10 }).map((_, index) => {
+        const angle = (index / 10) * Math.PI * 2;
+        const radius = 0.42;
+
+        return (
+          <mesh
+            key={index}
+            geometry={petalGeometry}
+            position={[
+              Math.cos(angle) * radius,
+              Math.sin(angle) * radius,
+              0.12,
+            ]}
+            rotation={[0, 0, angle]}
+            castShadow
+          >
+            <meshPhysicalMaterial
+              color="#FFFFFF"
+              roughness={0.34}
+              metalness={0}
+              clearcoat={0.1}
+              clearcoatRoughness={0.35}
+            />
+          </mesh>
+        );
+      })}
+
+      <mesh position={[0, 0, 0.2]} castShadow>
+        <cylinderGeometry args={[0.24, 0.29, 0.16, 48]} />
+        <meshPhysicalMaterial
+          color="#FFFFFF"
+          roughness={0.3}
+          metalness={0}
+          clearcoat={0.12}
+          clearcoatRoughness={0.32}
+        />
+      </mesh>
     </group>
   );
 }
@@ -220,8 +197,8 @@ export default function HeroScene({ motion }: HeroSceneProps) {
         />
         <directionalLight intensity={1.4} position={[-5, 2, 1]} />
 
-        <C303Model motion={motion} />
-        <BaguetteFragment motion={motion} />
+        <MouldingModel motion={motion} />
+        <StuccoRosette motion={motion} />
 
         <ContactShadows
           position={[0, -0.62, 0]}
