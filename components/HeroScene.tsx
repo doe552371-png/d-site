@@ -100,7 +100,7 @@ export default function HeroScene({ motion }: HeroSceneProps) {
     <div className="pointer-events-none absolute inset-0">
       <Canvas
         dpr={[1, 1.5]}
-        shadows
+        shadows="basic"
         camera={{ position: [0, 0.2, 8.2], fov: 34 }}
         gl={{
           antialias: true,
