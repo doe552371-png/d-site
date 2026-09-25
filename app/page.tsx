@@ -32,20 +32,20 @@ export default function Home() {
       </section>
 
       {/* B2B */}
-      <section id="b2b">
+      <section id="project">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
-              <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Для дизайнеров и бизнеса</p>
+              <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Под проект</p>
               <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Есть проект или ТЗ?</h2>
             </div>
             <div className="max-w-2xl">
               <p className="font-body text-lg font-normal leading-8 text-neutral-600">
-                Передайте проект — поможем подобрать материалы, собрать
-                комплектацию и подготовить решение под объект.
+                Покажите проект, ТЗ или фотографию пространства — поможем
+                подобрать подходящие материалы из каталога DECOR.
               </p>
-              <Link href="/pro" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Передать проект</Link>
-              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Для дизайнеров, архитекторов, строительных компаний и частных проектов.</p>
+              <Link href="/visualizer" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Подобрать материалы</Link>
+              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Для дизайнеров, архитекторов, строительных компаний и комплектаторов.</p>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function Home() {
               <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Материалы для интерьера и архитектурных проектов</h2>
             </div>
             <p className="font-body max-w-2xl text-lg font-normal leading-8 text-neutral-600">
-              Подбираем и поставляем материалы для дизайнеров, архитекторов, строительных компаний и частных проектов — от первого выбора до поставки.
+              Подбираем и поставляем специализированные материалы для дизайнеров, архитекторов, строительных компаний и комплектаторов — от выбора позиции до поставки.
             </p>
           </div>
         </div>
