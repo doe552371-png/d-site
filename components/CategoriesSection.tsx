@@ -1,7 +1,13 @@
 import Link from "next/link";
 
-import { categories } from "@/data/categories";
+import CategoryVisual from "@/components/CategoryVisual";
+import { catalogDirections } from "@/data/directions";
 import { getPublishedProducts } from "@/lib/catalog";
+
+const directionVisuals: Record<string, string> = {
+  "finishing-materials": "baseboards",
+  "stucco-decor": "moldings",
+};
 
 export default function CategoriesSection() {
   const publishedProducts = getPublishedProducts();
@@ -14,33 +20,33 @@ export default function CategoriesSection() {
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.12em] text-neutral-500">
               Каталог
             </p>
-
             <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
               Материалы для интерьера
             </h2>
           </div>
 
-          <Link
-            href="/catalog"
-            className="text-base font-medium underline underline-offset-4"
-          >
+          <Link href="/catalog" className="text-base font-medium underline underline-offset-4">
             Смотреть весь каталог
           </Link>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {categories.map((category, index) => {
-            const categoryProducts = publishedProducts.filter(
-              (product) => product.category === category.slug,
+          {catalogDirections.map((direction, index) => {
+            const directionProducts = publishedProducts.filter(
+              (product) => product.direction === direction.slug,
             );
 
             return (
               <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
+                key={direction.slug}
+                href={direction.slug === "custom-order" ? "/contacts" : "/direction/" + direction.slug}
                 className="group bg-white p-6 transition-colors duration-200 hover:bg-neutral-50 md:p-7"
               >
-                <div className="min-h-44">
+                {directionVisuals[direction.slug] && (
+                  <CategoryVisual slug={directionVisuals[direction.slug]} />
+                )}
+
+                <div className="min-h-44 pt-6">
                   <div className="flex min-h-44 flex-col justify-between">
                     <span className="text-xs font-medium text-neutral-400">
                       {String(index + 1).padStart(2, "0")}
@@ -48,15 +54,13 @@ export default function CategoriesSection() {
 
                     <div>
                       <h3 className="font-display text-2xl font-normal tracking-[-0.015em]">
-                        {category.name}
+                        {direction.name}
                       </h3>
-
                       <p className="mt-3 text-base font-normal text-neutral-500">
-                        {category.description}
+                        {direction.description}
                       </p>
-
                       <p className="mt-4 text-sm text-neutral-400">
-                        {categoryProducts.length} товаров
+                        {directionProducts.length} товаров
                       </p>
                     </div>
                   </div>
@@ -66,10 +70,7 @@ export default function CategoriesSection() {
           })}
         </div>
 
-        <Link
-          href="/catalog"
-          className="mt-6 inline-block text-base font-medium underline underline-offset-4 md:hidden"
-        >
+        <Link href="/catalog" className="mt-6 inline-block text-base font-medium underline underline-offset-4 md:hidden">
           Смотреть весь каталог
         </Link>
       </div>
