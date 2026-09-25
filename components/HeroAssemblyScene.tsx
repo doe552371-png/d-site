@@ -14,12 +14,11 @@ type HeroAssemblySceneProps = {
 function HeroMolding({ motion }: HeroAssemblySceneProps) {
   const { scene } = useGLTF("/models/molding_glb.glb");
   const group = useRef<THREE.Group>(null);
-  const pivot = useRef<THREE.Group>(null);
+  const modelRef = useRef<THREE.Group>(null);
 
   const pointer = useRef(new THREE.Vector2(0.5, 0.5));
   const pointerVelocity = useRef(new THREE.Vector2());
   const targetVelocity = useRef(new THREE.Vector2());
-  const pulse = useRef(0);
 
   useEffect(() => {
     let lastX = window.innerWidth * 0.5;
@@ -42,7 +41,6 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
         THREE.MathUtils.clamp(dy / window.innerHeight / dt, -2.5, 2.5),
       );
 
-      pulse.current = Math.max(pulse.current, Math.min(Math.hypot(dx, dy) / 120, 1));
       lastX = event.clientX;
       lastY = event.clientY;
       lastTime = now;
@@ -52,21 +50,26 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     return () => window.removeEventListener("pointermove", onPointerMove);
   }, []);
 
-  const model = useMemo(() => {
+  const preparedModel = useMemo(() => {
     const clone = scene.clone(true);
+
+    // Normalize the model around its own geometric center. This is the key
+    // difference from the previous implementation: the object rotates in
+    // place, while the outer group is responsible only for hero positioning.
     const bounds = new THREE.Box3().setFromObject(clone);
-    const size = bounds.getSize(new THREE.Vector3());
     const center = bounds.getCenter(new THREE.Vector3());
+    const size = bounds.getSize(new THREE.Vector3());
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
 
-    // The pivot is the geometric center. The mesh is centered inside it,
-    // so rotation cannot make the molding orbit around the scene.
     clone.position.sub(center);
-    clone.rotation.x = -Math.PI / 2;
+
+    // Keep the source geometry intact. We only orient it for presentation.
+    clone.rotation.set(-Math.PI / 2, 0, 0);
     clone.scale.setScalar(6.7 / maxDimension * 5);
 
     clone.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
+
       object.castShadow = true;
       object.receiveShadow = true;
       object.material = new THREE.MeshPhysicalMaterial({
@@ -82,65 +85,74 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
   }, [scene]);
 
   useFrame((_, delta) => {
-    if (!group.current || !pivot.current) return;
-
-    const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
+    if (!group.current || !modelRef.current) return;
 
     pointerVelocity.current.lerp(
       targetVelocity.current,
       1 - Math.pow(0.0005, delta),
     );
     targetVelocity.current.multiplyScalar(Math.pow(0.035, delta));
-    pulse.current *= Math.pow(0.045, delta);
 
     const px = pointer.current.x - 0.5;
     const py = pointer.current.y - 0.5;
     const vx = pointerVelocity.current.x;
     const vy = pointerVelocity.current.y;
-    const t = performance.now() * 0.001;
 
-    // The hero object itself never moves. It continuously spins around
-    // the molding's own local long axis; the cursor only adds a small tilt.
-    const spin = t * 0.55;
-    const tiltX = py * 0.12 - vy * 0.025;
-    const tiltZ = -px * 0.10 - vx * 0.018;
+    // Dash-inspired interaction model:
+    // a constant inertial rotation is always running, while pointer motion
+    // adds a damped rotational offset. There is deliberately NO translation.
+    const time = performance.now() * 0.001;
+    const baseSpin = time * 0.7;
 
-    const smoothing = 1 - Math.pow(0.00001, delta);
+    const targetX = baseSpin + py * 0.16 - vy * 0.035;
+    const targetY = px * 0.12 + vx * 0.028;
+    const targetZ = -px * 0.10 - vx * 0.018;
 
+    const smoothing = 1 - Math.pow(0.000001, delta);
+
+    modelRef.current.rotation.x = THREE.MathUtils.lerp(
+      modelRef.current.rotation.x,
+      targetX,
+      smoothing,
+    );
+    modelRef.current.rotation.y = THREE.MathUtils.lerp(
+      modelRef.current.rotation.y,
+      targetY,
+      smoothing,
+    );
+    modelRef.current.rotation.z = THREE.MathUtils.lerp(
+      modelRef.current.rotation.z,
+      targetZ,
+      smoothing,
+    );
+
+    // Fixed hero anchor. Scroll can affect the existing Hero timeline,
+    // but never causes the 3D object to fly out of the section.
     group.current.position.x = THREE.MathUtils.lerp(
-      group.current.position.x, 1.05, smoothing,
+      group.current.position.x,
+      1.05,
+      smoothing,
     );
     group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y, 0, smoothing,
+      group.current.position.y,
+      0,
+      smoothing,
     );
     group.current.position.z = THREE.MathUtils.lerp(
-      group.current.position.z, 0, smoothing,
+      group.current.position.z,
+      0,
+      smoothing,
     );
 
-    group.current.rotation.x = THREE.MathUtils.lerp(
-      group.current.rotation.x, tiltX, smoothing,
-    );
-    group.current.rotation.y = THREE.MathUtils.lerp(
-      group.current.rotation.y, 0, smoothing,
-    );
-    group.current.rotation.z = THREE.MathUtils.lerp(
-      group.current.rotation.z, tiltZ, smoothing,
-    );
-
-    // IMPORTANT: spin is applied to the centered pivot, not to position.
-    pivot.current.rotation.set(spin, 0, 0);
-
-    const targetScale = 1 + pulse.current * 0.01;
-    const scale = THREE.MathUtils.lerp(
-      group.current.scale.x, targetScale, smoothing,
-    );
-    group.current.scale.setScalar(scale);
+    // Keep the existing scene responsive to the Hero scroll state without
+    // introducing positional movement.
+    void motion.current.progress;
   });
 
   return (
     <group ref={group}>
-      <group ref={pivot}>
-        <primitive object={model} />
+      <group ref={modelRef}>
+        <primitive object={preparedModel} />
       </group>
     </group>
   );
