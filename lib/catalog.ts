@@ -1,4 +1,5 @@
 import { categories } from "@/data/categories";
+import { catalogDirections } from "@/data/directions";
 import { manufacturers } from "@/data/manufacturers";
 import { productImages } from "@/data/productImages";
 import { products } from "@/data/products";
@@ -35,6 +36,14 @@ export function searchPublishedProducts(query: string) {
         String(value).toLocaleLowerCase().includes(normalizedQuery),
       );
   });
+}
+
+export function getDirectionBySlug(slug: string) {
+  return catalogDirections.find((direction) => direction.slug === slug);
+}
+
+export function getProductsByDirection(slug: string) {
+  return getPublishedProducts().filter((product) => product.direction === slug);
 }
 
 export function getCategoryBySlug(slug: string) {
