@@ -55,6 +55,9 @@ export default function CategoriesSection() {
                     </span>
 
                     <div>
+                      <p className="mb-2 text-xs font-medium uppercase tracking-[0.1em] text-neutral-400">
+                        {direction.brandLabel}
+                      </p>
                       <h3 className="font-display text-2xl font-normal tracking-[-0.015em]">
                         {direction.name}
                       </h3>
