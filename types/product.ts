@@ -106,11 +106,18 @@ export interface ProductImage {
   sortOrder?: number;
 }
 
+export type ProductDirection =
+  | "finishing-materials"
+  | "stucco-decor"
+  | "accessories"
+  | "custom-order";
+
 export interface Product {
   slug: string;
   sku: string;
   name: string;
   manufacturer: string;
+  direction: ProductDirection;
   category: string;
 
   description?: string;
