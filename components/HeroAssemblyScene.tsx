@@ -70,7 +70,7 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
 
     clone.position.sub(center);
     clone.rotation.set(-Math.PI / 2, 0, 0);
-    clone.scale.setScalar((6.7 / maxDimension) * 5);
+    clone.scale.setScalar((6.7 / maxDimension) * 1.25);
 
     clone.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
