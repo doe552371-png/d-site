@@ -37,7 +37,7 @@ export default async function DirectionPage({ params }: DirectionPageProps) {
           </Link>
 
           <p className="mb-5 mt-10 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
-            Направление
+            {direction.slug === "stucco-decor" ? "Отдельное направление" : "Основное направление"}
           </p>
 
           <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl">
@@ -46,6 +46,9 @@ export default async function DirectionPage({ params }: DirectionPageProps) {
 
           <p className="mt-8 max-w-2xl text-lg font-normal leading-8 text-neutral-500">
             {direction.description}
+          {direction.slug === "stucco-decor" && (
+            <p className="mt-4 text-base leading-7 text-neutral-500">DECOMASTER · Paolo Arte — доступны для заказа под проект.</p>
+          )}
           </p>
         </div>
       </section>
@@ -57,7 +60,7 @@ export default async function DirectionPage({ params }: DirectionPageProps) {
               Категории
             </p>
             <h2 className="mt-3 font-display text-3xl font-normal tracking-[-0.02em] md:text-4xl">
-              {directionProducts.length} материалов
+              {directionProducts.length} материалов в направлении
             </h2>
           </div>
 
