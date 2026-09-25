@@ -61,7 +61,20 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
 
     clone.position.sub(center);
-    clone.scale.setScalar(6.7 / maxDimension);
+
+    // Make the molding substantially larger while compressing its
+    // longest axis so it reads as a compact architectural object,
+    // closer to the proportions of the reference.
+    const baseScale = 6.7 / maxDimension;
+    const largestAxis =
+      size.x >= size.y && size.x >= size.z
+        ? "x"
+        : size.y >= size.x && size.y >= size.z
+          ? "y"
+          : "z";
+
+    clone.scale.setScalar(baseScale * 5);
+    clone.scale[largestAxis] *= 0.16;
 
     clone.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
@@ -86,8 +99,6 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
     const reveal = Math.sin(progress * Math.PI);
 
-    // Smooth cursor velocity with decay: cursor creates an impulse,
-    // but the model keeps its own independent continuous motion.
     pointerVelocity.current.lerp(
       targetVelocity.current,
       1 - Math.pow(0.0005, delta),
@@ -100,40 +111,27 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const vx = pointerVelocity.current.x;
     const vy = pointerVelocity.current.y;
 
-    // Continuous Dash-like idle rotation.
     const t = performance.now() * 0.001;
     const idleX = Math.sin(t * 0.48) * 0.07;
     const idleY = t * 0.22;
     const idleZ = Math.sin(t * 0.34) * 0.045;
 
-    // Cursor affects orientation/position, not the primary trajectory.
     const magneticStrength = 0.24 + pulse.current * 0.34;
 
     const targetRotationX =
-      -Math.PI / 2 +
-      idleX +
-      py * 0.16 * magneticStrength -
-      vy * 0.045;
+      -Math.PI / 2 + idleX + py * 0.16 * magneticStrength - vy * 0.045;
 
     const targetRotationY =
-      idleY +
-      px * 0.22 * magneticStrength +
-      vx * 0.07;
+      idleY + px * 0.22 * magneticStrength + vx * 0.07;
 
     const targetRotationZ =
-      idleZ -
-      px * 0.09 * magneticStrength -
-      vx * 0.025;
+      idleZ - px * 0.09 * magneticStrength - vx * 0.025;
 
     const targetX =
-      1.28 +
-      px * 0.18 * magneticStrength +
-      vx * 0.035;
+      1.28 + px * 0.18 * magneticStrength + vx * 0.035;
 
     const targetY =
-      reveal * 0.12 -
-      py * 0.08 * magneticStrength -
-      vy * 0.02;
+      reveal * 0.12 - py * 0.08 * magneticStrength - vy * 0.02;
 
     const smoothing = 1 - Math.pow(0.00001, delta);
 
