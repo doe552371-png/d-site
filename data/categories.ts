@@ -1,5 +1,10 @@
 export const categories = [
   {
+    slug: "shadow-baseboards",
+    name: "Теневые плинтусы",
+    description: "Теневые и скрытые плинтусные решения LACONISTIQ.",
+  },
+  {
     slug: "moldings",
     name: "Молдинги",
     description: "Декоративные профили для стен и интерьера",
