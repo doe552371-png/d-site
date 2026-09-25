@@ -105,7 +105,7 @@ export default async function ProductPage({
           )}
 
           <div className="border-t border-neutral-200 pt-8">
-            <p className="mb-5 text-sm leading-6 text-neutral-500">Нужна эта позиция для проекта? Оставьте заявку — поможем уточнить комплектацию и поставку.</p>
+            <p className="mb-5 text-sm leading-6 text-neutral-500">Нужна эта позиция для проекта? Оставьте заявку — поможем уточнить наличие, подбор и поставку.</p>
             <RequestForm
               productName={product.name}
             />
