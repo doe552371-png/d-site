@@ -30,65 +30,16 @@ function HeroMolding({ motion: _motion }: HeroAssemblySceneProps) {
   const group = useRef<THREE.Group>(null);
   const modelRef = useRef<THREE.Mesh>(null);
 
-  const mouse = useRef(new THREE.Vector2(0.5, 0.5));
-  const lastMouse = useRef(new THREE.Vector2(0.5, 0.5));
-  const dirTarget = useRef(new THREE.Vector2());
-  const dirSm = useRef(new THREE.Vector2());
-  const motionTarget = useRef(0);
-  const motionSm = useRef(0);
+  useFrame(() => {
+    if (!modelRef.current) return;
 
-  useEffect(() => {
-    const onPointerMove = (event: PointerEvent) => {
-      const x = event.clientX / Math.max(window.innerWidth, 1);
-      const y = event.clientY / Math.max(window.innerHeight, 1);
-      mouse.current.set(x, y);
-
-      const dx = x - lastMouse.current.x;
-      const dy = y - lastMouse.current.y;
-      const speed = Math.min(Math.hypot(dx, dy) * 220, 1);
-
-      if (speed > 0.0001) dirTarget.current.set(dx, dy).normalize();
-      motionTarget.current = Math.max(motionTarget.current, speed);
-      lastMouse.current.set(x, y);
-    };
-
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onPointerMove);
-  }, []);
-
-  useFrame((_, delta) => {
-    if (!group.current || !modelRef.current) return;
-
-    motionTarget.current *= Math.pow(0.86, delta * 60);
-    const mappedMotion = Math.min(motionTarget.current * 220, 1);
-
-    motionSm.current +=
-      (mappedMotion - motionSm.current) *
-      (1 - Math.pow(1 - 0.14, delta * 60));
-
-    const dirLerp = 1 - Math.pow(1 - 0.12, delta * 60);
-    dirSm.current.x += (dirTarget.current.x - dirSm.current.x) * dirLerp;
-    dirSm.current.y += (dirTarget.current.y - dirSm.current.y) * dirLerp;
-
-    const px = mouse.current.x - 0.5;
-    const py = mouse.current.y - 0.5;
+    // The object is completely independent from the cursor.
+    // It only performs a continuous, stable rotation around its own center.
     const time = performance.now() * 0.001;
-    const pull = motionSm.current;
-
-    modelRef.current.rotation.x = THREE.MathUtils.lerp(
-      modelRef.current.rotation.x,
-      time * 0.55 + dirSm.current.y * pull * 0.42 + py * 0.08,
-      1 - Math.pow(0.000001, delta),
-    );
-    modelRef.current.rotation.y = THREE.MathUtils.lerp(
-      modelRef.current.rotation.y,
-      dirSm.current.x * pull * 0.34 + px * 0.08,
-      1 - Math.pow(0.000001, delta),
-    );
-    modelRef.current.rotation.z = THREE.MathUtils.lerp(
-      modelRef.current.rotation.z,
-      -dirSm.current.x * pull * 0.22 - px * 0.045,
-      1 - Math.pow(0.000001, delta),
+    modelRef.current.rotation.set(
+      time * 0.55,
+      0,
+      0,
     );
   });
 
