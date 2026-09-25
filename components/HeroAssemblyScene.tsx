@@ -42,9 +42,7 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
         THREE.MathUtils.clamp(dy / window.innerHeight / dt, -2.5, 2.5),
       );
 
-      const speed = Math.min(Math.hypot(dx, dy) / 120, 1);
-      pulse.current = Math.max(pulse.current, speed);
-
+      pulse.current = Math.max(pulse.current, Math.min(Math.hypot(dx, dy) / 120, 1));
       lastX = event.clientX;
       lastY = event.clientY;
       lastTime = now;
@@ -61,16 +59,14 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const center = bounds.getCenter(new THREE.Vector3());
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
 
-    // Center the mesh inside an explicit pivot so rotation never changes its orbit.
+    // The pivot is the geometric center. The mesh is centered inside it,
+    // so rotation cannot make the molding orbit around the scene.
     clone.position.sub(center);
     clone.rotation.x = -Math.PI / 2;
-
-    const baseScale = 6.7 / maxDimension;
-    clone.scale.setScalar(baseScale * 5);
+    clone.scale.setScalar(6.7 / maxDimension * 5);
 
     clone.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
-
       object.castShadow = true;
       object.receiveShadow = true;
       object.material = new THREE.MeshPhysicalMaterial({
@@ -86,7 +82,7 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
   }, [scene]);
 
   useFrame((_, delta) => {
-    if (!group.current) return;
+    if (!group.current || !pivot.current) return;
 
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
 
@@ -101,64 +97,42 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const py = pointer.current.y - 0.5;
     const vx = pointerVelocity.current.x;
     const vy = pointerVelocity.current.y;
-
-    // Keep the object anchored in one place. Cursor only adds a subtle
-    // rotational impulse; it must never translate the molding out of frame.
     const t = performance.now() * 0.001;
-    const idleRotation = t * 0.22;
 
-    const targetRotationX =
-      Math.sin(t * 0.48) * 0.035 + py * 0.08 - vy * 0.018;
-    const targetRotationY = px * 0.08 + vx * 0.018;
-    const targetRotationZ =
-      Math.sin(t * 0.34) * 0.02 - px * 0.06 - vx * 0.012;
+    // The hero object itself never moves. It continuously spins around
+    // the molding's own local long axis; the cursor only adds a small tilt.
+    const spin = t * 0.55;
+    const tiltX = py * 0.12 - vy * 0.025;
+    const tiltZ = -px * 0.10 - vx * 0.018;
 
     const smoothing = 1 - Math.pow(0.00001, delta);
 
     group.current.position.x = THREE.MathUtils.lerp(
-      group.current.position.x,
-      1.05,
-      smoothing,
+      group.current.position.x, 1.05, smoothing,
     );
     group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y,
-      0,
-      smoothing,
+      group.current.position.y, 0, smoothing,
     );
     group.current.position.z = THREE.MathUtils.lerp(
-      group.current.position.z,
-      0,
-      smoothing,
+      group.current.position.z, 0, smoothing,
     );
 
     group.current.rotation.x = THREE.MathUtils.lerp(
-      group.current.rotation.x,
-      targetRotationX,
-      smoothing,
+      group.current.rotation.x, tiltX, smoothing,
     );
     group.current.rotation.y = THREE.MathUtils.lerp(
-      group.current.rotation.y,
-      targetRotationY,
-      smoothing,
+      group.current.rotation.y, 0, smoothing,
     );
     group.current.rotation.z = THREE.MathUtils.lerp(
-      group.current.rotation.z,
-      targetRotationZ,
-      smoothing,
+      group.current.rotation.z, tiltZ, smoothing,
     );
 
-    if (pivot.current) {
-      // The molding is elongated along its local X axis in the source asset.
-      // Rotate the pivot itself around that axis; the centered mesh never translates.
-      pivot.current.rotation.set(idleRotation, 0, 0);
-    }
+    // IMPORTANT: spin is applied to the centered pivot, not to position.
+    pivot.current.rotation.set(spin, 0, 0);
 
-    // Keep scale stable; cursor creates only a tiny visual pulse.
-    const targetScale = 1 + pulse.current * 0.012;
+    const targetScale = 1 + pulse.current * 0.01;
     const scale = THREE.MathUtils.lerp(
-      group.current.scale.x,
-      targetScale,
-      smoothing,
+      group.current.scale.x, targetScale, smoothing,
     );
     group.current.scale.setScalar(scale);
   });
