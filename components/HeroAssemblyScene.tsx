@@ -11,39 +11,50 @@ type HeroAssemblySceneProps = {
   motion: MotionRef;
 };
 
+const DASH_MOTION = {
+  radius: 0.41,
+  amplitude: 0.082,
+  frequency: 13,
+  speed: 0.98,
+  carry: 6,
+  stagger: 12,
+  centerPower: 2,
+  verticalDampPower: 2.2,
+  motionGain: 220,
+  speedDecay: 0.86,
+  momentum: 0.14,
+  dirSmooth: 0.12,
+};
+
 function HeroMolding({ motion }: HeroAssemblySceneProps) {
   const { scene } = useGLTF("/models/molding_glb.glb");
   const group = useRef<THREE.Group>(null);
   const modelRef = useRef<THREE.Group>(null);
 
-  const pointer = useRef(new THREE.Vector2(0.5, 0.5));
-  const pointerVelocity = useRef(new THREE.Vector2());
-  const targetVelocity = useRef(new THREE.Vector2());
+  const mouse = useRef(new THREE.Vector2(0.5, 0.5));
+  const lastMouse = useRef(new THREE.Vector2(0.5, 0.5));
+  const dirTarget = useRef(new THREE.Vector2());
+  const dirSm = useRef(new THREE.Vector2());
+  const motionTarget = useRef(0);
+  const motionSm = useRef(0);
 
   useEffect(() => {
-    let lastX = window.innerWidth * 0.5;
-    let lastY = window.innerHeight * 0.5;
-    let lastTime = performance.now();
-
     const onPointerMove = (event: PointerEvent) => {
-      const now = performance.now();
-      const dt = Math.max((now - lastTime) / 1000, 0.008);
-      const dx = event.clientX - lastX;
-      const dy = event.clientY - lastY;
+      const x = event.clientX / Math.max(window.innerWidth, 1);
+      const y = event.clientY / Math.max(window.innerHeight, 1);
 
-      pointer.current.set(
-        event.clientX / window.innerWidth,
-        event.clientY / window.innerHeight,
-      );
+      mouse.current.set(x, y);
 
-      targetVelocity.current.set(
-        THREE.MathUtils.clamp(dx / window.innerWidth / dt, -2.5, 2.5),
-        THREE.MathUtils.clamp(dy / window.innerHeight / dt, -2.5, 2.5),
-      );
+      const dx = x - lastMouse.current.x;
+      const dy = y - lastMouse.current.y;
+      const speed = Math.min(Math.hypot(dx, dy) * DASH_MOTION.motionGain, 1);
 
-      lastX = event.clientX;
-      lastY = event.clientY;
-      lastTime = now;
+      if (speed > 0.0001) {
+        dirTarget.current.set(dx, dy).normalize();
+      }
+
+      motionTarget.current = Math.max(motionTarget.current, speed);
+      lastMouse.current.set(x, y);
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -52,20 +63,14 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
 
   const preparedModel = useMemo(() => {
     const clone = scene.clone(true);
-
-    // Normalize the model around its own geometric center. This is the key
-    // difference from the previous implementation: the object rotates in
-    // place, while the outer group is responsible only for hero positioning.
     const bounds = new THREE.Box3().setFromObject(clone);
     const center = bounds.getCenter(new THREE.Vector3());
     const size = bounds.getSize(new THREE.Vector3());
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
 
     clone.position.sub(center);
-
-    // Keep the source geometry intact. We only orient it for presentation.
     clone.rotation.set(-Math.PI / 2, 0, 0);
-    clone.scale.setScalar(6.7 / maxDimension * 5);
+    clone.scale.setScalar((6.7 / maxDimension) * 5);
 
     clone.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
@@ -87,26 +92,49 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
   useFrame((_, delta) => {
     if (!group.current || !modelRef.current) return;
 
-    pointerVelocity.current.lerp(
-      targetVelocity.current,
-      1 - Math.pow(0.0005, delta),
+    // Same interaction pattern documented by Dash:
+    // target motion decays, smoothed motion follows it, and the direction
+    // persists instead of snapping back as soon as the pointer stops.
+    motionTarget.current *= Math.pow(DASH_MOTION.speedDecay, delta * 60);
+
+    const mappedMotion = Math.min(
+      motionTarget.current * DASH_MOTION.motionGain,
+      1,
     );
-    targetVelocity.current.multiplyScalar(Math.pow(0.035, delta));
 
-    const px = pointer.current.x - 0.5;
-    const py = pointer.current.y - 0.5;
-    const vx = pointerVelocity.current.x;
-    const vy = pointerVelocity.current.y;
+    motionSm.current +=
+      (mappedMotion - motionSm.current) *
+      (1 - Math.pow(1 - DASH_MOTION.momentum, delta * 60));
 
-    // Dash-inspired interaction model:
-    // a constant inertial rotation is always running, while pointer motion
-    // adds a damped rotational offset. There is deliberately NO translation.
+    const dirLerp =
+      1 - Math.pow(1 - DASH_MOTION.dirSmooth, delta * 60);
+
+    dirSm.current.x +=
+      (dirTarget.current.x - dirSm.current.x) * dirLerp;
+    dirSm.current.y +=
+      (dirTarget.current.y - dirSm.current.y) * dirLerp;
+
+    const px = mouse.current.x - 0.5;
+    const py = mouse.current.y - 0.5;
     const time = performance.now() * 0.001;
-    const baseSpin = time * 0.7;
 
-    const targetX = baseSpin + py * 0.16 - vy * 0.035;
-    const targetY = px * 0.12 + vx * 0.028;
-    const targetZ = -px * 0.10 - vx * 0.018;
+    // Continuous rotation, with pointer movement carrying momentum.
+    // No positional attraction: the molding stays anchored in the Hero.
+    const idle = time * 0.55;
+    const pull = motionSm.current;
+
+    const targetX =
+      idle +
+      dirSm.current.y * pull * 0.42 +
+      py * 0.08;
+
+    const targetY =
+      dirSm.current.x * pull * 0.34 +
+      px * 0.08;
+
+    const targetZ =
+      -dirSm.current.x * pull * 0.22 -
+      px * 0.045;
 
     const smoothing = 1 - Math.pow(0.000001, delta);
 
@@ -126,8 +154,6 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
       smoothing,
     );
 
-    // Fixed hero anchor. Scroll can affect the existing Hero timeline,
-    // but never causes the 3D object to fly out of the section.
     group.current.position.x = THREE.MathUtils.lerp(
       group.current.position.x,
       1.05,
@@ -144,8 +170,6 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
       smoothing,
     );
 
-    // Keep the existing scene responsive to the Hero scroll state without
-    // introducing positional movement.
     void motion.current.progress;
   });
 
