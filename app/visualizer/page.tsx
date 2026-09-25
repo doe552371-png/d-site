@@ -11,20 +11,12 @@ import {
 export default function VisualizerPage() {
   const products = getPublishedProducts();
 
-  const featuredSlugs = [
-    "decomaster-d001",
-    "decomaster-d002",
-    "decomaster-d030",
-    "decomaster-d235",
-    "decomaster-d235-115",
-    "decomaster-d303",
-    "decomaster-d317",
-    "decomaster-d328",
-  ];
+  const featuredProducts = [
+    ...products.filter((product) => product.direction === "finishing-materials"),
+    ...products.filter((product) => product.direction === "stucco-decor"),
+  ].slice(0, 8);
 
-  const matches = featuredSlugs
-    .map((slug) => products.find((product) => product.slug === slug))
-    .filter(Boolean)
+  const matches = featuredProducts
     .map((product) => {
       const category = getCategoryBySlug(product!.category);
       const manufacturer = getManufacturerBySlug(product!.manufacturer);
@@ -58,16 +50,16 @@ export default function VisualizerPage() {
               ← DECOR
             </Link>
             <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-400">
-              Подбор · визуализация
+              Подбор материалов под проект
             </p>
             <h1 className="mt-5 text-5xl font-medium uppercase leading-[0.94] tracking-[-0.04em] md:text-7xl">
               Покажите пространство.
               <br />
-              Мы подберём детали.
+              Подберём материалы для проекта.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-600 md:text-xl">
-              Загрузите фотографию помещения, задайте направление и выберите материал.
-              Мы соберём подходящий сценарий и покажем релевантные позиции каталога DECOR.
+              Загрузите фотографию помещения или передайте задачу по проекту.
+              Мы поможем выбрать направление и покажем релевантные позиции каталога DECOR.
             </p>
           </div>
         </div>
@@ -86,14 +78,14 @@ export default function VisualizerPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">01</p>
               <h2 className="mt-3 text-xl font-medium uppercase tracking-tight">Фото</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
-                Загружается реальное помещение заказчика.
+                Загрузите фотографию помещения или материалы проекта.
               </p>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">02</p>
               <h2 className="mt-3 text-xl font-medium uppercase tracking-tight">Сценарий</h2>
               <p className="mt-3 text-sm leading-6 text-neutral-500">
-                Формируется задача, стиль и направление материалов.
+                Определяется задача и подходящее направление материалов.
               </p>
             </div>
             <div>
