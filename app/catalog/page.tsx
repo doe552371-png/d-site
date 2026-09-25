@@ -32,7 +32,7 @@ export default function CatalogPage() {
           <p className="mt-8 max-w-2xl text-lg font-normal leading-8 text-neutral-500">
             LACONISTIQ · DAKO · FlatStone — основное продуктовое ядро DECOR.
             Подбор и поставка материалов для дизайнеров, архитекторов,
-            строительных компаний и частных проектов.
+            строительных компаний и комплектаторов.
           </p>
         </div>
       </section>
@@ -79,26 +79,6 @@ export default function CatalogPage() {
                   </div>
                 </Link>
               );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-          <div className="mb-10">
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">Основное направление</p>
-            <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">Материалы для интерьера и архитектурных проектов</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-neutral-500">LACONISTIQ · DAKO · FlatStone</p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {manufacturers.filter((manufacturer) => manufacturer.direction === "finishing-materials").map((manufacturer) => {
-              const manufacturerProducts = publishedProducts.filter((product) => product.manufacturer === manufacturer.slug);
-              return <div key={manufacturer.slug} className="border border-neutral-200 p-8">
-                <p className="font-display text-xl font-normal tracking-tight">{manufacturer.name}</p>
-                <p className="mt-3 text-sm font-medium text-neutral-500">{manufacturer.productType}</p>
-                <p className="mt-2 text-sm text-neutral-400">{manufacturerProducts.length} товаров в стартовой коллекции</p>
-              </div>;
             })}
           </div>
         </div>
