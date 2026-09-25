@@ -24,7 +24,7 @@ export default function Home() {
                 категорию материала — мы соберём сценарий для AI-визуализации и
                 привяжем его к каталогу DECOR.
               </p>
-              <Link href="/visualizer" className="decor-button decor-button-primary mt-7">Запустить подбор</Link>
+              <Link href="/visualizer" className="decor-button decor-button-primary mt-7">Начать подбор</Link>
               <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Артикул знать не нужно — достаточно показать пространство.</p>
             </div>
           </div>
