@@ -71,6 +71,7 @@ export default function CategoryVisual({ slug }: CategoryVisualProps) {
         </Frame>
       );
 
+    case "shadow-baseboards":
     case "baseboards":
       return (
         <Frame>
