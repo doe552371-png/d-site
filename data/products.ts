@@ -4,11 +4,24 @@ import { productsGenerated } from "@/data/products.generated";
 export const products: Product[] = [
   ...productsGenerated,
 
+  // Paolo Arte — лепной декор
+  {
+    direction: "stucco-decor",
+    slug: "paolo-arte-kr025u",
+    sku: "Kr025U",
+    name: "Лепной декор Paolo Arte Kr025U",
+    manufacturer: "paolo-arte",
+    category: "moldings",
+    description: "Декоративный профиль Paolo Arte Kr025U размером 80×16×2000 мм.",
+    published: true,
+  },
+
   // ============================================================
   // DECOMASTER
   // ============================================================
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d001",
     sku: "D001/112",
     name: "Молдинг ДМ D001",
@@ -20,6 +33,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d002",
     sku: "D002/42",
     name: "Молдинг ДМ D002",
@@ -31,6 +45,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d030",
     sku: "D030/48",
     name: "Молдинг ДМ D030",
@@ -42,6 +57,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d034",
     sku: "D034/120",
     name: "Молдинг ДМ D034",
@@ -53,6 +69,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d048",
     sku: "D048/21",
     name: "Молдинг ДМ D048",
@@ -64,6 +81,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d130",
     sku: "D130/80",
     name: "Молдинг ДМ D130",
@@ -75,6 +93,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d160",
     sku: "D160/80",
     name: "Молдинг ДМ D160",
@@ -86,6 +105,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d163",
     sku: "D163/20",
     name: "Молдинг / плинтус ДМ D163",
@@ -101,6 +121,7 @@ export const products: Product[] = [
   // ============================================================
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d303",
     sku: "D303/11",
     name: "Панель ДМ D303",
@@ -110,6 +131,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d317",
     sku: "D317/11",
     name: "Панель ДМ D317",
@@ -119,6 +141,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d318",
     sku: "D318/18",
     name: "Панель ДМ D318",
@@ -128,6 +151,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d323",
     sku: "D323/13",
     name: "Панель ДМ D323",
@@ -137,6 +161,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d328",
     sku: "D328/8",
     name: "Панель ДМ D328",
@@ -150,6 +175,7 @@ export const products: Product[] = [
   // ============================================================
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d004",
     sku: "D004/12",
     name: "Плинтус ДМ D004",
@@ -159,6 +185,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d005",
     sku: "D005/26",
     name: "Плинтус ДМ D005",
@@ -168,6 +195,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d025",
     sku: "D025/36",
     name: "Плинтус ДМ D025",
@@ -177,6 +205,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d036",
     sku: "D036/20",
     name: "Плинтус ДМ D036",
@@ -186,6 +215,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d037",
     sku: "D037/18",
     name: "Плинтус ДМ D037",
@@ -195,6 +225,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d105",
     sku: "D105/18",
     name: "Плинтус ДМ D105",
@@ -204,6 +235,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d125",
     sku: "D125/25",
     name: "Плинтус ДМ D125",
@@ -213,6 +245,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d137",
     sku: "D137/18",
     name: "Плинтус ДМ D137",
@@ -222,6 +255,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d157",
     sku: "D157/30",
     name: "Плинтус ДМ D157",
@@ -231,6 +265,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d228",
     sku: "D228/30",
     name: "Плинтус ДМ D228",
@@ -240,6 +275,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d232",
     sku: "D232/14",
     name: "Плинтус ДМ D232",
@@ -249,6 +285,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d233",
     sku: "D233/10",
     name: "Плинтус ДМ D233",
@@ -258,6 +295,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d234",
     sku: "D234/15",
     name: "Плинтус ДМ D234",
@@ -267,6 +305,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d235",
     sku: "D235/20",
     name: "Плинтус ДМ D235",
@@ -276,6 +315,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d235-115",
     sku: "D235-115/20",
     name: "Плинтус ДМ D235-115 белый",
@@ -287,6 +327,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "stucco-decor",
     slug: "decomaster-d235-116",
     sku: "D235-116/20",
     name: "Плинтус ДМ D235-116 черный",
@@ -302,6 +343,7 @@ export const products: Product[] = [
   // ============================================================
 
   {
+    direction: "accessories",
     slug: "kudo-classic",
     sku: "KUDO-CLASSIC",
     name: "KUDO Classic",
@@ -313,6 +355,7 @@ export const products: Product[] = [
   },
 
   {
+    direction: "accessories",
     slug: "decomaster-ultra-fix",
     sku: "ULTRA-FIX",
     name: "DECOMASTER Ultra Fix",
