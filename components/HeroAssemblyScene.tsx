@@ -62,9 +62,6 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
 
     clone.position.sub(center);
 
-    // Make the molding substantially larger while compressing its
-    // longest axis so it reads as a compact architectural object,
-    // closer to the proportions of the reference.
     const baseScale = 6.7 / maxDimension;
     const largestAxis =
       size.x >= size.y && size.x >= size.z
@@ -97,7 +94,6 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     if (!group.current) return;
 
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-    const reveal = Math.sin(progress * Math.PI);
 
     pointerVelocity.current.lerp(
       targetVelocity.current,
@@ -111,29 +107,37 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const vx = pointerVelocity.current.x;
     const vy = pointerVelocity.current.y;
 
+    // Keep the object anchored in one place. Cursor only adds a subtle
+    // rotational impulse; it must never translate the molding out of frame.
     const t = performance.now() * 0.001;
-    const idleX = Math.sin(t * 0.48) * 0.07;
-    const idleY = t * 0.22;
-    const idleZ = Math.sin(t * 0.34) * 0.045;
-
-    const magneticStrength = 0.24 + pulse.current * 0.34;
+    const idleRotation = t * 0.22;
 
     const targetRotationX =
-      -Math.PI / 2 + idleX + py * 0.16 * magneticStrength - vy * 0.045;
+      -Math.PI / 2 + Math.sin(t * 0.48) * 0.04 + py * 0.08 - vy * 0.018;
 
     const targetRotationY =
-      idleY + px * 0.22 * magneticStrength + vx * 0.07;
+      idleRotation + px * 0.18 + vx * 0.035;
 
     const targetRotationZ =
-      idleZ - px * 0.09 * magneticStrength - vx * 0.025;
-
-    const targetX =
-      1.28 + px * 0.18 * magneticStrength + vx * 0.035;
-
-    const targetY =
-      reveal * 0.12 - py * 0.08 * magneticStrength - vy * 0.02;
+      Math.sin(t * 0.34) * 0.025 - px * 0.06 - vx * 0.012;
 
     const smoothing = 1 - Math.pow(0.00001, delta);
+
+    group.current.position.x = THREE.MathUtils.lerp(
+      group.current.position.x,
+      1.05,
+      smoothing,
+    );
+    group.current.position.y = THREE.MathUtils.lerp(
+      group.current.position.y,
+      0,
+      smoothing,
+    );
+    group.current.position.z = THREE.MathUtils.lerp(
+      group.current.position.z,
+      0,
+      smoothing,
+    );
 
     group.current.rotation.x = THREE.MathUtils.lerp(
       group.current.rotation.x,
@@ -151,18 +155,8 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
       smoothing,
     );
 
-    group.current.position.x = THREE.MathUtils.lerp(
-      group.current.position.x,
-      targetX,
-      smoothing,
-    );
-    group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y,
-      targetY,
-      smoothing,
-    );
-
-    const targetScale = 1 + reveal * 0.08 + pulse.current * 0.025;
+    // Keep scale stable; cursor creates only a tiny visual pulse.
+    const targetScale = 1 + pulse.current * 0.012;
     const scale = THREE.MathUtils.lerp(
       group.current.scale.x,
       targetScale,
