@@ -1,22 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const HeroScene = dynamic(() => import("./HeroAssemblyScene"), {
-  ssr: false,
-});
-
-type ScrollMotion = {
-  progress: number;
-};
-
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const motionRef = useRef<ScrollMotion>({ progress: 0 });
 
   useLayoutEffect(() => {
     if (!sectionRef.current) return;
@@ -29,7 +19,6 @@ export default function Hero() {
 
     const ctx = gsap.context(() => {
       if (reduceMotion) {
-        motionRef.current.progress = 0.35;
         gsap.set(".hero-line", { yPercent: 0, opacity: 1 });
         return;
       }
@@ -44,15 +33,6 @@ export default function Hero() {
       });
 
       timeline
-        .to(
-          motionRef.current,
-          {
-            progress: 1,
-            ease: "none",
-            duration: 1,
-          },
-          0,
-        )
         .to(
           ".hero-line-1",
           {
@@ -104,8 +84,6 @@ export default function Hero() {
       className="relative min-h-[200svh] overflow-clip bg-white text-neutral-950"
     >
       <div className="sticky top-0 h-[100svh] min-h-[680px] overflow-hidden">
-        <HeroScene motion={motionRef} />
-
         <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
           <div className="hero-copy max-w-4xl pt-[15vh]">
             <h1 className="mt-5 max-w-5xl text-[clamp(56px,8vw,128px)] font-normal leading-[0.86] tracking-[-0.055em] text-black">
