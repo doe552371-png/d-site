@@ -147,7 +147,7 @@ export default function RequestForm({
       >
         {status === "loading"
           ? "Отправка..."
-          : "Отправить запрос"}
+          : "Оставить заявку"}
       </button>
     </form>
   );
