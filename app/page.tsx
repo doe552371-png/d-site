@@ -10,29 +10,11 @@ export default function Home() {
       {/* HERO */}
       <Hero />
 
-      {/* SELECTION */}
-      <section id="selection">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div className="text-center">
-              <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">Подбор</p>
-              <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Не знаете, что выбрать?</h2>
-            </div>
-            <div className="max-w-2xl">
-              <p className="font-body text-lg font-normal leading-8 text-neutral-600">
-                Начните с фотографии помещения. Выберите направление, стиль и
-                категорию материала — мы соберём сценарий для AI-визуализации и
-                привяжем его к каталогу DECOR.
-              </p>
-              <Link href="/visualizer" className="decor-button decor-button-primary mt-7">Начать подбор</Link>
-              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Артикул знать не нужно — достаточно показать пространство.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* CATALOG */}
+      <CategoriesSection />
 
-      {/* B2B */}
-      <section id="project">
+      {/* PROJECT SELECTION */}
+      <section id="selection">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:py-36">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
@@ -41,11 +23,13 @@ export default function Home() {
             </div>
             <div className="max-w-2xl">
               <p className="font-body text-lg font-normal leading-8 text-neutral-600">
-                Покажите проект, ТЗ или фотографию пространства — поможем
-                подобрать подходящие материалы из каталога DECOR.
+                Покажите проект, ТЗ или фотографию пространства — поможем подобрать
+                подходящие материалы из каталога DECOR и проверить их в интерьере.
               </p>
-              <Link href="/visualizer" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Подобрать материалы</Link>
-              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Для дизайнеров, архитекторов, строительных компаний и комплектаторов.</p>
+              <Link href="/visualizer" className="decor-button decor-button-primary mt-7">Начать подбор</Link>
+              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">
+                Для дизайнеров, архитекторов, строительных компаний и комплектаторов.
+              </p>
             </div>
           </div>
         </div>
@@ -67,8 +51,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <CategoriesSection />
 
       {/* ABOUT */}
       <section id="about">
