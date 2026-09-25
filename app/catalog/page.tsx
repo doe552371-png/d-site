@@ -9,7 +9,7 @@ import {
   getProductPreviewImage,
   getPublishedProducts,
 } from "@/lib/catalog";
-import { categories } from "@/data/categories";
+import { catalogDirections } from "@/data/directions";
 import { manufacturers } from "@/data/manufacturers";
 
 export default function CatalogPage() {
@@ -39,18 +39,18 @@ export default function CatalogPage() {
       <section>
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <div className="grid gap-4 md:grid-cols-2">
-            {categories.map((category, index) => {
-              const categoryProducts = publishedProducts.filter(
-                (product) => product.category === category.slug,
+            {catalogDirections.map((direction, index) => {
+              const directionProducts = publishedProducts.filter(
+                (product) => product.direction === direction.slug,
               );
 
               return (
                 <Link
-                  key={category.slug}
-                  href={`/category/${category.slug}`}
+                  key={direction.slug}
+                  href={direction.slug === "custom-order" ? "/contacts" : "/direction/" + direction.slug}
                   className="group overflow-hidden border border-neutral-200 bg-white transition-colors duration-200 hover:border-neutral-400"
                 >
-                  <CategoryVisual slug={category.slug} />
+                  {direction.slug !== "custom-order" && (\n                    <CategoryVisual slug={direction.slug === "stucco-decor" ? "moldings" : direction.slug === "finishing-materials" ? "baseboards" : "stone-veneer"} />\n                  )}
 
                   <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-6">
                     <div className="flex min-w-0 items-center gap-3">
@@ -58,12 +58,12 @@ export default function CatalogPage() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <h2 className="truncate font-display text-xl font-normal leading-tight tracking-[-0.015em] md:text-2xl">
-                        {category.name}
+                        {direction.name}
                       </h2>
                     </div>
 
                     <span className="shrink-0 text-xs text-neutral-400">
-                      {categoryProducts.length}
+                      {directionProducts.length}
                     </span>
                   </div>
                 </Link>
