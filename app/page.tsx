@@ -45,7 +45,7 @@ export default function Home() {
                 комплектацию и подготовить решение под объект.
               </p>
               <Link href="/pro" className="font-body mt-7 inline-flex rounded-md bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80">Передать проект</Link>
-              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Один каталог для частных клиентов, дизайнеров и строительных компаний.</p>
+              <p className="font-body mt-4 text-sm font-normal leading-6 text-neutral-500">Для дизайнеров, архитекторов, строительных компаний и частных проектов.</p>
             </div>
           </div>
         </div>
@@ -76,12 +76,10 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="text-center">
               <p className="font-body text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">DECOR</p>
-              <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Материалы как часть решения</h2>
+              <h2 className="mt-4 max-w-xl text-4xl font-normal leading-[1.02] tracking-[-0.025em] text-neutral-900 sm:text-5xl">Материалы для интерьера и архитектурных проектов</h2>
             </div>
             <p className="font-body max-w-2xl text-lg font-normal leading-8 text-neutral-600">
-              Мы собираем каталог интерьерных материалов и помогаем подобрать
-              конкретное решение под задачу, пространство и бюджет — от первого
-              выбора до поставки.
+              Подбираем и поставляем материалы для дизайнеров, архитекторов, строительных компаний и частных проектов — от первого выбора до поставки.
             </p>
           </div>
         </div>
