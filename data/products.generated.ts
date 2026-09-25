@@ -56,7 +56,7 @@ export const productsGenerated: Product[] = [
     name: "Микроплинтус LACONISTIQ MICRO 15 CLASSIC",
     manufacturer: "laconistiq",
     direction: "finishing-materials",
-    category: "baseboards",
+    category: "shadow-baseboards",
     description: "Алюминиевый микроплинтус размером 5×15×2450 мм. Перекрывает компенсационный зазор 10–13 мм.",
     published: true,
   },
