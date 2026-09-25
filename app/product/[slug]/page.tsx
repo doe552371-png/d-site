@@ -85,6 +85,9 @@ export default async function ProductPage({
             <div className="mb-3 text-sm uppercase tracking-[0.08em] text-neutral-500">
               {manufacturer?.name ?? product.manufacturer}
             </div>
+            <div className="mb-3 text-xs uppercase tracking-[0.1em] text-neutral-400">
+              {product.direction === "stucco-decor" ? "Лепной декор" : "Материалы для интерьера и архитектурных проектов"}
+            </div>
 
             <h1 className="text-3xl font-medium tracking-tight text-neutral-900 sm:text-4xl">
               {product.name}
@@ -102,6 +105,7 @@ export default async function ProductPage({
           )}
 
           <div className="border-t border-neutral-200 pt-8">
+            <p className="mb-5 text-sm leading-6 text-neutral-500">Нужна эта позиция для проекта? Оставьте заявку — поможем уточнить комплектацию и поставку.</p>
             <RequestForm
               productName={product.name}
             />
