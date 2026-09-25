@@ -23,7 +23,7 @@ export default function CategoriesSection() {
               Каталог
             </p>
             <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
-              Материалы для интерьера
+              Материалы для интерьера и архитектурных проектов
             </h2>
           </div>
 
