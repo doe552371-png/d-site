@@ -14,6 +14,7 @@ type HeroAssemblySceneProps = {
 function HeroMolding({ motion }: HeroAssemblySceneProps) {
   const { scene } = useGLTF("/models/molding_glb.glb");
   const group = useRef<THREE.Group>(null);
+  const pivot = useRef<THREE.Group>(null);
 
   const pointer = useRef(new THREE.Vector2(0.5, 0.5));
   const pointerVelocity = useRef(new THREE.Vector2());
@@ -60,18 +61,11 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const center = bounds.getCenter(new THREE.Vector3());
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
 
+    // Center the mesh inside an explicit pivot so rotation never changes its orbit.
     clone.position.sub(center);
 
     const baseScale = 6.7 / maxDimension;
-    const largestAxis =
-      size.x >= size.y && size.x >= size.z
-        ? "x"
-        : size.y >= size.x && size.y >= size.z
-          ? "y"
-          : "z";
-
     clone.scale.setScalar(baseScale * 5);
-    clone.scale[largestAxis] *= 0.16;
 
     clone.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
@@ -113,13 +107,10 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const idleRotation = t * 0.22;
 
     const targetRotationX =
-      -Math.PI / 2 + Math.sin(t * 0.48) * 0.04 + py * 0.08 - vy * 0.018;
-
-    const targetRotationY =
-      idleRotation + px * 0.18 + vx * 0.035;
-
+      Math.sin(t * 0.48) * 0.035 + py * 0.08 - vy * 0.018;
+    const targetRotationY = px * 0.08 + vx * 0.018;
     const targetRotationZ =
-      Math.sin(t * 0.34) * 0.025 - px * 0.06 - vx * 0.012;
+      Math.sin(t * 0.34) * 0.02 - px * 0.06 - vx * 0.012;
 
     const smoothing = 1 - Math.pow(0.00001, delta);
 
@@ -155,6 +146,12 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
       smoothing,
     );
 
+    if (pivot.current) {
+      // The molding is elongated along its local X axis in the source asset.
+      // Rotate the pivot itself around that axis; the centered mesh never translates.
+      pivot.current.rotation.set(idleRotation, 0, 0);
+    }
+
     // Keep scale stable; cursor creates only a tiny visual pulse.
     const targetScale = 1 + pulse.current * 0.012;
     const scale = THREE.MathUtils.lerp(
@@ -167,7 +164,9 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
 
   return (
     <group ref={group}>
-      <primitive object={model} />
+      <group ref={pivot}>
+        <primitive object={model} />
+      </group>
     </group>
   );
 }
