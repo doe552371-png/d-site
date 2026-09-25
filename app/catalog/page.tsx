@@ -47,20 +47,20 @@ export default function CatalogPage() {
               return (
                 <Link
                   key={direction.slug}
-                  href={direction.slug === "custom-order" ? "/contacts" : "/direction/" + direction.slug}
+                  href={"/direction/" + direction.slug}
                   className="group overflow-hidden border border-neutral-200 bg-white transition-colors duration-200 hover:border-neutral-400"
                 >
-                  {direction.slug !== "custom-order" && (
-                    <CategoryVisual
-                      slug={
-                        direction.slug === "stucco-decor"
-                          ? "moldings"
-                          : direction.slug === "finishing-materials"
-                            ? "baseboards"
-                            : "stone-veneer"
-                      }
-                    />
-                  )}
+                  <CategoryVisual
+                    slug={
+                      direction.slug === "shadow-baseboards"
+                        ? "baseboards"
+                        : direction.slug === "porcelain-stoneware"
+                          ? "porcelain-stoneware"
+                          : direction.slug === "stone-veneer"
+                            ? "stone-veneer"
+                            : "moldings"
+                    }
+                  />
 
                   <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-6">
                     <div className="flex min-w-0 items-center gap-3">
