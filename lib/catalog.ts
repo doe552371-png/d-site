@@ -19,6 +19,7 @@ export function searchPublishedProducts(query: string) {
   return getPublishedProducts().filter((product) => {
     const category = getCategoryBySlug(product.category)?.name ?? "";
     const manufacturer = getManufacturerBySlug(product.manufacturer)?.name ?? "";
+    const direction = getDirectionBySlug(product.direction)?.name ?? "";
 
     return [
       product.name,
@@ -30,6 +31,7 @@ export function searchPublishedProducts(query: string) {
       product.color,
       category,
       manufacturer,
+      direction,
     ]
       .filter(Boolean)
       .some((value) =>
