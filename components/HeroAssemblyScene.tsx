@@ -15,22 +15,38 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
   const { scene } = useGLTF("/models/molding_glb.glb");
   const group = useRef<THREE.Group>(null);
 
-  const pointer = useRef(new THREE.Vector2(0.72, 0.08));
-  const target = useRef(new THREE.Vector2(0.72, 0.08));
-  const velocity = useRef(new THREE.Vector2());
+  const pointer = useRef(new THREE.Vector2(0.5, 0.5));
+  const pointerVelocity = useRef(new THREE.Vector2());
+  const targetVelocity = useRef(new THREE.Vector2());
+  const pulse = useRef(0);
 
   useEffect(() => {
+    let lastX = window.innerWidth * 0.5;
+    let lastY = window.innerHeight * 0.5;
+    let lastTime = performance.now();
+
     const onPointerMove = (event: PointerEvent) => {
-      target.current.x = THREE.MathUtils.clamp(
+      const now = performance.now();
+      const dt = Math.max((now - lastTime) / 1000, 0.008);
+      const dx = event.clientX - lastX;
+      const dy = event.clientY - lastY;
+
+      pointer.current.set(
         event.clientX / window.innerWidth,
-        0,
-        1,
-      );
-      target.current.y = THREE.MathUtils.clamp(
         event.clientY / window.innerHeight,
-        0,
-        1,
       );
+
+      targetVelocity.current.set(
+        THREE.MathUtils.clamp(dx / window.innerWidth / dt, -2.5, 2.5),
+        THREE.MathUtils.clamp(dy / window.innerHeight / dt, -2.5, 2.5),
+      );
+
+      const speed = Math.min(Math.hypot(dx, dy) / 120, 1);
+      pulse.current = Math.max(pulse.current, speed);
+
+      lastX = event.clientX;
+      lastY = event.clientY;
+      lastTime = now;
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -68,57 +84,93 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     if (!group.current) return;
 
     const progress = THREE.MathUtils.clamp(motion.current.progress, 0, 1);
-
-    // Dash-style magnetic cursor motion: the object follows the pointer
-    // with a damped delay rather than snapping directly to it.
-    const previous = pointer.current.clone();
-    pointer.current.lerp(target.current, 1 - Math.pow(0.0001, delta));
-    velocity.current
-      .copy(pointer.current)
-      .sub(previous)
-      .multiplyScalar(1 / Math.max(delta, 0.001));
-
-    const cursorX = pointer.current.x - 0.5;
-    const cursorY = pointer.current.y - 0.5;
-
     const reveal = Math.sin(progress * Math.PI);
-    const scrollRotation = progress * 0.34;
 
-    const magneticX = cursorX * 0.95;
-    const magneticY = -cursorY * 0.48;
+    // Smooth cursor velocity with decay: cursor creates an impulse,
+    // but the model keeps its own independent continuous motion.
+    pointerVelocity.current.lerp(
+      targetVelocity.current,
+      1 - Math.pow(0.0005, delta),
+    );
+    targetVelocity.current.multiplyScalar(Math.pow(0.035, delta));
+    pulse.current *= Math.pow(0.045, delta);
 
-    group.current.position.x = THREE.MathUtils.lerp(
-      group.current.position.x,
-      1.35 + magneticX + velocity.current.x * 0.018,
-      1 - Math.pow(0.00001, delta),
-    );
-    group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y,
-      magneticY + reveal * 0.12,
-      1 - Math.pow(0.00001, delta),
-    );
+    const px = pointer.current.x - 0.5;
+    const py = pointer.current.y - 0.5;
+    const vx = pointerVelocity.current.x;
+    const vy = pointerVelocity.current.y;
+
+    // Continuous Dash-like idle rotation.
+    const t = performance.now() * 0.001;
+    const idleX = Math.sin(t * 0.48) * 0.07;
+    const idleY = t * 0.22;
+    const idleZ = Math.sin(t * 0.34) * 0.045;
+
+    // Cursor affects orientation/position, not the primary trajectory.
+    const magneticStrength = 0.24 + pulse.current * 0.34;
+
+    const targetRotationX =
+      -Math.PI / 2 +
+      idleX +
+      py * 0.16 * magneticStrength -
+      vy * 0.045;
+
+    const targetRotationY =
+      idleY +
+      px * 0.22 * magneticStrength +
+      vx * 0.07;
+
+    const targetRotationZ =
+      idleZ -
+      px * 0.09 * magneticStrength -
+      vx * 0.025;
+
+    const targetX =
+      1.28 +
+      px * 0.18 * magneticStrength +
+      vx * 0.035;
+
+    const targetY =
+      reveal * 0.12 -
+      py * 0.08 * magneticStrength -
+      vy * 0.02;
+
+    const smoothing = 1 - Math.pow(0.00001, delta);
 
     group.current.rotation.x = THREE.MathUtils.lerp(
       group.current.rotation.x,
-      -Math.PI / 2 + cursorY * 0.34 - velocity.current.y * 0.008,
-      1 - Math.pow(0.00001, delta),
+      targetRotationX,
+      smoothing,
     );
     group.current.rotation.y = THREE.MathUtils.lerp(
       group.current.rotation.y,
-      0.16 + scrollRotation + cursorX * 0.52 + velocity.current.x * 0.006,
-      1 - Math.pow(0.00001, delta),
+      targetRotationY,
+      smoothing,
     );
     group.current.rotation.z = THREE.MathUtils.lerp(
       group.current.rotation.z,
-      -0.02 - cursorX * 0.18,
-      1 - Math.pow(0.00001, delta),
+      targetRotationZ,
+      smoothing,
     );
 
-    const scale = 1 + reveal * 0.1;
-    group.current.scale.lerp(
-      new THREE.Vector3(scale, scale, scale),
-      1 - Math.pow(0.00001, delta),
+    group.current.position.x = THREE.MathUtils.lerp(
+      group.current.position.x,
+      targetX,
+      smoothing,
     );
+    group.current.position.y = THREE.MathUtils.lerp(
+      group.current.position.y,
+      targetY,
+      smoothing,
+    );
+
+    const targetScale = 1 + reveal * 0.08 + pulse.current * 0.025;
+    const scale = THREE.MathUtils.lerp(
+      group.current.scale.x,
+      targetScale,
+      smoothing,
+    );
+    group.current.scale.setScalar(scale);
   });
 
   return (
