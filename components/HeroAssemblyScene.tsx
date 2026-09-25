@@ -26,10 +26,9 @@ const DASH_MOTION = {
   dirSmooth: 0.12,
 };
 
-function HeroMolding({ motion }: HeroAssemblySceneProps) {
-  const { scene } = useGLTF("/models/molding_glb.glb");
+function HeroMolding({ motion: _motion }: HeroAssemblySceneProps) {
   const group = useRef<THREE.Group>(null);
-  const modelRef = useRef<THREE.Group>(null);
+  const modelRef = useRef<THREE.Mesh>(null);
 
   const mouse = useRef(new THREE.Vector2(0.5, 0.5));
   const lastMouse = useRef(new THREE.Vector2(0.5, 0.5));
@@ -42,17 +41,13 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     const onPointerMove = (event: PointerEvent) => {
       const x = event.clientX / Math.max(window.innerWidth, 1);
       const y = event.clientY / Math.max(window.innerHeight, 1);
-
       mouse.current.set(x, y);
 
       const dx = x - lastMouse.current.x;
       const dy = y - lastMouse.current.y;
-      const speed = Math.min(Math.hypot(dx, dy) * DASH_MOTION.motionGain, 1);
+      const speed = Math.min(Math.hypot(dx, dy) * 220, 1);
 
-      if (speed > 0.0001) {
-        dirTarget.current.set(dx, dy).normalize();
-      }
-
+      if (speed > 0.0001) dirTarget.current.set(dx, dy).normalize();
       motionTarget.current = Math.max(motionTarget.current, speed);
       lastMouse.current.set(x, y);
     };
@@ -61,123 +56,54 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
     return () => window.removeEventListener("pointermove", onPointerMove);
   }, []);
 
-  const preparedModel = useMemo(() => {
-    const clone = scene.clone(true);
-    const bounds = new THREE.Box3().setFromObject(clone);
-    const center = bounds.getCenter(new THREE.Vector3());
-    const size = bounds.getSize(new THREE.Vector3());
-    const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-
-    clone.position.sub(center);
-    clone.rotation.set(-Math.PI / 2, 0, 0);
-    clone.scale.setScalar((6.7 / maxDimension) * 1.25);
-
-    clone.traverse((object) => {
-      if (!(object instanceof THREE.Mesh)) return;
-
-      object.castShadow = true;
-      object.receiveShadow = true;
-      object.material = new THREE.MeshPhysicalMaterial({
-        color: "#FFFFFF",
-        roughness: 0.28,
-        metalness: 0,
-        clearcoat: 0.18,
-        clearcoatRoughness: 0.3,
-      });
-    });
-
-    return clone;
-  }, [scene]);
-
   useFrame((_, delta) => {
     if (!group.current || !modelRef.current) return;
 
-    // Same interaction pattern documented by Dash:
-    // target motion decays, smoothed motion follows it, and the direction
-    // persists instead of snapping back as soon as the pointer stops.
-    motionTarget.current *= Math.pow(DASH_MOTION.speedDecay, delta * 60);
-
-    const mappedMotion = Math.min(
-      motionTarget.current * DASH_MOTION.motionGain,
-      1,
-    );
+    motionTarget.current *= Math.pow(0.86, delta * 60);
+    const mappedMotion = Math.min(motionTarget.current * 220, 1);
 
     motionSm.current +=
       (mappedMotion - motionSm.current) *
-      (1 - Math.pow(1 - DASH_MOTION.momentum, delta * 60));
+      (1 - Math.pow(1 - 0.14, delta * 60));
 
-    const dirLerp =
-      1 - Math.pow(1 - DASH_MOTION.dirSmooth, delta * 60);
-
-    dirSm.current.x +=
-      (dirTarget.current.x - dirSm.current.x) * dirLerp;
-    dirSm.current.y +=
-      (dirTarget.current.y - dirSm.current.y) * dirLerp;
+    const dirLerp = 1 - Math.pow(1 - 0.12, delta * 60);
+    dirSm.current.x += (dirTarget.current.x - dirSm.current.x) * dirLerp;
+    dirSm.current.y += (dirTarget.current.y - dirSm.current.y) * dirLerp;
 
     const px = mouse.current.x - 0.5;
     const py = mouse.current.y - 0.5;
     const time = performance.now() * 0.001;
-
-    // Continuous rotation, with pointer movement carrying momentum.
-    // No positional attraction: the molding stays anchored in the Hero.
-    const idle = time * 0.55;
     const pull = motionSm.current;
-
-    const targetX =
-      idle +
-      dirSm.current.y * pull * 0.42 +
-      py * 0.08;
-
-    const targetY =
-      dirSm.current.x * pull * 0.34 +
-      px * 0.08;
-
-    const targetZ =
-      -dirSm.current.x * pull * 0.22 -
-      px * 0.045;
-
-    const smoothing = 1 - Math.pow(0.000001, delta);
 
     modelRef.current.rotation.x = THREE.MathUtils.lerp(
       modelRef.current.rotation.x,
-      targetX,
-      smoothing,
+      time * 0.55 + dirSm.current.y * pull * 0.42 + py * 0.08,
+      1 - Math.pow(0.000001, delta),
     );
     modelRef.current.rotation.y = THREE.MathUtils.lerp(
       modelRef.current.rotation.y,
-      targetY,
-      smoothing,
+      dirSm.current.x * pull * 0.34 + px * 0.08,
+      1 - Math.pow(0.000001, delta),
     );
     modelRef.current.rotation.z = THREE.MathUtils.lerp(
       modelRef.current.rotation.z,
-      targetZ,
-      smoothing,
+      -dirSm.current.x * pull * 0.22 - px * 0.045,
+      1 - Math.pow(0.000001, delta),
     );
-
-    group.current.position.x = THREE.MathUtils.lerp(
-      group.current.position.x,
-      1.05,
-      smoothing,
-    );
-    group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y,
-      0,
-      smoothing,
-    );
-    group.current.position.z = THREE.MathUtils.lerp(
-      group.current.position.z,
-      0,
-      smoothing,
-    );
-
-    void motion.current.progress;
   });
 
   return (
-    <group ref={group}>
-      <group ref={modelRef}>
-        <primitive object={preparedModel} />
-      </group>
+    <group ref={group} position={[1.05, 0, 0]}>
+      <mesh ref={modelRef} scale={[1.25, 0.42, 0.42]} castShadow receiveShadow>
+        <boxGeometry args={[4.8, 0.8, 0.8]} />
+        <meshPhysicalMaterial
+          color="#FFFFFF"
+          roughness={0.28}
+          metalness={0}
+          clearcoat={0.18}
+          clearcoatRoughness={0.3}
+        />
+      </mesh>
     </group>
   );
 }
