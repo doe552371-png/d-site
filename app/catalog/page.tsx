@@ -86,27 +86,6 @@ export default function CatalogPage() {
       <section className="border-t border-neutral-200">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <div className="mb-10">
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">Отдельное направление</p>
-            <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">Лепной декор</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-neutral-500">DECOMASTER · Paolo Arte</p>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-500">Молдинги, плинтусы, панели и другие элементы лепного декора — доступны для заказа под проект.</p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {manufacturers.filter((manufacturer) => manufacturer.direction === "stucco-decor").map((manufacturer) => {
-              const manufacturerProducts = publishedProducts.filter((product) => product.manufacturer === manufacturer.slug);
-              return <div key={manufacturer.slug} className="border border-neutral-200 p-8">
-                <p className="font-display text-xl font-normal tracking-tight">{manufacturer.name}</p>
-                <p className="mt-3 text-sm font-medium text-neutral-500">{manufacturer.productType}</p>
-                <p className="mt-2 text-sm text-neutral-400">{manufacturerProducts.length} товаров в стартовой коллекции</p>
-              </div>;
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-          <div className="mb-10">
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">Расширение комплектации</p>
             <h2 className="font-display text-3xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">Нужны материалы других производителей?</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-neutral-500">Мы также можем подобрать и заказать необходимые позиции под ваш проект.</p>
