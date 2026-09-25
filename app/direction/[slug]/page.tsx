@@ -46,10 +46,12 @@ export default async function DirectionPage({ params }: DirectionPageProps) {
 
           <p className="mt-8 max-w-2xl text-lg font-normal leading-8 text-neutral-500">
             {direction.description}
-          {direction.slug === "stucco-decor" && (
-            <p className="mt-4 text-base leading-7 text-neutral-500">DECOMASTER · Paolo Arte — доступны для заказа под проект.</p>
-          )}
           </p>
+          {direction.slug === "stucco-decor" && (
+            <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-500">
+              DECOMASTER · Paolo Arte — доступны для заказа под проект.
+            </p>
+          )}
         </div>
       </section>
 
