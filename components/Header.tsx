@@ -13,7 +13,7 @@ export default function Header() {
         <nav className="hidden items-center gap-8 md:flex">
           <Link href="/catalog" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Каталог</Link>
           <Link href="/visualizer" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Подбор</Link>
-          <Link href="/#about" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">О нас</Link>
+          <Link href="/pro" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Для бизнеса</Link>
           <Link href="/#contacts" className="font-body text-[15px] font-medium leading-none text-neutral-900 transition-colors hover:text-neutral-500">Контакты</Link>
         </nav>
 
