@@ -63,6 +63,7 @@ function HeroMolding({ motion }: HeroAssemblySceneProps) {
 
     // Center the mesh inside an explicit pivot so rotation never changes its orbit.
     clone.position.sub(center);
+    clone.rotation.x = -Math.PI / 2;
 
     const baseScale = 6.7 / maxDimension;
     clone.scale.setScalar(baseScale * 5);
