@@ -5,7 +5,9 @@ import { catalogDirections } from "@/data/directions";
 import { getPublishedProducts } from "@/lib/catalog";
 
 const directionVisuals: Record<string, string> = {
-  "finishing-materials": "baseboards",
+  "shadow-baseboards": "baseboards",
+  "porcelain-stoneware": "porcelain-stoneware",
+  "stone-veneer": "stone-veneer",
   "stucco-decor": "moldings",
 };
 
@@ -39,7 +41,7 @@ export default function CategoriesSection() {
             return (
               <Link
                 key={direction.slug}
-                href={direction.slug === "custom-order" ? "/contacts" : "/direction/" + direction.slug}
+                href={"/direction/" + direction.slug}
                 className="group bg-white p-6 transition-colors duration-200 hover:bg-neutral-50 md:p-7"
               >
                 {directionVisuals[direction.slug] && (
