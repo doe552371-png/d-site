@@ -44,7 +44,7 @@ export default async function CategoryPage({
           </Link>
 
           <p className="mb-5 mt-10 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
-            Категория
+            Категория материалов
           </p>
 
           <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl">
