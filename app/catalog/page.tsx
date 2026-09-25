@@ -10,7 +10,6 @@ import {
   getPublishedProducts,
 } from "@/lib/catalog";
 import { catalogDirections } from "@/data/directions";
-import { manufacturers } from "@/data/manufacturers";
 
 export default function CatalogPage() {
   const publishedProducts = getPublishedProducts();
